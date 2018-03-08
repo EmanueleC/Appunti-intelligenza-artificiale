@@ -1,0 +1,34 @@
+\newpage
+
+\section{Task environment}
+
+Il task environment (T.E.) è la specifica del problema: deve essere il più precisa
+possibile.
+
+\begin{itemize}
+ \item \textbf{P}erformance measure
+ \item \textbf{E}nvironment
+ \item \textbf{A}ctuators
+ \item \textbf{S}ensors
+\end{itemize}
+
+Una lunga e noiosa lista di tipi di T.E.:
+
+\begin{itemize}
+ \item \textbf{Totalmente/parzialmente osservabile}.
+ \item \textbf{Deterministico}: lo stato corrente determina completamente quello successivo (vs non deterministico).
+ \item \textbf{Strategico}: come deterministico, ma ci sono più agenti (che possono competere o collaborare).
+ \item \textbf{Stocastico}: incertezza (+ probabilità) per scegliere il prossimo stato.
+ \item \textbf{Incerto}: parzialmente osservabile e non deterministico.
+ \item \textbf{Episodico}: l'azione di un agente dipende solo da un singolo episodio (vs sequenziale).
+ \item \textbf{Discreto}: ha un numero finito, di distinti stati, percezioni, azioni. (vs continuo).
+ \item \textbf{Single/multi-agent} uno o più agenti operano nell'ambiente. Se ci sono più agenti un T.E. può essere competitivo (es. : scacchi) o cooperativo.
+ \item \textbf{Noto/Non noto}: dipende dalla conoscenza che ha un agente delle regole che governano un ambiente.
+ \item \textbf{Dinamico}: l'ambiente cambia/viene cambiato dall'agente (vs statico).
+\end{itemize}
+
+Il tipo di T.E. determina la progettazione dell'agente.
+Inutile dire che il mondo reale è parzialmente osservabile, stocastico, continuo, non noto,
+dinamico e multi-agent.
+
+
