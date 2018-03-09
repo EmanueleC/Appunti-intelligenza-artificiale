@@ -1,0 +1,80 @@
+\newpage
+
+\section{Tipi di agenti}
+
+4 tipi di agenti (dal meno generale a quello più generale):
+
+\begin{itemize}
+ \item simple reflex (reattivi).
+ \item model-based reflex agents.
+ \item agenti basati su goal.
+ \item utility-based agent.
+\end{itemize}
+
+Tutti questi possono essere trasformati in learning agents.\\
+
+Notazione: di seguito con ``mondo'' si intende ``insieme di stati''. Gli schemi degli agenti funzionano per incrementi (sono le parti in grassetto).
+
+\subsection{Reflex agents}
+
+Ambiente $\rightarrow$ Sensori $\rightarrow$ Capisco com'è il mondo in questo
+istante $\rightarrow$ \textbf{Che azione dovrei fare? (dipende dalle regole
+condizione/azione)} $\rightarrow$ Attuatori $\rightarrow$ Ambiente
+
+\subsection{Model-based reflex agents}
+
+Ambiente $\rightarrow$ Sensori $\rightarrow$ \textbf{Capisco com'è il mondo in questo istante (come evolve e come influiscono su di esso le mie azioni)} $\rightarrow$ Che azione dovrei fare? (dipende dalle regole condizione/azione) $\rightarrow$ Attuatori $\rightarrow$ Ambiente
+
+\subsection{Goal-based agents}
+
+Ambiente $\rightarrow$ Sensori $\rightarrow$ Capisco com'è il mondo in questo istante (come evolve e come influiscono su di esso le mie azioni) $\rightarrow$ \textbf{Come apparirebbe il mondo se eseguissi l'azione A? (ipotesi/test)} $\rightarrow$ Che azione dovrei fare? (dipende dalle regole condizione/azione) $\rightarrow$ Attuatori $\rightarrow$ Ambiente
+
+\subsection{Utility-based agent}
+
+Ambiente $\rightarrow$ Sensori $\rightarrow$ Capisco com'è il mondo in questo istante (come evolve e come influiscono su di esso le mie azioni) $\rightarrow$ Come apparirebbe il mondo se eseguissi l'azione A? (ipotesi) $\rightarrow$ \textbf{Quanto soddisfatto sarei in questo stato? (dipende dall'utilità)} $\rightarrow$ Che azione dovrei fare? (dipende dalle regole condizione/azione) $\rightarrow$ Attuatori $\rightarrow$ Ambiente
+
+\subsection{Learning agents}
+
+Sono agenti programmati in modo tale che apprendano, gestiscano e si adattino
+ad ambienti sconosciuti.
+
+Componenti di un learning agent:
+
+\begin{itemize}
+ \item Componente di apprendimento: per migliorare se stesso.
+ \item Performance element: seleziona quali azioni compiere.
+ \item Critic element: misura quanto ``bene'' l'agente si comporta in relazione
+alla misura di performance.
+ \item Problem generation: genera azioni con ``guadagno di informazioni''
+(potrebbe suggerire azioni sub-ottime che nel lungo termine possono rivelarsi
+migliori).
+\end{itemize}
+
+\subsection{Problem solving agents}
+
+È un sottotipo degli agenti basati su obiettivo (goal-based agents).
+
+Prima formula il \textbf{goal} (un insieme di stati desiderabili in cui
+l'obiettivo è stato raggiunto) poi formula il \textbf{problema}, tramite un insieme di \textbf{stati},
+\textbf{azioni}.
+Infine specifica i \textbf{costi} di ricerca e di esecuzione.
+
+Un concetto importante è dato dal \textbf{modello di transizione}, che descrive
+il risultato di una certa azione su un certo stato (funzione ``successore'').
+
+La soluzione è data da un'appropriata sequenza di azioni.
+
+Questo agente funziona in un ambiente statico, noto, osservabile e deterministico.
+
+Esempio: formulazione del problema per l'aspirapolvere.
+
+Insieme di stati: 8 (sporco o pulito (4))*(destra o sinistra (2))
+Azioni: muoviti a destra, muoviti a sinistra, aspira
+Obiettivo: arrivare agli stati (2) in cui non c'è sporco.
+Costo: 1 unità per azione (è arbitrario in questo esempio).
+
+
+
+
+
+
