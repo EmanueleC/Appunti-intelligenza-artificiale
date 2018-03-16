@@ -1,0 +1,37 @@
+\newpage
+
+\section{Ricerca}
+
+Un \textbf{albero di ricerca} è dato dall'insieme delle possibili sequenze di
+azioni che è possibile applicare a partire da uno stato iniziale.
+
+\textbf{Radice}: stato iniziale.
+
+\textbf{Nodi}: stati.
+
+\textbf{Rami}: azioni possibili.
+
+Lo stesso stato può comparire più volte $\rightarrow$ possono esserci dei cicli.
+
+\textbf{Nota bene}: il grafo che rappresenta lo spazio degli stati è una cosa
+diversa dall'albero di ricerca.
+
+\textbf{Foglie}: nodi senza figli.
+
+\textbf{Frontiera}: nodi foglia che si possono espandere.
+
+\lstinputlisting[language=Python]{source_filename.py}
+function TREE-SEARCH(problem) returns a solution, or failure
+// initialize the frontier using the initial state of problem
+loop do
+  if the frontier is empty then return failure
+  choose a leaf node and remove it from the frontier
+  if the node contains a goal state, returns the solution
+  expand the chosen node, adding the resulting nodes to the frontier
+
+
+
+
+
+
+
