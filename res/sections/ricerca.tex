@@ -13,22 +13,27 @@ azioni che è possibile applicare a partire da uno stato iniziale.
 
 Lo stesso stato può comparire più volte $\rightarrow$ possono esserci dei cicli.
 
-\textbf{Nota bene}: il grafo che rappresenta lo spazio degli stati è una cosa
-diversa dall'albero di ricerca.
+\textbf{Nota bene}: il grafo che rappresenta lo spazio degli stati \textbf{è una
+cosa diversa dall'albero di ricerca}.
 
 \textbf{Foglie}: nodi senza figli.
 
 \textbf{Frontiera}: nodi foglia che si possono espandere.
 
-\lstinputlisting[language=Python]{source_filename.py}
-function TREE-SEARCH(problem) returns a solution, or failure
-// initialize the frontier using the initial state of problem
-loop do
-  if the frontier is empty then return failure
-  choose a leaf node and remove it from the frontier
-  if the node contains a goal state, returns the solution
-  expand the chosen node, adding the resulting nodes to the frontier
-
+\begin{algorithm}
+    \caption{Algoritmo di ricerca}
+    \label{search}
+    \begin{algorithmic}[1] % The number tells where the line numbering should start
+        \Procedure{TREE SEARCH}{$problem$} \Comment{ritorna una soluzione o fallisce}
+            \Loop
+            \If{Frontiera vuota} \Return{Fallimento} \EndIf
+            \State Scegli un nodo foglia e rimuovilo dalla frontiera
+            \If{Nodo con stato obiettivo} \Return{Soluzione} \EndIf
+            \State Espandi il nodo scelto e aggiungi il risultato alla frontiera
+			\EndLoop
+        \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
 
 
 
