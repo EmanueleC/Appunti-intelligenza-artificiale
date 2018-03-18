@@ -5,26 +5,35 @@
 Un \textbf{albero di ricerca} è dato dall'insieme delle possibili sequenze di
 azioni che è possibile applicare a partire da uno stato iniziale.
 
-\textbf{Radice}: stato iniziale.
+\textbf{Radice}: contiene lo stato iniziale.
 
-\textbf{Nodi}: stati.
+\textbf{Nodi}: contengono gli stati.
 
-\textbf{Rami}: azioni possibili.
+\textbf{Rami}: sono le azioni possibili.
 
-Lo stesso stato può comparire più volte $\rightarrow$ possono esserci dei cicli.
+Lo stesso stato può comparire più volte in un albero di ricerca $\rightarrow$
+possono esserci dei cicli.
 
-\textbf{Nota bene}: il grafo che rappresenta lo spazio degli stati \textbf{è una
+\textbf{Nota bene - 1}: il grafo che rappresenta lo spazio degli stati \textbf{è una
 cosa diversa dall'albero di ricerca}.
+
+\textbf{Nota bene - 2}: nodo e stati sono due cose diverse: uno stato è una
+configurazione del mondo con cui si ha a che fare e un nodo è una struttura
+usata per rappresentare l'albero di ricerca.
 
 \textbf{Foglie}: nodi senza figli.
 
 \textbf{Frontiera}: nodi foglia che si possono espandere.
 
+Il seguente algoritmo \ref{alg:search} riporta come viene svolta la ricerca nell'albero
+costruito. 
+
 \begin{algorithm}
     \caption{Algoritmo di ricerca}
-    \label{search}
+    \label{alg:search}
     \begin{algorithmic}[1] % The number tells where the line numbering should start
         \Procedure{TREE SEARCH}{$problem$} \Comment{ritorna una soluzione o fallisce}
+			\State Inizializza la frontiera usando lo stato iniziale del problema
             \Loop
             \If{Frontiera vuota} \Return{Fallimento} \EndIf
             \State Scegli un nodo foglia e rimuovilo dalla frontiera
@@ -35,8 +44,49 @@ cosa diversa dall'albero di ricerca}.
     \end{algorithmic}
 \end{algorithm}
 
+Questo algoritmo può produrre dei cicli. Una soluzione possibile è la seguente,
+che considera un insieme \textbf{explored set} che memorizza ogni nodo espanso.
 
+\begin{algorithm}
+    \caption{Algoritmo di ricerca senza cicli}
+    \label{alg:search}
+    \begin{algorithmic}[1] % The number tells where the line numbering should start
+        \Procedure{TREE SEARCH}{$problem$} \Comment{ritorna una soluzione o fallisce}
+			\State Inizializza la frontiera usando lo stato iniziale del problema
+			\State Inizializza l'insieme explored set (vuoto).
+            \Loop
+            \If{Frontiera vuota} \Return{Fallimento} \EndIf
+            \State Scegli un nodo foglia e rimuovilo dalla frontiera
+            \If{Nodo con stato obiettivo} \Return{Soluzione} \EndIf
+			\State Aggiungi il nodo all'insieme explored set
+            \State Espandi il nodo scelto e aggiungi il risultato alla frontiera \textbf{solo se}
+non è già nella frontiera e nemmeno nell'explored 
+			\EndLoop
+        \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
 
+\subsection{Note per implementazione}
 
+La frontiera deve essere una struttura dati che memorizzi i nodi in modo tale che si possa scegliere
+facilmente il prossimo nodo da espandere.
 
+La struttura dati appropriata per questo è una \textbf{coda}.
 
+Esistono diverse politiche di ordinamento di una coda \dots
+
+\begin{itemize}
+\item FIFO: l'operazione pop ritorna l'elemento più vecchio.
+\item LIFO: l'operazione pop ritorna l'elemento più recente.
+\item Coda di priorità: l'operazione pop ritorna l'elemento con priorità più alta.
+\end{itemize}
+
+Una \textbf{strategia di ricerca} è definita in base all'ordine di espansione dei nodi nell'albero
+e viene valutata in base ai seguenti parametri:
+
+\begin{itemize}
+\item \textbf{Completezza} - Trova sempre una soluzione, se questa esiste?
+\item \textbf{Complessità di tempo}
+\item \textbf{Complessità di spazio}
+\item \textbf{Ottimalità}
+\end{itemize}
