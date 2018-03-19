@@ -49,7 +49,7 @@ che considera un insieme \textbf{explored set} che memorizza ogni nodo espanso.
 
 \begin{algorithm}
     \caption{Algoritmo di ricerca senza cicli}
-    \label{alg:search}
+    \label{alg:search2}
     \begin{algorithmic}[1] % The number tells where the line numbering should start
         \Procedure{TREE SEARCH}{$problem$} \Comment{ritorna una soluzione o fallisce}
 			\State Inizializza la frontiera usando lo stato iniziale del problema
@@ -59,17 +59,17 @@ che considera un insieme \textbf{explored set} che memorizza ogni nodo espanso.
             \State Scegli un nodo foglia e rimuovilo dalla frontiera
             \If{Nodo con stato obiettivo} \Return{Soluzione} \EndIf
 			\State Aggiungi il nodo all'insieme explored set
-            \State Espandi il nodo scelto e aggiungi il risultato alla frontiera \textbf{solo se}
-non è già nella frontiera e nemmeno nell'explored 
+            \State Espandi il nodo scelto e aggiungi il risultato alla
+frontiera \textbf{solo se} non è già nella frontiera e nemmeno nell'explored 
 			\EndLoop
         \EndProcedure
     \end{algorithmic}
 \end{algorithm}
 
-\subsection{Note per implementazione}
+\subsection{Proprietà}
 
-La frontiera deve essere una struttura dati che memorizzi i nodi in modo tale che si possa scegliere
-facilmente il prossimo nodo da espandere.
+La frontiera deve essere una struttura dati che memorizzi i nodi in modo tale
+che si possa scegliere facilmente il prossimo nodo da espandere.
 
 La struttura dati appropriata per questo è una \textbf{coda}.
 
@@ -81,8 +81,8 @@ Esistono diverse politiche di ordinamento di una coda \dots
 \item Coda di priorità: l'operazione pop ritorna l'elemento con priorità più alta.
 \end{itemize}
 
-Una \textbf{strategia di ricerca} è definita in base all'ordine di espansione dei nodi nell'albero
-e viene valutata in base ai seguenti parametri:
+Una \textbf{strategia di ricerca} è definita in base all'ordine di espansione
+dei nodi nell'albero e viene valutata in base ai seguenti parametri:
 
 \begin{itemize}
 \item \textbf{Completezza} - Trova sempre una soluzione, se questa esiste?
@@ -90,3 +90,64 @@ e viene valutata in base ai seguenti parametri:
 \item \textbf{Complessità di spazio}
 \item \textbf{Ottimalità}
 \end{itemize}
+
+Le complessità di tempo e spazio si misurano in base a:
+
+\begin{itemize}
+\item \textbf{b} - Il massimo fattore di branching nell'albero di ricerca
+\item \textbf{d} - Profondità del minore nodo con uno stato obiettivo
+\item \textbf{m} - La lunghezza massima di ogni cammino nello spazio degli stati
+\end{itemize}
+
+Il tempo si misura in termini di nodi generati durante la ricerca.
+Lo spazio si misura in termini del massimo numero di nodi memorizzati.\\
+
+\subsection{Tipi di ricerca}
+
+\textbf{Breadth-first search}: espande il nodo minore non ancora esplorato.
+La frontiera è una coda FIFO.
+
+È completo (se b è finito), complessità di spazio e tempo pari a $\mathcal{O}(b^d)$,
+è ottimale (se ha un costo di un'unità per passo).
+Lo spazio è il problema maggiore.\\
+
+\textbf{Uniform-cost search}: espande il nodo non ancora esplorato con minor costo.
+La frontiera è una coda di priorità in base al costo di cammino.
+È equivalente al breadth-first se i costi sono tutti uguali.
+
+È completo se i costi sono > $\epsilon$. Ha complessità di spazio e tempo pari a
+$\mathcal{O}(b^{floor(C^*/\epsilon)+1})$ dove $C^*$ è il costo della soluzione
+ottimale e ciascuna azione costa almeno $\epsilon$. È ottimale.\\
+
+\textbf{Depth-first search}: espande il nodo non ancora esplorato più profondo
+(più lontano dalla radice) dell'albero. La frontiera è una coda LIFO.
+\textbf{Non} è completo in generale dato che uno stato già incontrato non può
+essere ripetuto in un cammino. In spazi finiti è completo. Non è ottimale.
+Complessita di spazio pari a: $\mathcal{O}(bm).$ - lineare.
+Complessità di tempo pari a: $\mathcal{O}(b^m)$\\
+
+\textbf{Depth-limited search}: la ricerca si ferma alla profondità l.
+Ricordando che d è la profondità del minore nodo con uno stato obiettivo.
+Non è completo se l < d.
+Non è ottimale se l > d.\\
+
+\textbf{Iterative deepening search}: applica la depth-limited search incrementando
+l a ogni iterazione.
+
+\begin{algorithm}
+    \caption{Iterative deepening search}
+    \label{alg:search2}
+    \begin{algorithmic}[1] % The number tells where the line numbering should start
+        \Procedure{ITERATIVE-DEEPENING-SEARCH}{$problem$} \Comment{ritorna una soluzione o fallisce}
+            \For{depth=0 to $\infty$}
+            \State Risultato $\leftarrow$ DEPTH-LIMITED-SEARCH(problem, depth)
+            \If{Risultato $\neq$ cutoff} \Return{Risultato} \EndIf
+			\EndFor
+        \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
+
+È completo.
+È ottimale se il costo del cammino è una funzione non decrescente della profondità.
+Complessita di spazio pari a: $\mathcal{O}(bd).$ - lineare.
+Complessità di tempo pari a: $\mathcal{O}(b^d)$\\
