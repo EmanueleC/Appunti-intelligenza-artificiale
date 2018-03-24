@@ -1,3 +1,6 @@
+import networkx as nx
+import matplotlib.pyplot as plt
+
 class State:
     def __init__(self, array):
         self.array = array
@@ -9,8 +12,11 @@ class State:
         return True
     
     def getString(self):
-        for el in self.array:
-            el.getString()
+		strings = ""
+		for i in range(0,len(self.array)-1):
+			strings = strings + self.array[i].getString() + ","
+		strings = strings + self.array[len(self.array)-1].getString()
+		return strings
 
 class Pair:
     def __init__(self, location, prop):
@@ -26,7 +32,7 @@ class Pair:
         else: return False
         
     def getString(self):
-        print self.location + " " + self.prop
+        return self.location + " " + self.prop
 
 class Agent:
     def __init__(self, where):
@@ -42,13 +48,29 @@ class Agent:
     def start(self, initial, goal):
         while(not initial.compare(goal)):
             for el in initial.array:
-                initial.getString()
+                print(initial.getString())
                 if (el.prop == "Dirty" and el.location == self.where):
                     el.suck()
                 else:
                     self.move()
                     el.suck()
-            initial.getString()
+            print(initial.getString())
+
+def graph():
+	allClean = State([Pair("A","Clean"),Pair("B","Clean")]).getString()
+	allDirty = State([Pair("A","Dirty"),Pair("B","Dirty")]).getString()
+	cleanDirty = State([Pair("A","Dirty"),Pair("B","Clean")]).getString()
+	dirtyClean = State([Pair("A","Clean"),Pair("B","Dirty")]).getString()
+	graph = nx.Graph()
+	graph.add_node(allClean)
+	graph.add_node(allDirty)
+	graph.add_node(cleanDirty)
+	graph.add_node(dirtyClean)
+	graph.add_edge(allClean,cleanDirty)
+	graph.add_edge(allClean,dirtyClean)
+	graph.add_edge(allDirty,cleanDirty)
+	graph.add_edge(allDirty,dirtyClean)
+	return graph
 
 vacuum = Agent("A")
 pair1 = Pair("A","Dirty")
@@ -60,3 +82,7 @@ arrayGoal = [pairGoal1,pairGoal2]
 initialState = State(array)
 goalState = State(arrayGoal)
 vacuum.start(initialState,goalState)
+g = graph()
+pos = nx.spring_layout(g)
+nx.draw(g,pos=pos,with_labels=True)
+plt.savefig("vacummTree.png")
