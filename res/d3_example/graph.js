@@ -12,7 +12,7 @@ vis.text("The Graph").select("#graph");
 //create a node.
 var nodes = [{x: 30, y: 50},
 			{x: 50, y: 80},
-			{x: 90, y: 120}];
+			{x: 90, y: 120}];z
 //add node to DOM with tag name "circle" and other attr.
 addBase(vis,"circle .nodes",nodes,"svg:circle")
      .attr("class", "nodes")
