@@ -16,11 +16,39 @@ identificando combinazioni di valori/variabili che violano i vincoli.\\
 
 Insieme di vincoli: $C = \{ c_i = (scope,rel_i) | i=1,...,h\}$
 
-Lo scope indica le variabili interessate dal vincolo, rel indica quali
-assegnamenti di valori sono permessi.
+Lo \textbf{scope} indica le variabili interessate dal vincolo, mentre \textbf{rel}
+indica quali assegnamenti di valori sono permessi.
 
-I vincoli si classificano in unari, binari, higher-order, globali.
+I vincoli si classificano in:
 
+\begin{itemize}
+ \item \textbf{unari} - coinvolgono una variabile
+ \item \textbf{binari} - coinvolgono una coppia di variabili
+ \item \textbf{higher-order} - coinvolgono 3 o più variabili
+ \item \textbf{globali} - coinvolgono un numero arbitrario di variabili
+\end{itemize}
 
+Concetti utili:
 
+\textbf{Stato}: un assegnamento di valori a qualcuna o a tutte le variabili.
 
+Un \textbf{Assegnamento} può essere:
+
+\begin{itemize}
+ \item \textbf{consistente} se non viola nessun vincolo
+ \item \textbf{completo} se ogni variabile viene assegnata a un valore
+ \item \textbf{parziale}: non completo
+\end{itemize}
+
+\textbf{Soluzione}: un assegnamento consistente e completo.
+
+Un CSP binario contiene solo vincoli binari.
+
+In un grafo di un CSP i nodi rappresentano le variabili, gli archi rappresentano
+i vincoli.
+
+Perché tradurre un problema in CSP? Il fatto è che molti problemi presentano
+una traduzione intuitiva in un csp. Inoltre esistono sistemi generali in grado di
+risolvere problemi csp senza dover costruire soluzioni su misura.
+Inoltre i risolutori di CSP permettono di ridurre lo spazio da esplorare grazie
+alla propagazione dei vincoli.
