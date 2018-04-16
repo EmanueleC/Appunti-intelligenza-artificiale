@@ -33,8 +33,42 @@ essere in grado di apprendere da se stesso) che dall'apprendimento non supervisi
 (non deve tentare di trovare patterns o strutture in dati sconosciuti) quello che
 deve fare, principalmente, è tentare di massimizzare la ricompensa.
 
-Un agente che apprende deve \textbf{sfruttare} ciò che ha imparato in passato per ottenere una
-ricompensa, ma deve anche \textbf{esplorare} nuove azioni per sceglierne di migliori in futuro.
+Un agente che apprende deve \textbf{sfruttare} ciò che ha imparato in passato per
+ottenere una ricompensa, ma deve anche \textbf{esplorare} nuove azioni per sceglierne
+di migliori in futuro.
 
 Questo tipo di approccio permette di gestire le \textbf{incertezze} dell'ambiente in
 cui l'agente si trova.
+
+L'effetto di un'azione dell'agente spesso è difficile da prevedere, perciò è necessario
+monitorare frequentemente l'ambiente.
+
+(Parentesi psicologica) - tutto ciò si può ricondurre al \textbf{comportamentismo}
+(o psicologia comportamentale), un tipo di approccio alla psicologia sviluppato da
+John Watson agli inizi del Novecento, basato sull'assunto che il comportamento
+esplicito dell'individuo è l'unica unità di analisi scientificamente studiabile della
+psicologia avvalendosi del metodo stimolo (ambiente) e risposta (comportamento), in
+quanto direttamente osservabile dallo studioso.
+
+\subsection{Elementi del reinforcement learning}
+
+\begin{itemize}
+ \item Una \textbf{politica} (mappatura da uno stato dell'ambiente a un'azione da compiere
+quando ci si trova in quello stato). Si tratta del cuore di un agente che apprende,
+dato che da sola basta per determinarne il comportamento.
+ \item Un \textbf{segnale di ricompensa}. Definisce l'obiettivo del problema; a ogni passo
+l'agente riceve una ricompensa che deve massimizzare nel lungo termine.
+ \item Una \textbf{funzione dei valori}. Mentre la ricompensa definisce ciò che è buono
+nel \textbf{breve termine}, la funzione dei valori definisce ciò che è buono nel
+\textbf{lungo termine}.
+Ne segue che è essenziale prenderla in considerazione quando si devono prendere decisioni/
+fare delle valutazioni. Purtroppo i valori sono più difficili da individuare rispetto alla
+ricompensa (che è data da uno stimolo dell'ambiente). Di solito occorre osservare tutta
+la storia passata di un agente (se disponibile).
+Per questo motivo il più importante elemento di un sistema di apprendimento per rinforzo
+è proprio quello che effettua la stima dei valori.
+ \item Un \textbf{modello dell'ambiente} (opzionale, visto che può essere completamente
+ignoto). Viene usato per fare predizioni sui prossimi stati e ricompense se si effettua una
+determinata azione. Tale approccio di pianificazione è considerato opposto alla ricerca
+``prova, sbaglia, impara''.
+\end{itemize}
