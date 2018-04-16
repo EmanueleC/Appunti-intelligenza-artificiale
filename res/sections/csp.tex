@@ -100,3 +100,50 @@ Sia $[1,...,n]$ la posizione su riga di una regina.
  \item $x_i - x_j \neq i-j$ nessun attacco su diagonale $\backslash$
  \item $x_i - x_j \neq j-i$ nessun attacco su diagonale $/$
 \end{itemize}
+
+\subsection{Formulazioni}
+
+\textbf{Formulazione standard}:
+
+\begin{itemize}
+ \item Stato iniziale vuoto \{\}
+ \item Funzione successore: assegna un valore a una variabile non assegnata
+che non sia in conflitto con l'attuale assegnamento
+ \item Stato: assegnamento parziale
+ \item Goal test: l'assegnamento è completo
+\end{itemize}
+
+Con questa formulazione sarebbe possibile usare una ricerca in profondità, tuttavia
+la complessità è elevata.
+
+Se si considera un CSP con n variabili e un dominio discreto e finito di
+dimensione d, viene generato un albero con $n!*d^n$ foglie anche se gli
+assegnamenti completi possibili sono $d^n$\\
+
+In CSP, gli assegnamenti di variabili sono commutativi, perciò occorre
+considerare una sola variabile a ogni nodo nell'albero di ricerca.
+In questo caso il numero di fogli diventa pari al numero possibile di
+assegnamenti completi, ossia $d^n$.
+
+La ricerca in profondità in problemi CSP dove si considera l'assegnamento
+di una singola variabile è chiamato \textbf{backtracking search}.
+
+\begin{figure}[H]
+\caption{Esempio di backtracking nel problema di colorazione di una mappa}
+\centering
+\includegraphics[width=0.5\textwidth]{backtracking}
+\end{figure}
+
+\subsection{Euristiche}
+
+Si può scegliere di adottare l'euristica \textbf{minimum remaining values}
+(MRV) che consiste nel scegliere di fare branching sulla variabile a cui è
+possibile assegnare il minor numero di valori.
+
+Un'altra euristica è la \textbf{most constraining variable} che sceglie la
+variabile coinvolta nel maggior numero possibile di vincoli con le altre variabili.
+
+Al contrario, l'euristica \textbf{least constraining value} sceglie la
+variabile coinvolta nel minor numero possibile di vincoli con le altre variabili.
+
+
