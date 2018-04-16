@@ -52,3 +52,51 @@ una traduzione intuitiva in un csp. Inoltre esistono sistemi generali in grado d
 risolvere problemi csp senza dover costruire soluzioni su misura.
 Inoltre i risolutori di CSP permettono di ridurre lo spazio da esplorare grazie
 alla propagazione dei vincoli.
+
+Le variabili in un CSP possono essere:
+
+\begin{itemize}
+ \item \textbf{discrete} : in domini finiti di dimensione n le possibili
+assegnazioni sono $\mathcal{O}(d^n)$. In domini infiniti occorre un linguaggio
+per definire dei vincoli.
+ \item \textbf{continue} : coinvolgono vincoli lineari risolvibili in tempo
+polinomiale (rispetto al numero di variabili) - aka programmazione lineare.
+\end{itemize}
+
+\subsection{La sottosezione degli esempi tediosi}
+
+\textbf{Problema di soddisfacibilità booleana (3-SAT)}:\\
+
+$(x_1 \lor x_2 \lor x_6) \land (\neg x_1 \lor x_3 \lor x_4) \land
+(\neg x_4 \lor \neg x_5 \lor x_6) \land (x_2 \lor x_5 \lor \neg x_6)$
+
+Qui ci sono 6 variabili booleane e 4 clausole (i raggruppamenti tra parentesi)
+separati da $\land$.
+
+Ogni clausola deve risultare vera affinchè tutta la formula sia
+vera.
+
+Perciò si inseriscono dei vincoli in corrispondenza di tali clausole \dots
+ad esempio la tripla $(x_1, x_2, x_6)$ può assumere valori solo nel seguente
+insieme: \{(0,0,1), (0,1,0), (0,1,1), (1,0,0), (1,0,1), (1,1,0), (1,1,1)\} e
+così via anche per le altre (tenendo conto delle negazioni).\\
+
+Il \textbf{problema delle n regine}: si vogliono posizionare n regine in
+una scacchiera n x n in modo che con una mossa non si possano mangiare
+fra di loro.\\
+
+All'inizio si posiziona una regina su ciascuna colonna, in una riga a caso e
+così facendo abbiamo escluso la possibilità di un attacco su colonna.
+
+Occorre imporre anche altri vincoli: nessun attacco su riga e nessun attacco su
+diagonale. Questi vincoli si traducono in matematichese così:
+
+Siano $x_1,...,x_n$ le n regine posizionate su n colonne.
+
+Sia $[1,...,n]$ la posizione su riga di una regina.
+
+\begin{itemize}
+ \item $x_i \neq x_j$: nessun attacco su riga
+ \item $x_i - x_j \neq i-j$ nessun attacco su diagonale $\backslash$
+ \item $x_i - x_j \neq j-i$ nessun attacco su diagonale $/$
+\end{itemize}
