@@ -61,14 +61,22 @@ l'agente riceve una ricompensa che deve massimizzare nel lungo termine.
  \item Una \textbf{funzione dei valori}. Mentre la ricompensa definisce ciò che è buono
 nel \textbf{breve termine}, la funzione dei valori definisce ciò che è buono nel
 \textbf{lungo termine}.
-Ne segue che è essenziale prenderla in considerazione quando si devono prendere decisioni/
-fare delle valutazioni. Purtroppo i valori sono più difficili da individuare rispetto alla
+Ne segue che è essenziale quando si devono prendere decisioni/fare delle valutazioni.
+Purtroppo i valori sono più difficili da individuare rispetto alla
 ricompensa (che è data da uno stimolo dell'ambiente). Di solito occorre osservare tutta
 la storia passata di un agente (se disponibile).
 Per questo motivo il più importante elemento di un sistema di apprendimento per rinforzo
 è proprio quello che effettua la stima dei valori.
+Si noti che alcuni sistemi non possiedono una funzione dei valori, ma si basano solo
+sulla ricompensa ottenuta e modificano le loro politiche dopo molti tentativi
+\textbf{evolvendo nelo tempo}, senza tenere conto delle singole interazioni con l'ambiente
+(algoritmi genetici, simulated annealing ecc\dots).
  \item Un \textbf{modello dell'ambiente} (opzionale, visto che può essere completamente
 ignoto). Viene usato per fare predizioni sui prossimi stati e ricompense se si effettua una
 determinata azione. Tale approccio di pianificazione è considerato opposto alla ricerca
 ``prova, sbaglia, impara''.
 \end{itemize}
+
+I metodi che evolvono le loro politiche non stimano la funzione dei valori e sono utili
+in casi in cui un agente non può rilevare lo stato completo dell'ambiente circostante,
+mentre i metodi di apprendimento per rinforzo più comuni apprendono interagendo con l'ambiente.
