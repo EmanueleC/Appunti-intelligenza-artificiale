@@ -1,13 +1,17 @@
 \newpage
 \section{Apprendimento per rinforzo}
 
+\textit{Gli appunti seguenti sono un riassunto dei punti salienti
+del libro di Richard S. Sutton e Andrew G. Barto - Reinforcement
+Learning: An Introduction}
+
 L'apprendimento che deriva dall'\textbf{interazione} con un ambiente è una
 forma di intelligenza molto comune, la più nota, semplice e intuitiva.
 
 \begin{figure}[H]
-\caption{Scenario descrittivo dell'apprendimento per rinforzo}
 \centering
-\includegraphics[width=0.5\textwidth]{learning}
+\includegraphics[width=0.4\textwidth]{learning}
+\caption{Scenario descrittivo dell'apprendimento per rinforzo}
 \end{figure}
 
 L'apprendimento per rinforzo è guidato da un \textbf{obiettivo}, che viene
@@ -27,11 +31,12 @@ Un agente che apprende deve saper riconoscere lo stato dell'ambiente in cui si t
 e interagire con esso in modo tale da cambiarlo. Deve anche sapere qual è
 l'obiettivo da raggiungere.
 
-L'apprendimento per rinforzo è diverso sia dall'apprendimento supervisionato (non
-dispone di esempi passati che possano dirgli quale sia la cosa giusta da fare, deve
-essere in grado di apprendere da se stesso) che dall'apprendimento non supervisionato
-(non deve tentare di trovare patterns o strutture in dati sconosciuti) quello che
-deve fare, principalmente, è tentare di massimizzare la ricompensa.
+L'apprendimento per rinforzo è diverso sia dall'apprendimento supervisionato
+(non dispone di esempi passati che possano dirgli quale sia la cosa giusta
+da fare, deve essere in grado di apprendere da se stesso) che dall'apprendimento
+non supervisionato (non deve tentare di trovare patterns o strutture in dati
+sconosciuti) quello che deve fare, principalmente, è tentare di massimizzare
+la ricompensa.
 
 Un agente che apprende deve \textbf{sfruttare} ciò che ha imparato in passato per
 ottenere una ricompensa, ma deve anche \textbf{esplorare} nuove azioni per sceglierne
@@ -80,3 +85,77 @@ determinata azione. Tale approccio di pianificazione è considerato opposto alla
 I metodi che evolvono le loro politiche non stimano la funzione dei valori e sono utili
 in casi in cui un agente non può rilevare lo stato completo dell'ambiente circostante,
 mentre i metodi di apprendimento per rinforzo più comuni apprendono interagendo con l'ambiente.
+
+\subsection{Esempi di problemi}
+
+L'apprendimento per rinforzo usa le informazioni di training per valutare le azioni intraprese
+piuttosto che decidere qual è l'azione giusta da prendere.
+
+Si suppone di avere a disposizione un set di k azioni e che ciascuna di esse restituisca
+una ricompensa quando viene selezionata. L'obiettivo è massimizzare la ricompensa.
+
+L'azione scelta al tempo t è $A_t$ e la corrispondente ricompensa è $R_t$.
+Il valore di un'azione arbitraria $a$ è: $q_*(a) = E[R_t | A_t = a]$ cioè il valore atteso
+di $R_t$ ogni volta che viene selezionata l'azione $A_t$.
+
+Se si conoscesse $q_*(a)$ allora basteresse scegliere sempre l'azione che restituisce una
+ricompensa maggiore. In alcuni casi però si ha a disposizione solo una stima della
+ricompensa dell'azione a selezionata al tempo t, detta $Q_t(a)$. Si vorrebbe rendere
+$Q_t(a)$ il più possibile vicina a $q_*(a)$.
+
+Le azioni greedy sono quelle che massimizzano $Q_t(a)$. Se vengono selezionate, si sta
+sfruttando la concoscenza dell'ambiente, altrimenti se si sceglie di selezionarne altre,
+si sta esplorando l'ambiente.
+
+Lo \textbf{sfruttamento} può massimizzare la ricompensa nel breve termine, mentre
+l'\textbf{esplorazione} può massimizzarla nel lungo termine.
+
+Ci si può chiedere se queste due strategie siano in conflitto tra loro, ma in realtà
+i risultati migliori si ottengono quando vengono bilanciate. Il problema
+di bilanciare sfruttamento ed esplorazione è una sfida nell'apprendimento per rinforzo
+ed esistono anche tecniche sofisticate.
+
+Un modo di stimare il valore vero delle ricompense è quello di fare la media delle 
+ricompense effettivamente ricevute:\\
+
+$Q_T(a) = \frac{\sum_{i=1}^{t-1} R_i*Id_{A_i = a}}{\sum_{i=1}^{t-1} Id_{A_i = a}}$\\
+
+Se il denominatore è 0, allora $Q_t(a)$ assume valore di default 0.
+Quando il denominatore tende all'infinito (cioè l'azione a è stata selezionata
+infinite volte) allora per la legge dei grandi numeri si è ragionevolmente sicuri che
+il numeratore tenda alla media reale, cioè a $q_*(a)$.
+
+Questo metodo di stima dei valori delle azioni è detto \textbf{metodo di campionamento
+semplice}.
+
+Il metodo greedy consiste nel selezionare, istante dopo istante, l'azione
+$A_t = argmax_a Q_t(a)$ che massimizza la stima dei valori (in caso di pareggio viene
+scelta in modo arbitrario tra le azioni alla pari).
+
+Un'alternativa al metodo greedy consiste nel scegliere una volta ogni tanto un'azione
+indipendentemente dalla stima con probabilita $\epsilon$. Questo metodo è chiamato
+$\epsilon$-greedy.
+
+L'immagine \ref{fig:meanDistributions} mostra i valori reali di $q_*(a)$ per un
+problema con 10 possibili azioni e le relative distribuzioni normali (media $q_*(a)$
+e varianza unitaria).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{meanDistributions}
+\caption{Distribuzione di $q_*(a)$ per un problema con 10 azioni}
+\label{fig:meanDistributions}
+\end{figure}
+
+L'immagine \ref{fig:comparison} mostra una comparazione tra un algoritmo
+$\epsilon$-greedy (con $\epsilon$=0.01 e $\epsilon$=0.1) e un algoritmo greedy.
+Entrambi i metodi hanno stimato i valori di $q_*(a)$ tramite il metodo del
+campionamento semplice.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{comparison}
+\caption{Comparazione tra un algoritmo $\epsilon$-greedy e un algoritmo greedy}
+\label{fig:comparison}
+\end{figure}
+
