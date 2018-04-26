@@ -144,6 +144,44 @@ Un'altra euristica è la \textbf{most constraining variable} che sceglie la
 variabile coinvolta nel maggior numero possibile di vincoli con le altre variabili.
 
 Al contrario, l'euristica \textbf{least constraining value} sceglie la
-variabile coinvolta nel minor numero possibile di vincoli con le altre variabili.
+variabile coinvolta nel minor numero possibile di vincoli con le altre variabili.\\
+
+\subsection{Difetti del backtracking}
 
 
+\begin{itemize}
+ \item Non ricorda le ragioni di eventuali conflitti; la soluzione è il
+\textbf{backjumping}.
+Il \textbf{backjumping} consiste nel ritornare all'assegnamento completo causa del
+conflitto e identificare la più recente assegnazione precedente.
+
+ \item Effettua più volte controlli inutili; la soluzione è ricordarsi gli assegnamenti
+non legali e aggiungere dei vincoli al problema o tenere in cache tali assegnamenti
+e controllare che non vengano ripetuti.
+
+ \item Un conflitto viene scoperto solo quando tutte le variabili sono state assegnate a
+dei valori; la soluzione è fare \textbf{forward checking} dei vincoli (si controlla
+in anticipo se un assegnamento non completo porterà alla violazione di un vincolo).
+Come? Tenendo in considerazione i valori legali delle rimanenti variabili. Quando a
+una certa variabile non ancora assegnata non rimangono più valori legali, si scopre
+in anticipo il conflitto (si veda la figura \ref{fig:fc})\dots ma non prevede
+possibili conflitti (ad esempio quando due variabili rimanenti possono assumere lo stesso
+unico valore).
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{fc}
+\caption{Esempio di forward checking nel problema di colorazione di una mappa}
+\label{fig:fc}
+\end{figure}
+
+Per risolvere la previsione dei conflitti e migliorare il forward checking viene usata
+la \textbf{propagazione dei vincoli}, al fine di assicurare la consistenza locale
+del problema. Esistono diversi tipi di consistenza\dots
+
+\begin{itemize}
+ \item \textbf{Nodo-consistenza}
+ \item \textbf{Arco-consistenza}
+ \item \textbf{Cammino-consistenza}
+\end{itemize}
