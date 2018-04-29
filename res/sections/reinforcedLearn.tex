@@ -86,7 +86,7 @@ I metodi che evolvono le loro politiche non stimano la funzione dei valori e son
 in casi in cui un agente non può rilevare lo stato completo dell'ambiente circostante,
 mentre i metodi di apprendimento per rinforzo più comuni apprendono interagendo con l'ambiente.
 
-\subsection{Esempi di problemi}
+\subsection{K-Bandit Algorithm}
 
 L'apprendimento per rinforzo usa le informazioni di training per valutare le azioni intraprese
 piuttosto che decidere qual è l'azione giusta da prendere.
@@ -116,9 +116,11 @@ di bilanciare sfruttamento ed esplorazione è una sfida nell'apprendimento per r
 ed esistono anche tecniche sofisticate.
 
 Un modo di stimare il valore vero delle ricompense è quello di fare la media delle 
-ricompense effettivamente ricevute:\\
+ricompense effettivamente ricevute:
 
-$Q_T(a) = \frac{\sum_{i=1}^{t-1} R_i*Id_{A_i = a}}{\sum_{i=1}^{t-1} Id_{A_i = a}}$\\
+\begin{equation}
+Q_T(a) = \frac{\sum_{i=1}^{t-1} R_i*Id_{A_i = a}}{\sum_{i=1}^{t-1} Id_{A_i = a}}
+\end{equation}
 
 Se il denominatore è 0, allora $Q_t(a)$ assume valore di default 0.
 Quando il denominatore tende all'infinito (cioè l'azione a è stata selezionata
@@ -136,7 +138,7 @@ Un'alternativa al metodo greedy consiste nel scegliere una volta ogni tanto un'a
 indipendentemente dalla stima con probabilita $\epsilon$. Questo metodo è chiamato
 $\epsilon$-greedy.
 
-L'immagine \ref{fig:meanDistributions} mostra i valori reali di $q_*(a)$ per un
+Il grafico \ref{fig:meanDistributions} mostra i valori reali di $q_*(a)$ per un
 problema con 10 possibili azioni e le relative distribuzioni normali (media $q_*(a)$
 e varianza unitaria).
 
@@ -147,7 +149,7 @@ e varianza unitaria).
 \label{fig:meanDistributions}
 \end{figure}
 
-L'immagine \ref{fig:comparison} mostra una comparazione tra un algoritmo
+Il grafico \ref{fig:comparison} mostra una comparazione tra un algoritmo
 $\epsilon$-greedy (con $\epsilon$=0.01 e $\epsilon$=0.1) e un algoritmo greedy.
 Entrambi i metodi hanno stimato i valori di $q_*(a)$ tramite il metodo del
 campionamento semplice.
@@ -158,4 +160,73 @@ campionamento semplice.
 \caption{Comparazione tra un algoritmo $\epsilon$-greedy e un algoritmo greedy}
 \label{fig:comparison}
 \end{figure}
+
+Una semplice implementazione in python del 10-bandit algorithm è riportata
+nel seguente snippet di codice:
+
+\lstinputlisting[language=Python, breaklines=true]{res/code/banditAlgorithm.py}
+
+\subsection{Valori iniziali ottimistici}
+
+In un ambiente non-stazionario, è preferibile che il passo $\alpha$ cambi a ogni
+iterazione. Nell'esempio precedente rimane fisso a $\frac{1}{n}$ e permette di convergere
+al valore reale delle ricompense delle azioni.
+
+I metodi finora discussi dipendono dalla stima iniziale del valore di
+ricompensa delle azioni ($Q_i(a)$).
+Per il metodo che utilizza la media come stima di $Q_i(a)$ questo bias
+dovuto al valore iniziale viene aggiustato una volta che tutte le azioni
+sono state selezionate almeno una volta.
+
+Per un metodo che come passo utilizzi una costante $\alpha$, il bias rimane.
+Se decidiamo di dare una stima iniziale di +5 alle ricompense di tutte le
+azioni, questa sarà una stima ottimista (in realtà le ricompense reali
+segunono una distribuzione normale di probabilità con media 0 e varianza 1).
+Cominciare con un valore ottimista (+5) porta il metodo \textbf{puramente}
+greedy (con $\epsilon = 0$) ad esplorare di più e avere (\textbf{nel lungo termine})
+performances migliori del metodo greedy con stime iniziali a 0 e $\epsilon = 0.01$
+(si veda il grafico \ref{fig:greedyOpt}).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{GreedyOpt}
+\caption{Comparazione tra un algoritmo $\epsilon = 0.01$-greedy e un algoritmo
+puramente greedy con stime iniziali ottimiste a +5}
+\label{fig:greedyOpt}
+\end{figure}
+
+\subsection{Selezione basata sull'upper confidence bound}
+
+Come scegliere le azioni nel caso non greedy in modo più proficuo
+rispetto alla casualità? Lo scopo è quello di esplorare con qualche indicazione
+in più, o comunque in modo più intelligente rispetto a quello random.
+
+Un modo è quello di selezionare, al tempo t, l'azione $A_t$:
+
+\begin{equation}
+A_t = argmax_a [Q_t(a) + c \sqrt{\frac{ln t}{N_t(a)}}]
+\end{equation}
+
+dove c rappresenta il \textbf{grado di esplorazione} e il termine
+sotto la radice indica l'incertezza relativa alla stima $Q_t(a)$.
+
+Quello che si fa è massimizzare l'upper bound della possibile
+ricompensa reale di un'azione a. Il tempo è usato come un
+indicatore della stima: se un'azione viene selezionata molte volte,
+la stima della sua ricompensa migliora e l'incertezza diminuisce,
+se non viene selezionata per molto tempo la stima della sua
+ricompensa peggiora e l'incertezza aumenta.
+Questo metodo non funziona molto bene in casi generali o in problemi
+non-stazionari. Comunque, nel problema del k-Bandit funziona bene
+come si può dedurre dal grafico \ref{fig:ucb}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{ucb}
+\caption{Comparazione tra un algoritmo $\epsilon = 0.01$-greedy e un algoritmo
+che seleziona l'azione con il criterio ucb (c = 2)}
+\label{fig:ucb}
+\end{figure}
+
+
 
