@@ -202,20 +202,20 @@ possibilmente in tempo costante.
 Calcolare ogni volta la media con la formula usuale non è efficiente:
 
 \begin{equation}
- $Q_1 := \frac{R_1 + R_2 + ... + R_n}{n - 1}$
+ Q_1 := \frac{R_1 + R_2 + ... + R_n}{n - 1}
 \end{equation}
 
 conviene sfruttare la media calcolata fino al passo precedente ($Q_{n-1}$) per calcolare la
 nuova, tramite la formula:
 
 \begin{equation}
- $Q_n := Q_{n-1} + \frac{1}{n}[R_n - Q_n]$
+ Q_n := Q_{n-1} + \frac{1}{n}[R_n - Q_n]
 \end{equation}
 
 La precedente formula viene generalizzata in:
 
 \begin{equation}
- $Nuova stima <- vecchia stima + passo[target + vecchia stima]$
+ Nuova stima <- vecchia stima + passo[target + vecchia stima]
 \end{equation}
 
 L'espressione $passo[target + vecchia stima]$ è un errore della stima (tra la vecchia

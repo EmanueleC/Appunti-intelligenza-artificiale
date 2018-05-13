@@ -2,7 +2,8 @@
 
 \section{Problemi con vincoli}
 
-CSP (Constraint satisfaction problems) è un modo di risolvere un'ampia varietà di problemi.
+CSP (Constraint satisfaction problems) è un modo di risolvere un'ampia varietà
+di problemi.
 
 Stati definiti da \textbf{ variabili $X_i$ } con valori nel dominio $D_i$
 
@@ -16,8 +17,8 @@ identificando combinazioni di valori/variabili che violano i vincoli.\\
 
 Insieme di vincoli: $C = \{ c_i = (scope,rel_i) | i=1,...,h\}$
 
-Lo \textbf{scope} indica le variabili interessate dal vincolo, mentre \textbf{rel}
-indica quali assegnamenti di valori sono permessi.
+Lo \textbf{scope} indica le variabili interessate dal vincolo, mentre
+\textbf{rel} indica quali assegnamenti di valori sono permessi.
 
 I vincoli si classificano in:
 
@@ -181,7 +182,33 @@ la \textbf{propagazione dei vincoli}, al fine di assicurare la consistenza local
 del problema. Esistono diversi tipi di consistenza\dots
 
 \begin{itemize}
- \item \textbf{Nodo-consistenza}
- \item \textbf{Arco-consistenza}
- \item \textbf{Cammino-consistenza}
+ \item \textbf{Nodo-consistenza}: una variabile è nodo consistente se tutti i valori
+nel suo dominio soddisfano i vincoli unari imposti.
+ \item \textbf{Arco-consistenza}: una variabile è arco consistente se tutti i valori
+nel suo dominio soddisfano i vincoli binari imposti.
+Assumiamo che ci sia un vincolo binario tra X e Y: X è arco consistente rispetto a Y
+se e solo se per ogni valore di X, esiste un valore \textbf{legale} di Y.
+Ne segue che ogni volta che il dominio di X viene ristretto di un valore,
+occorre ricontrollare tutti i suoi vicini per assicurare ancora l'arco consistenza.
+L'arco consistenza rileva un fallimento prima del \textbf{prima del forward checking}.
+
+In generale verificare che un problema csp sia AC permette di restringere lo spazio
+delle soluzioni, ma non può dirci con certezza se esiste una soluzione (e
+restituirne una - quando tutti i domini delle variabili sono ristretti a un unico
+valore) o se non ne esiste nessuna (quando rimangono domini vuoti per una o più variabili).
+ \item \textbf{Cammino-consistenza}: si tratta di imporre la consistenza su più di un
+vincolo. Due variabili legate da un vincolo ${X_i, X_j}$ sono cammino-consistenti rispetto
+a una terza variabile $X_m$ se per ogni assegnamento consistente di ${X_i, X_j}$ esiste un
+assegnamento di $X_m$ che soddisfa i vincoli di ${X_i, X_m}$ e ${X_i, X_j}$.
+\end{itemize}
+
+Un concetto più generale di consistenza è la k-Consistenza\dots un problema
+CSP è k-consistente se per ogni insieme di k-1 variabili e per ogni assegnamento consistente
+di queste k-1 variabili, può sempre essere scelto un valore consistente per una qualsiasi
+variabile k-esima.
+
+\begin{itemize}
+ \item Nodo consistenza $\rightarrow$ 1-consistenza
+ \item Arco consistenza $\rightarrow$ 2-consistenza
+ \item Cammino consistenza $\rightarrow$ 3-consistenza
 \end{itemize}
