@@ -9,8 +9,10 @@
 - Problem solving agents ed esempi di formulazione di problemi
 - Ricerca su alberi
 - Ricerca non informata e informata
-- Problemi con vincoli
-- Introduzione e cenni di reinforcement learning
+- Problemi con vincoli (in progress)
+  - Vincoli soft (in progress)
+- Reti bayesiane (in progress)
+- Introduzione e cenni di reinforcement learning (in progress)
 
 ### Laboratori
 
@@ -19,6 +21,7 @@
 - Algoritmo di matching marriage (Python + networkx)
 - Problema di colorazione di un grafo (Python + networkx + python-constraint)
 - Problema delle n regine (Python + python-constraint)
+- Voting problem (Python + networkx)
 - 10-Bandit problem (Python)
 
 
