@@ -31,7 +31,7 @@ L'insieme parzialmente ordinato dei valori di preferenza ha 2 operazioni e
 questo lo rende simile a un semianello. Si basa sulla struttura
 \textbf{c-semianello}.
 
-\subsection{Formalismo del c-semianello}
+\subsection{Formalismo dei c-semianelli}
 
 Sia $<A, +, *, 0, 1>$ un semianello:
 
@@ -41,4 +41,65 @@ Sia $<A, +, *, 0, 1>$ un semianello:
  \item * è l'operazione di combinazione
  \item 0 è l'elemento che corrisponde al peggior valore di preferenza $0 \in A$
  \item 1 è l'elemento che corrisponde al miglior valore di preferenza $1 \in A$
+\end{itemize}
+
+Un problema CSP soft consiste in un insieme di vincoli soft su un insieme di
+variabili basate su uno specifico c-semianello.
+
+Una soluzione consiste come sempre in un assegnamento completo di valori alle
+variabili.
+
+Una soluzione, inoltre, possiede un valore di preferenza, combinando le
+preferenze dei singoli valori.
+
+Un \textbf{c-semianello fuzzy} ha valori di A in un insieme continuo [0,1]:
+$<A = [0,1], + = max, * = min, 0 = 0, 1 = 1>$. La combinazione fra due o
+più valori in questo c-semianello avviene prendendo il valore minimo.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{esempioFuzzy}
+\caption{Esempio di vincoli soft con c-semianello fuzzy}
+\label{fig:esempioFuzzy}
+\end{figure}
+
+In figura \ref{fig:esempioFuzzy} si può notare l'esempio di un problema
+csp fuzzy (FCSP). Ci sono i vincoli soft con le preferenze associate a
+ciascun assegnamento sulla sinistra e due soluzioni possibili a destra.
+
+Per determinare quale delle due soluzioni è la migliore, si devono trovare
+i loro valori di preferenza, combinando i singoli valori degli assegnamenti
+in base ai vincoli soft. In questo esempio la seconda soluzione $S'$ è
+migliore della prima.
+
+Un c-semianello pesato ha valori nell'insieme dei numeri naturali.
+La combinazione dei valori di preferenza avviene prendendo la loro somma.
+È utile in tutti i contesti in cui sono coinvolti dei costi (occorre
+minimizzare la loro somma).
+
+Un soft CSP induce un ordine sulle soluzioni, dall'ordine del c-semianello
+(che può ossere totale o parziale).
+
+L'idea generale è quella di usare un c-semianello per ogni criterio di
+ordinamento, attraverso i multi-criteria problems.
+
+Dati n c-semianelli, si può costruire il c-semianello che li contiene
+tutti:
+$<<A_1,...,A_n>, +, *, <0_1,...,0_n>,<I_1,...,I_n>>$.
+
+Esempio: si vuole scegliere che strada percorrere per andare da una città
+X a una città Y. Ogni pezzettino di strada ha associato un costo e una
+preferenza.
+Questo contesto è adatto per un multi-criteria problems: da un lato si
+vuole minimizzare la somma dei costi e dall'altro si vuole massimizzare
+la preferenza. Si usano due c-semianelli: quello fuzzy e quello pesato.
+
+\subsection{Operazioni fondamentali con i vincoli soft}
+
+\begin{itemize}
+ \item \textbf{Proiezione}: elimina una o più variabili da un vincolo
+ottenendo un nuovo vincolo soft e preserva tutte le informazioni delle
+rimanenti.
+ \item \textbf{Combinazione}: combina due o più vincoli soft in uno
+nuovo sintetizzando le informazioni di quelli originali.
 \end{itemize}
