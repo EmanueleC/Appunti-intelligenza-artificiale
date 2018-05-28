@@ -64,9 +64,9 @@ for i in range(50000):
     dCost_db = dCost * dz_db
 
     # update weights and bias
-    w1 = learningRate * dCost_dw1
-    w2 = learningRate * dCost_dw2
-    b = learningRate * dCost_db
+    w1 = w1 - learningRate * dCost_dw1
+    w2 = w2 -learningRate * dCost_dw2
+    b = b - learningRate * dCost_db
 
 plt.clf()
 plt.plot(costs)
@@ -83,7 +83,5 @@ else:
     color = 'r'
 
 plt.scatter(mystery[0], mystery[1], c=color)
-z = w1*x + w2*y + b
-plt.plot(x,y,z)
 print(w1,w2,b)
 plt.savefig("scatter.png")

@@ -76,7 +76,7 @@ model.get_weights()
 model.compile(loss='binary_crossentropy',
               optimizer='adam',
               metrics=['accuracy'])
-                   
+
 model.fit(X_train, y_train,epochs=10, batch_size=1, verbose=1)
 
 
