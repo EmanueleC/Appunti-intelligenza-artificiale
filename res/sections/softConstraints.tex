@@ -23,7 +23,7 @@ ristorante.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.5\textwidth]{soft}
-\caption{Esempio di vincolo soft per l'esempio del ristorante}
+\caption{Esempio di vincolo soft per il problema del ristorante}
 \label{fig:soft}
 \end{figure}
 
@@ -58,7 +58,7 @@ più valori in questo c-semianello avviene prendendo il valore minimo.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.5\textwidth]{esempioFuzzy}
+\includegraphics[width=0.8\textwidth]{esempioFuzzy}
 \caption{Esempio di vincoli soft con c-semianello fuzzy}
 \label{fig:esempioFuzzy}
 \end{figure}
@@ -72,7 +72,7 @@ i loro valori di preferenza, combinando i singoli valori degli assegnamenti
 in base ai vincoli soft. In questo esempio la seconda soluzione $S'$ è
 migliore della prima.
 
-Un c-semianello pesato ha valori nell'insieme dei numeri naturali.
+Un \textbf{c-semianello pesato} ha valori nell'insieme dei numeri naturali.
 La combinazione dei valori di preferenza avviene prendendo la loro somma.
 È utile in tutti i contesti in cui sono coinvolti dei costi (occorre
 minimizzare la loro somma).
@@ -81,7 +81,7 @@ Un soft CSP induce un ordine sulle soluzioni, dall'ordine del c-semianello
 (che può ossere totale o parziale).
 
 L'idea generale è quella di usare un c-semianello per ogni criterio di
-ordinamento, attraverso i multi-criteria problems.
+ordinamento, attraverso i \textbf{multi-criteria problems}.
 
 Dati n c-semianelli, si può costruire il c-semianello che li contiene
 tutti:
@@ -92,7 +92,7 @@ X a una città Y. Ogni pezzettino di strada ha associato un costo e una
 preferenza.
 Questo contesto è adatto per un multi-criteria problems: da un lato si
 vuole minimizzare la somma dei costi e dall'altro si vuole massimizzare
-la preferenza. Si usano due c-semianelli: quello fuzzy e quello pesato.
+la preferenza. Si usano due c-semianelli: quello pesato e quello fuzzy.
 
 \subsection{Operazioni fondamentali con i vincoli soft}
 
@@ -103,3 +103,27 @@ rimanenti.
  \item \textbf{Combinazione}: combina due o più vincoli soft in uno
 nuovo sintetizzando le informazioni di quelli originali.
 \end{itemize}
+
+Esempio di proiezione - si vuole \textbf{eliminare la variabile ``Wine''} dal
+seguente vincolo fuzzy:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.45\textwidth]{proj1}
+\caption{Eliminare la variabile ``Wine'' dal vincolo fuzzy}
+\label{fig:proj1}
+\end{figure}
+
+La situazione iniziale è $c=<f,\{mc,w\}>$.
+
+Si vuole ottenere il vincolo ristretto alla variabile mc: $c|_{mc}$.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.45\textwidth]{proj2}
+\caption{Vincolo fuzzy che preserva le informazioni del precedente, eliminando
+la variabile ``Wine''}
+\label{fig:proj2}
+\end{figure}
+
+

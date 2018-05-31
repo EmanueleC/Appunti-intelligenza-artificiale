@@ -15,7 +15,8 @@ Lo stesso stato può comparire più volte in un albero di ricerca $\rightarrow$
 possono esserci dei cicli.
 
 \textbf{Nota bene - 1}: il grafo che rappresenta lo spazio degli stati \textbf{è una
-cosa diversa dall'albero di ricerca}.
+cosa diversa dall'albero di ricerca}: l'albero di ricerca può contenere più volte
+lo stesso stato.
 
 \textbf{Nota bene - 2}: nodo e stati sono due cose diverse: uno stato è una
 configurazione del mondo con cui si ha a che fare e un nodo è una struttura
@@ -53,7 +54,7 @@ che considera un insieme \textbf{explored set} che memorizza ogni nodo espanso.
     \begin{algorithmic}[1] % The number tells where the line numbering should start
         \Procedure{TREE SEARCH}{$problem$} \Comment{ritorna una soluzione o fallisce}
 			\State Inizializza la frontiera usando lo stato iniziale del problema
-			\State Inizializza l'insieme explored set (vuoto).
+			\State Inizializza l'insieme explored set (vuoto all'inizio).
             \Loop
             \If{Frontiera vuota} \Return{Fallimento} \EndIf
             \State Scegli un nodo foglia e rimuovilo dalla frontiera
@@ -76,8 +77,8 @@ La struttura dati appropriata per questo è una \textbf{coda}.
 Esistono diverse politiche di ordinamento di una coda \dots
 
 \begin{itemize}
-\item FIFO: l'operazione pop ritorna l'elemento più vecchio.
-\item LIFO: l'operazione pop ritorna l'elemento più recente.
+\item FIFO: l'operazione pop ritorna l'elemento più vecchio inserito.
+\item LIFO: l'operazione pop ritorna l'elemento più recente inserito.
 \item Coda di priorità: l'operazione pop ritorna l'elemento con priorità più alta.
 \end{itemize}
 
@@ -123,22 +124,22 @@ ottimale e ciascuna azione costa almeno $\epsilon$. È ottimale.\\
 (più lontano dalla radice) dell'albero. La frontiera è una coda LIFO.
 \textbf{Non} è completo in generale dato che uno stato già incontrato non può
 essere ripetuto in un cammino. In spazi finiti è completo. Non è ottimale.
-Complessita di spazio pari a: $\mathcal{O}(bm).$ - lineare.
+Complessità di spazio pari a: $\mathcal{O}(bm)$: lineare.
 Complessità di tempo pari a: $\mathcal{O}(b^m)$\\
 
-\textbf{Depth-limited search}: la ricerca si ferma alla profondità l.
-Ricordando che d è la profondità del minore nodo con uno stato obiettivo.
-Non è completo se l < d.
-Non è ottimale se l > d.\\
+\textbf{Depth-limited search}: la ricerca si ferma alla profondità p.
+Ricordando che d è la profondità del minore nodo con uno stato obiettivo,
+questo algoritmo non è completo se p < d e non è ottimale se p > d.\\
 
 \textbf{Iterative deepening search}: applica la depth-limited search incrementando
-l a ogni iterazione.
+p a ogni iterazione.
 
 \begin{algorithm}
     \caption{Iterative deepening search}
     \label{alg:search2}
     \begin{algorithmic}[1] % The number tells where the line numbering should start
-        \Procedure{ITERATIVE-DEEPENING-SEARCH}{$problem$} \Comment{ritorna una soluzione o fallisce}
+        \Procedure{ITERATIVE-DEEPENING-SEARCH}{$problem$} \Comment{ritorna una
+soluzione o fallisce}
             \For{depth=0 to $\infty$}
             \State Risultato $\leftarrow$ DEPTH-LIMITED-SEARCH(problem, depth)
             \If{Risultato $\neq$ cutoff} \Return{Risultato} \EndIf
@@ -148,6 +149,7 @@ l a ogni iterazione.
 \end{algorithm}
 
 È completo.
-È ottimale se il costo del cammino è una funzione non decrescente della profondità.
+È ottimale se il costo del cammino è una funzione \textbf{crescente con
+la profondità}.
 Complessita di spazio pari a: $\mathcal{O}(bd).$ - lineare.
 Complessità di tempo pari a: $\mathcal{O}(b^d)$\\

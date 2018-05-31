@@ -2,10 +2,11 @@
 
 \section{Problemi con vincoli}
 
-CSP (Constraint satisfaction problems) è un modo di risolvere un'ampia varietà
-di problemi.
+CSP (Constraint satisfaction problems) è un modo di risolvere un'ampia
+varietà di problemi.
 
-Stati definiti da \textbf{ variabili $X_i$ } con valori nel dominio $D_i$
+In questi problemi gli stati sono definiti da \textbf{variabili $X_i$} con
+valori nel dominio $D_i$.
 
 Il \textbf{test goal} è definito da un insieme di vincoli.
 
@@ -38,29 +39,28 @@ Un \textbf{Assegnamento} può essere:
 \begin{itemize}
  \item \textbf{consistente} se non viola nessun vincolo
  \item \textbf{completo} se ogni variabile viene assegnata a un valore
- \item \textbf{parziale}: non completo
+ \item \textbf{parziale} se non è completo
 \end{itemize}
 
-\textbf{Soluzione}: un assegnamento consistente e completo.
+Una \textbf{soluzione} è un assegnamento consistente e completo.
 
 Un CSP binario contiene solo vincoli binari.
 
 In un grafo di un CSP i nodi rappresentano le variabili, gli archi rappresentano
-i vincoli.
+i vincoli.\\
 
 Perché tradurre un problema in CSP? Il fatto è che molti problemi presentano
-una traduzione intuitiva in un csp. Inoltre esistono sistemi generali in grado di
+una traduzione intuitiva in un csp. Esistono sistemi generali in grado di
 risolvere problemi csp senza dover costruire soluzioni su misura.
-Inoltre i risolutori di CSP permettono di ridurre lo spazio da esplorare grazie
-alla propagazione dei vincoli.
+I risolutori di CSP permettono di ridurre lo spazio da esplorare grazie
+alla propagazione dei vincoli.\\
 
 Le variabili in un CSP possono essere:
 
 \begin{itemize}
- \item \textbf{discrete} : in domini finiti di dimensione n le possibili
-assegnazioni sono $\mathcal{O}(d^n)$. In domini infiniti occorre un linguaggio
-per definire dei vincoli.
- \item \textbf{continue} : coinvolgono vincoli lineari risolvibili in tempo
+ \item \textbf{discrete}: in domini finiti di dimensione n le possibili
+assegnazioni sono $\mathcal{O}(d^n)$.
+ \item \textbf{continue}: coinvolgono vincoli lineari risolvibili in tempo
 polinomiale (rispetto al numero di variabili) - aka programmazione lineare.
 \end{itemize}
 
@@ -107,11 +107,11 @@ Sia $[1,...,n]$ la posizione su riga di una regina.
 \textbf{Formulazione standard}:
 
 \begin{itemize}
- \item Stato iniziale vuoto \{\}
- \item Funzione successore: assegna un valore a una variabile non assegnata
-che non sia in conflitto con l'attuale assegnamento
- \item Stato: assegnamento parziale
- \item Goal test: l'assegnamento è completo
+ \item \textbf{Stato iniziale} vuoto \{\}
+ \item \textbf{Funzione successore}: assegna un valore a una delle
+variabili non assegnate che non sia in conflitto con l'attuale assegnamento
+ \item \textbf{Stato: assegnamento parziale}
+ \item \textbf{Goal test: l'assegnamento è completo}
 \end{itemize}
 
 Con questa formulazione sarebbe possibile usare una ricerca in profondità, tuttavia
@@ -119,11 +119,11 @@ la complessità è elevata.
 
 Se si considera un CSP con n variabili e un dominio discreto e finito di
 dimensione d, viene generato un albero con $n!*d^n$ foglie anche se gli
-assegnamenti completi possibili sono $d^n$\\
+assegnamenti completi possibili sono $d^n$\\.
 
 In CSP, gli assegnamenti di variabili sono commutativi, perciò occorre
 considerare una sola variabile a ogni nodo nell'albero di ricerca.
-In questo caso il numero di fogli diventa pari al numero possibile di
+In questo caso il numero di foglie diventa pari al numero possibile di
 assegnamenti completi, ossia $d^n$.
 
 La ricerca in profondità in problemi CSP dove si considera l'assegnamento
@@ -138,14 +138,16 @@ di una singola variabile è chiamato \textbf{backtracking search}.
 \subsection{Euristiche}
 
 Si può scegliere di adottare l'euristica \textbf{minimum remaining values}
-(MRV) che consiste nel scegliere di fare branching sulla variabile a cui è
-possibile assegnare il minor numero di valori.
+(MRV) che consiste nel fare branching sulla variabile a cui è possibile
+assegnare il \textit{minor numero di valori}.
 
 Un'altra euristica è la \textbf{most constraining variable} che sceglie la
-variabile coinvolta nel maggior numero possibile di vincoli con le altre variabili.
+variabile coinvolta nel \textit{maggior numero possibile di vincoli} con le
+altre variabili.
 
 Al contrario, l'euristica \textbf{least constraining value} sceglie la
-variabile coinvolta nel minor numero possibile di vincoli con le altre variabili.\\
+variabile coinvolta nel \textit{minor numero possibile di vincoli} con le
+altre variabili.\\
 
 \subsection{Difetti del backtracking}
 
@@ -156,9 +158,9 @@ variabile coinvolta nel minor numero possibile di vincoli con le altre variabili
 Il \textbf{backjumping} consiste nel ritornare all'assegnamento completo causa del
 conflitto e identificare la più recente assegnazione precedente.
 
- \item Effettua più volte controlli inutili; la soluzione è ricordarsi gli assegnamenti
-non legali e aggiungere dei vincoli al problema o tenere in cache tali assegnamenti
-e controllare che non vengano ripetuti.
+ \item Effettua più volte controlli inutili; la soluzione è \textbf{ricordarsi gli
+assegnamenti non legali} e aggiungere dei vincoli al problema o tenere in cache
+tali assegnamenti e controllare che non vengano ripetuti.
 
  \item Un conflitto viene scoperto solo quando tutte le variabili sono state assegnate a
 dei valori; la soluzione è fare \textbf{forward checking} dei vincoli (si controlla
@@ -166,8 +168,8 @@ in anticipo se un assegnamento non completo porterà alla violazione di un vinco
 Come? Tenendo in considerazione i valori legali delle rimanenti variabili. Quando a
 una certa variabile non ancora assegnata non rimangono più valori legali, si scopre
 in anticipo il conflitto (si veda la figura \ref{fig:fc})\dots ma non prevede
-possibili conflitti (ad esempio quando due variabili rimanenti possono assumere lo stesso
-unico valore).
+altri tipi di possibili conflitti (ad esempio quando due variabili rimanenti possono
+assumere lo stesso unico valore).
 \end{itemize}
 
 \begin{figure}[H]
@@ -177,20 +179,25 @@ unico valore).
 \label{fig:fc}
 \end{figure}
 
-Per risolvere la previsione dei conflitti e migliorare il forward checking viene usata
-la \textbf{propagazione dei vincoli}, al fine di assicurare la consistenza locale
-del problema. Esistono diversi tipi di consistenza\dots
+Per risolvere la previsione dei conflitti e migliorare il forward checking viene
+usata la \textbf{propagazione dei vincoli}, al fine di assicurare la
+consistenza locale del problema. Esistono diversi tipi di consistenza\dots
 
 \begin{itemize}
- \item \textbf{Nodo-consistenza}: una variabile è nodo consistente se tutti i valori
-nel suo dominio soddisfano i vincoli unari imposti.
- \item \textbf{Arco-consistenza}: una variabile è arco consistente se tutti i valori
-nel suo dominio soddisfano i vincoli binari imposti.
-Assumiamo che ci sia un vincolo binario tra X e Y: X è arco consistente rispetto a Y
-se e solo se per ogni valore di X, esiste un valore \textbf{legale} di Y.
+ \item \textbf{Nodo-consistenza}: una variabile è nodo consistente se tutti
+i valori nel suo dominio soddisfano i vincoli unari imposti.
+ \item \textbf{Arco-consistenza}: una variabile è arco consistente se tutti
+i valori nel suo dominio soddisfano i vincoli binari imposti.
+Assumiamo che ci sia un vincolo binario tra X e Y: X è arco consistente
+rispetto a Y se e solo se per ogni valore di X, esiste un valore \textbf{legale}
+di Y:\\
+
+X arco consistente con Y $\iff (\forall$ valore di X $\implies \exists$ valore
+legale di Y)\\
+
 Ne segue che ogni volta che il dominio di X viene ristretto di un valore,
 occorre ricontrollare tutti i suoi vicini per assicurare ancora l'arco consistenza.
-L'arco consistenza rileva un fallimento prima del \textbf{prima del forward checking}.
+L'arco consistenza rileva un fallimento \textbf{prima del forward checking}.
 
 In generale verificare che un problema csp sia AC permette di restringere lo spazio
 delle soluzioni, ma non può dirci con certezza se esiste una soluzione (e
