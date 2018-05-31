@@ -104,8 +104,8 @@ rimanenti.
 nuovo sintetizzando le informazioni di quelli originali.
 \end{itemize}
 
-Esempio di proiezione - si vuole \textbf{eliminare la variabile ``Wine''} dal
-seguente vincolo fuzzy:
+\textbf{Esempio di proiezione} - si vuole \textbf{eliminare la variabile
+``Wine''} dal seguente vincolo fuzzy:
 
 \begin{figure}[H]
 \centering
@@ -114,9 +114,15 @@ seguente vincolo fuzzy:
 \label{fig:proj1}
 \end{figure}
 
-La situazione iniziale è $c=<f,\{mc,w\}>$.
+La situazione iniziale è $c=<f,\{mc,w\}>$, dove f è la funzione che
+associa una tupla/assegnamento a un valore di preferenza.
 
 Si vuole ottenere il vincolo ristretto alla variabile mc: $c|_{mc}$.
+
+Si considerano tutti i valori di mc e si usa l'operatore di proiezione +
+su tutte le tuple con uno stesso valore di mc, dopo aver ricavato
+il valore di preferenza della tupla (in questo esempio si applica + su
+tutte le tuple che contengono fish e su tutte quelle che contengono meat).
 
 \begin{figure}[H]
 \centering
@@ -126,4 +132,25 @@ la variabile ``Wine''}
 \label{fig:proj2}
 \end{figure}
 
+\textbf{Esempio di combinazione} - si vogliono riunire i tre seguenti vincoli
+fuzzy che rappresentano le preferenze sulle componenti di un PC:
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.45\textwidth]{comb1}
+\caption{I vincoli fuzzy da combinare}
+\label{fig:comb1}
+\end{figure}
+
+Occorre applicare l'operatore di combinazione alle tuple dei vincoli
+che si vogliono unire (dopo aver ricavato il loro valore di preferenza).
+Le tuple non si possono combinare a caso, se c'è una variabile legata
+da più di un vincolo allora occorre combinare le tuple che hanno valori
+uguali per la variabile in comune... nell'esempio questa variabile è MB.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{comb2}
+\caption{Vincolo fuzzy che combina i 3 precedenti}
+\label{fig:comb2}
+\end{figure}
