@@ -9,6 +9,7 @@
 - Problem solving agents ed esempi di formulazione di problemi
 - Ricerca su alberi
 - Ricerca non informata e informata
+- Stable matching: algoritmo di Gale-Shapley
 - Problemi con vincoli (in progress)
   - Vincoli soft (in progress)
 - Sistemi di voto
@@ -19,10 +20,12 @@
 
 - Problem solving agent vacuum e space problem (Python + networkx)
 - Ricerca in ampiezza su un grafo (Python + networkx)
-- Algoritmo di matching marriage (Python + networkx)
+- Algoritmo di stable matching (Gale-Shapley) (Python + networkx)
 - Problema di colorazione di un grafo (Python + networkx + python-constraint)
 - Problema delle n regine (Python + python-constraint)
 - Voting problem (Python + networkx)
 - 10-Bandit problem (Python)
+- Reti neurali: classificazione di vini (Python + Keras + Theano)
+- Reti neurale da zero (niente dipendenze, derivate calcolate esplicitamente) (Python)
 
 
