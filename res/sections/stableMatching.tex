@@ -1,0 +1,147 @@
+\newpage
+
+\section{Stable Matching Problem}
+
+
+Il problema è quello di trovare dei match tra gli agenti di due gruppi
+in base alle loro preferenze. I match devono essere \textbf{stabili}, cioè
+non devono esistere due agenti che si preferirebbero tra di loro piuttosto
+che con il rispettivo partner.
+
+Ad esempio a un insieme di rovers \{Rover1, Rover2, Rover3\} sono associate
+delle preferenze rispetto a un insieme di analisi \{Drill, Picture, Download\}
+e viceversa.
+
+Le preferenze dei rovers sono:
+
+\begin{itemize}
+ \item Rover1:  Downlink > Picture > Drill
+ \item Rover2:  Picture > Downlink > Drill
+ \item Rover3:  Downlink > Picture > Drill
+\end{itemize}
+
+Le preferenze delle analisi sono:
+
+\begin{itemize}
+ \item Downlink: Rover2 > Rover1 > Rover3
+ \item Picture: Rover1 > Rover2 > Rover3
+ \item Drill: Rover1 > Rover2 > Rover3
+\end{itemize}
+
+L'obiettivo è trovare dei match stabili tali che ogni rover è assegnato a
+un'analisi e non esiste nessuna coppia (rover, analisi) che vorrebbe rompersi
+e formare un nuovo match.
+
+L'algoritmo \ref{alg:galshap} di Gale Shapley raggiunge questo obiettivo.
+
+\begin{algorithm}
+    \caption{Algoritmo di Gale Shapley}
+    \label{alg:galshap}
+    \begin{algorithmic}[1] % The number tells where the line numbering should start
+        \Procedure{STABLE MATCHING}{}
+            \While{esiste un uomo single u}
+            \State u si propone alla donna d che preferisce con cui non ci
+ha già provato
+            \If{d è single} \State{(u,d) diventano una coppia}
+            \Else
+            \If{d preferisce u al suo partner p} \State{(u,d) diventano una
+coppia e p diventa libero}
+            \Else \State{d rifiuta la proposta} \EndIf
+            \EndIf
+            \EndWhile
+        \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
+
+Ciascuno degli n agenti può fare al più n proposte: la complessità
+computazionale di \ref{alg:galshap} è $\mathcal{O}(n^2)$.\\
+
+Può esistere più di un matching stabile. L'algoritmo \ref{alg:galshap}
+ritorna una \textbf{soluzione che è ottima per gli uomini, ma la peggiore per
+le donne} (significa che in qualunque altro matching stabile le donne sono
+più soddisfatte).
+
+Si applica l'algoritmo all'esempio dei rovers e delle analisi: i
+rovers sono gli uomini, le analisi le donne\dots in questo modo si troverà
+una soluzione ottima per i rovers.\\
+
+All'inizio tutti i rovers e tutte le analisi sono single.
+
+Rover1 si propone a Downlink che è libera $\implies$ (Rover1, Downlink).
+
+Rover2 si propone a Picture che è libera $\implies$ (Rover2, Picture).
+
+Rover3 si propone a Downlink, ma Downlink è già occupata con Rover1 e non
+preferisce Rover3 a Rover1.
+
+Rover3 si propone alla sua seconda preferenza: Picture, ma Picture è già
+occupata con Rover2 e non preferisce Rover3 a Rover2.
+
+Rover3 si propone alla sua terza preferenza: Drill, che è libera $\implies$
+(Rover3, Drill).\\
+
+Il matching stabile trovato dall'algoritmo è \textbf{\{(Rover1, Downlink),
+(Rover2, Picture), (Rover3, Drill)\}}.
+
+\subsection{Preferenze a pari merito}
+
+Ci possono essere degli uomini che non preferiscono una donna a un'altra,
+ciò significa che esistono preferenze a pari merito.
+
+Con questa osservazione, il concetto di stabilità si amplia: un matching
+può essere\dots
+
+\begin{itemize}
+ \item \textbf{fortemente stabile} non esiste una coppia di persone singles
+tale che uno dei due preferisce strettamente l'altro e l'altro lo preferisce
+equalmente o di più.
+ \item \textbf{debolmente stabile} non esiste una coppia di persone singles
+che preferiscono strettamente l'un l'altro.
+\end{itemize}
+
+Un matching fortemente stabile potrebbe non esistere. Per controllare la
+sua esistenza occorre complessità $\mathcal{O}(n^4)$. Al contrario, un
+matching debolmente stabile esiste sempre. Basta solo rompere le preferenze
+a pari merito in modo arbitrario e usare l'algoritmo di Gale Shapley.
+
+\subsection{Esercizio}
+
+Apply Gale-Shapley algorithm to the preference profile shown below.
+What is the resulting matching?
+What is the property of the resulting matching?
+
+Preferences for men:
+
+\begin{itemize}
+ \item Adam: Cindy > Allie > Betty
+ \item Blake: Betty > Allie > Cindy
+ \item Carl: Cindy > Betty > Allie
+\end{itemize}
+
+Preferences for women:
+
+\begin{itemize}
+ \item Allie: Adam > Blake > Carl
+ \item Betty: Carl > Blake > Adam
+ \item Cindy: Adam > Carl > Blake
+\end{itemize}
+
+Start
+
+\{\}
+
+\{(Adam, Cindy)\}
+
+\{(Adam, Cindy), (Blake, Betty)\}
+
+\{(Adam, Cindy), (Carl, Betty)\}
+
+\textbf{\{(Adam, Cindy), (Carl, Betty), (Blake, Allie)\}}
+
+End
+
+The resulting matching is complete and stable: it means that there are no 2
+people that would prefer each other over the respective partner.
+
+
+
