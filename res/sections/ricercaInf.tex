@@ -60,11 +60,13 @@ Dimostrazione - Si basa sul confronto di f e g tra un ottimo G e un sub-ottimo G
 \subsection{Euristica consistente}
 
 Un'euristica è consistente se:
-$\forall n \land \forall succ(n) = n'$ generato da un'azione act vale: $h(n) <= c(n,act,n') + h(n')$
+$\forall n \land \forall succ(n) = n'$ generato da un'azione act vale:
+$h(n) <= c(n,act,n') + h(n')$
 dove c(n,act,n') è il costo per andare da n a n' con l'azione act.
 
 Se un'euristica è consistente allora è anche ammissibile.
-Questa implicazione (Consistenza $\rightarrow$ Ammissibilità) si dimostra per induzione su uno stato n
+Questa implicazione (Consistenza $\rightarrow$ Ammissibilità) si dimostra per
+induzione su uno stato n
 
 Caso base:
 h(g) = 0.
@@ -79,3 +81,26 @@ Un'euristica h2 domina un'euristica h1 se $h2(n) >= h1(n) \forall n$ .
 
 Un problema rilassato ha meno vincoli rispetto all'originale.
 Grafo del problema rilassato = Supergrafo problema originale.
+
+\subsection{Ricerca locale}
+
+Gli algoritmi di ricerca locale esplorano uno spazio degli stati che può avere
+una forma simile a quella in figura \ref{img:landscape}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{landscape}
+\caption{Esempio di uno spazio degli stati a 1 dimensione definito da una
+funzione obiettivo}
+\label{fig:landscape}
+\end{figure}
+
+Lo spazio degli stati ha delle locazioni (ascisse) e delle elevazioni
+(valori delle ordinate).
+
+Se l'elevazione corrisponde a un costo, occorre cercare un minimo globale,
+se corrisponde a un ricavo di qualche tipo, occorre cercare un massimo globale.
+
+Gli algoritmi di ricerca locale possono essere \textbf{completi} (trovano
+sempre lo stato obiettivo se esiste) oppure \textbf{ottimali} (riescono sempre a
+trovare un massimo e un minimo globale)
