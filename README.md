@@ -11,6 +11,7 @@
 - Ricerca non informata e informata
 - Problemi con vincoli (in progress)
   - Vincoli soft (in progress)
+- Sistemi di voto
 - Reti bayesiane (in progress)
 - Introduzione e cenni di reinforcement learning (in progress)
 
