@@ -85,7 +85,7 @@ Grafo del problema rilassato = Supergrafo problema originale.
 \subsection{Ricerca locale}
 
 Gli algoritmi di ricerca locale esplorano uno spazio degli stati che può avere
-una forma simile a quella in figura \ref{img:landscape}
+una forma simile a quella in figura \ref{fig:landscape}
 
 \begin{figure}[H]
 \centering
@@ -104,3 +104,52 @@ se corrisponde a un ricavo di qualche tipo, occorre cercare un massimo globale.
 Gli algoritmi di ricerca locale possono essere \textbf{completi} (trovano
 sempre lo stato obiettivo se esiste) oppure \textbf{ottimali} (riescono sempre a
 trovare un massimo e un minimo globale).
+
+\subsubsection{Hill-climbing search}
+
+Si assume che l'elevazione corrisponde alla funzione obiettivo; lo scopo
+sarebbe quello di trovare un massimo globale\dots tuttavia la hill-climbing
+è search un'euristica che può bloccarsi a un massimo locale.
+
+La Hill-climbing search modifica lo stato corrente cercando di migliorarlo e
+l'algoritmo \ref{alg:climb} che segue mostra come funziona: si sceglie un nodo
+iniziale e si seleziona il suo vicino con il più alto valore della funzione
+obiettivo. Termina quando non ci sono più vicini miglioranti.
+
+\begin{algorithm}
+    \caption{Hill-climbing search}
+    \label{alg:climb}
+    \begin{algorithmic}[1]
+        \Procedure{HILL-CLIMBING SEARCH}{$problema$} \Comment{ritorna uno stato
+che è un massimo locale}
+            \State{nodo\_corrente $\leftarrow$ MAKE-NODE(problema.STATO\_INIZIALE)}
+            \Loop
+            \State{vicino $\leftarrow$ il successore di nodo\_corrente con valore più
+alto}
+            \If{(vicino.valore $\leq$ nodo\_corrente.valore)} \Return{nodo\_corrente} \EndIf
+            \State{nodo\_corrente $\leftarrow$ vicino}
+            \EndLoop
+        \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
+
+Questa procedura si blocca se raggiunge un massimo locale o un plateau (una zona
+piatta).
+Esistono due tipi di plateau: uno da cui non si può fare progressi e un
+altro da cui si può continuare a migliorare se ci si sposta. In entrambi i casi
+la hill-climbing search si blocca.
+
+Varianti della hill-climbing search:
+
+\begin{itemize}
+ \item \textbf{Stochastic} hill-climbing: si sceglie in modo casuale fra
+tutti i vicini miglioranti.
+ \item \textbf{First-choice} hill-climbing: si sceglie il primo vicino
+migliorante.
+ \item \textbf{Random-restart} hill-climbing: si esegue l'algoritmo varie volte
+da punti di partenza casuali fino a quando uno stato obiettivo non viene
+raggiunto.
+\end{itemize}
+
+La hill-climbing search è incompleta, ma se combinata alla random walk
+(ricerca puramente casuale nello spazio degli stati) può diventare completa.
