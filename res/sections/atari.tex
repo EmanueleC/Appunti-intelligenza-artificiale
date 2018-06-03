@@ -1,0 +1,36 @@
+\newpage
+
+\section{Atari}
+
+I seguenti appunti sono tratti dal paper \textbf{Playing Atari with Deep
+Reinforcement Learning} [Volodymyr Mnih, Koray Kavukcuoglu, David Silver,
+Alex Graves, Ioannis Antonoglou, Daan Wierstra, Martin Riedmiller].\\
+
+Raw pixels $\rightarrow$ variante del Q-Learning $\rightarrow$ funzione
+che predice ricompense future.
+
+Un agente interagisce con un ambiente $\mathcal{E}$ - l'emulatore Atari.
+
+A ogni passo, l'agente seleziona un'azione $a_t$ dall'insieme legale delle
+azioni $\mathcal{A} = \{1,... ,K\}$ che modifica lo stato interno
+dell'emulatore (non noto) e lo score del gioco.
+
+L'agente non conosce lo stato interno dell'emulatore, ma riceve un'immagine
+$x_t \in R^d$.
+
+Dopo aver eseguito una certa azione, l'agente riceve una ricompensa
+$r_t$ che rappresenta il cambiamento nella score di gioco.
+
+Per imparare una strategia di gioco, occorre considerare sequenze di
+osservazioni e di azioni. L'obiettivo dell'agente è quello di selezionare
+azioni che massimizzino le ricompense future.
+
+Si definisce $R_t$ come la ricompensa totale futura a partire dal tempo t:
+$R_t = \sum_{t' = t}^T \gamma^{t' - t} r_{t'}$, dove T è il tempo in cui
+termina il gioco.
+
+Si definisce inoltre la funzione $Q^* (s,a)$ come la funzione che ritorna la
+massima ricompensa ottenibile seguendo una qualsiasi strategia, dopo
+una certa sequenza di osservazioni s e una certa sequenza di azioni a:
+$Q^* (s,a) = max_{\pi} E [R_t | s_t = s, a_t = a, \pi]$, dove
+$\pi$ è una politica che mappa osservazioni ad azioni.
