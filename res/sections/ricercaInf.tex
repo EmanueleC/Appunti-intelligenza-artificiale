@@ -37,10 +37,45 @@ numero di stati.
 
 Ottimo? No, dà una soluzione greedy
 
+Complessità di tempo e spazio? $\mathcal{O}(b^m)$
+
 \subsection{A* algorithm}
-f(n) = g(n) + h(n)
-g(n) = costo già sostenuto prima da stato iniziale al nodo n (costo effettivo fatto)
+
+Siano:
+
+g(n) = costo da stato iniziale al nodo n calcolato finora (costo effettivo fatto)
+
 h(n) = costo da n a stato obiettivo (euristica)
+
+f(n) = g(n) + h(n) è la distanza stimata dallo stato iniziale a n + la distanza
+da n allo stato obiettivo.\\
+
+\textbf{Algoritmo}\\
+
+All'inizio g(n) è una distanza infinita da S a tutti i nodi diversi da se
+stesso.
+
+\begin{algorithm}[H]
+    \caption{Ricerca A*}
+    \label{alg:algA}
+    \begin{algorithmic}[1]
+            \State{
+            \[
+             g(n) = 
+              \begin{cases} 
+               \infty & \text{if } n \neq S \\
+               0    & \text{if } n = S
+              \end{cases}
+            \]}
+            \State{Q := coda di nodi, ordinata in modo crescente secondo f(n)}
+            \While{Q non è vuota}
+            \State{v $\leftarrow$ Q.pop()}
+            \For{tutti i vicini u di v}
+            \If{g(v) + e(v,u) $\leq$ g(u)} \State{g(u) = g(v) + e(v,u)} \EndIf
+            \EndFor
+            \EndWhile
+    \end{algorithmic}
+\end{algorithm}
 
 Completo? Sì.
 

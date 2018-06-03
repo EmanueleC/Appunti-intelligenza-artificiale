@@ -154,3 +154,49 @@ uguali per la variabile in comune... nell'esempio questa variabile è MB.
 \caption{Vincolo fuzzy che combina i 3 precedenti}
 \label{fig:comb2}
 \end{figure}
+
+\subsection{Esercizio}
+
+Consider the three fuzzy constraints shown in the figure below.
+Draw the constraint which is obtained combining them.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.65\textwidth]{softEx}
+\caption{Esercizio di combinazione}
+\label{fig:comb2}
+\end{figure}
+
+<X = a, Z = a, Y = a, P = a> $\rightarrow$ min(0.1, 0, 0.9) = 0
+
+<X = a, Z = a, Y = a, P = b> $\rightarrow$ min(0.1, 0, 0) = 0
+
+<X = a, Z = b, Y = a, P = a> $\rightarrow$ min(0.1, 1, 0.9) = 0.1
+
+<X = a, Z = b, Y = a, P = b> $\rightarrow$ min(0.1, 1, 0) = 0
+
+<X = a, Z = a, Y = b, P = a> $\rightarrow$ min(0.1, 0.5, 0.3) = 0.1
+
+<X = a, Z = a, Y = b, P = b> $\rightarrow$ min(0.1, 0.5, 0) = 0
+
+<X = a, Z = b, Y = b, P = a> $\rightarrow$ min(0.1, 0, 0.3) = 0
+
+<X = a, Z = b, Y = b, P = b> $\rightarrow$ min(0.1, 0, 0) = 0\\
+
+E ora si ripetono tutte le combinazioni con X = b\dots\\
+
+<X = a, Z = a, Y = a, P = a> $\rightarrow$ min(0.2, 0, 0.9) = 0
+
+<X = a, Z = a, Y = a, P = b> $\rightarrow$ min(0.2, 0, 0) = 0
+
+<X = a, Z = b, Y = a, P = a> $\rightarrow$ min(0.2, 1, 0.9) = 0.2
+
+<X = a, Z = b, Y = a, P = b> $\rightarrow$ min(0.2, 1, 0) = 0
+
+<X = a, Z = a, Y = b, P = a> $\rightarrow$ min(0.2, 0.5, 0.3) = 0.2
+
+<X = a, Z = a, Y = b, P = b> $\rightarrow$ min(0.2, 0.5, 0) = 0
+
+<X = a, Z = b, Y = b, P = a> $\rightarrow$ min(0.2, 0, 0.3) = 0
+
+<X = a, Z = b, Y = b, P = b> $\rightarrow$ min(0.2, 0, 0) = 0

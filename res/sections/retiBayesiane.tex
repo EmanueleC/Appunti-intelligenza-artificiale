@@ -9,59 +9,152 @@ Sono dei modelli utili in situazioni di \textbf{incertezza}.\\
 Si modella la seguente situazione\dots
 
 \begin{itemize}
-\item L'allarme di casa (\textbf{A}) può scattare a causa di un terremoto (\textbf{E})
-\item L'allarme di casa (\textbf{A}) può scattare a causa di un'intrusione (\textbf{B})
-\item L'allarme di casa (\textbf{A}) acceso può portare Mary (\textbf{M}) o John (\textbf{J}) a chiamarmi
+\item L'allarme di casa (\textbf{A}) può scattare a causa di un terremoto
+(\textbf{E})
+\item L'allarme di casa (\textbf{A}) può scattare a causa di un'intrusione
+(\textbf{B})
+\item L'allarme di casa (\textbf{A}) acceso può portare Mary (\textbf{M}) o
+John (\textbf{J}) a chiamarmi
 \end{itemize}
 
-Le variabili del problema sono state riportate fra parentesi in grassetto: A, E, B, M, J.
-La rete bayesiana che rappresenta la situazione è rappresentata in figura \ref{fig:alarm}:
+Le variabili del problema sono state riportate fra parentesi in grassetto:
+A, E, B, M, J.
+La rete bayesiana che rappresenta la situazione è rappresentata in figura
+\ref{fig:alarm}:
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.25\textwidth]{alarm}
+\includegraphics[width=0.22\textwidth]{alarm}
 \caption{Rete bayesiana che modella l'esempio precedente}
 \label{fig:alarm}
 \end{figure}
 
-Gli archi rappresentano le \textbf{dipendenze} tra le variabili (nodi): $X \rightarrow Y$ significa che X influenza direttamente Y.
+\subsection{Sintassi delle reti bayesiane}
+
+Gli archi rappresentano le \textbf{dipendenze} tra le variabili (nodi):
+$X \rightarrow Y$ significa che X influenza direttamente Y.
 
 Una rete bayesiana è un \textbf{grafo orientato senza cicli}.
 
-Ciascun nodo/variabile/evento ha una certa probabilità di verificarsi, data la probabilità dei suoi genitori.
+Ciascun nodo/variabile/evento ha una certa probabilità di verificarsi,
+data la probabilità dei suoi genitori.
 
-Questa viene detta probabilità condizionata ed è rappresentata tramite delle tabelle di distribuzione di probabilità condizionata \textbf{CPT}. Nell'immagine \ref{fig:cpt} le CPT vengono associate ai nodi della rete bayesiana dell'esempio:
+Questa viene detta probabilità condizionata ed è rappresentata tramite
+delle tabelle di distribuzione di probabilità condizionata \textbf{CPT}.
+Nell'immagine \ref{fig:cpt} le CPT vengono associate ai nodi della rete
+bayesiana dell'esempio:
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\textwidth]{cpt}
+\includegraphics[width=0.65\textwidth]{cpt}
 \caption{Rete bayesiana con CPTs}
 \label{fig:cpt}
 \end{figure}
 
-\textbf{Nota}: le probabilità iniziali P(B) e P(E) sono le probabilità che B ed E si verifichino (siano veri). Per trovare le probabilità che B ed E siano falsi basta semplicemente fare il calcolo 1 - P(B) o 1 - P(E).\\
+\textbf{Nota}: le probabilità iniziali P(B) e P(E) sono le probabilità
+che B ed E si verifichino (siano veri). Per trovare le probabilità che
+B ed E siano falsi basta semplicemente fare il calcolo 1 - P(B) o 1 -
+P(E).\\
 
-Una CPT per una variabile booleana $X_i$ con k genitori ha $2^k$ righe (date le combinazioni dei genitori). Con n variabili/nodi sono quindi richieste $n2^k$ righe
+Una CPT per una variabile booleana $X_i$ con k genitori ha $2^k$ righe
+(date le combinazioni dei genitori). Con n variabili/nodi sono quindi
+richieste $n2^k$ righe
 
-Nella rete bayesiana dell'esempio quante righe ci sono? Basta fare il conto: $1 (E) + 1 (B) + 2^2 (A) + 2^1 (J) + 2^1 (M) = 1 + 1 + 4 + 2 + 2 = 10$ righe.
+Nella rete bayesiana dell'esempio quante righe ci sono? Basta fare il
+conto: $1 (E) + 1 (B) + 2^2 (A) + 2^1 (J) + 2^1 (M) = 1 + 1 + 4 + 2 + 2
+= 10$ righe.
 
-Nella \textbf{full joint distribution} occorre tenere conto di tutte le combinazioni possibile. Nell'esempio ci sono 5 variabili, quindi $2^5 = 32$ numeri.
+\subsection{Semantica delle reti bayesiane}
 
-La full joint distribution viene definita come il prodotto delle distribuzioni di probabilità condizionata locali: 
+Nella \textbf{full joint distribution} occorre tenere conto di tutte
+le combinazioni possibili. Nell'esempio ci sono 5 variabili, quindi
+$2^5 = 32$ numeri.
+
+La full joint distribution viene definita come il prodotto delle
+distribuzioni di probabilità condizionata locali: 
 
 \begin{equation}
  P(x_1, ..., x_n) = \prod_{i=1}^n P(X_i | Parents(X_i))
 \end{equation}
 
-Ad esempio si può calcolare la probabilità che l'allarme sia scattato e che sia John che Mary abbiano chiamato, ma non si siano verificati né un terremoto né un'intrusione:\\
+Applicando la formula precedente, ad esempio, si può calcolare
+la probabilità che l'allarme sia scattato e che sia John che Mary
+abbiano chiamato, ma non si siano verificati né un terremoto né un'
+intrusione:\\
 
-$P(j \land m \land a \land \neg b \land \neg e) = P(j|a)P(m|a)P(a|\neg b, \neg e) P(\neg b) P(\neg e)$.\\
+Convenzione: $P(X = true) = P(x)$
 
-Svolgendo tutti i calcoli risulta che questa probabilità sia 0.000628 (molto bassa).
+$P(j \land m \land a \land \neg b \land \neg e) = P(j|a)P(m|a)
+P(a|\neg b, \neg e) P(\neg b) P(\neg e)$.\\
+
+Svolgendo tutti i calcoli risulta che questa probabilità sia 0.000628
+(molto bassa).
 
 \subsection{Come costruire una rete Bayesiana?}
 
 \begin{itemize}
  \item Scegliere un ordinamento delle variabili
- \item \texttt{for i = 1 to n do} aggiungi $X_i$ alla rete e scegli i suoi genitori in modo tale che $P(X_i | Parents(X_i)) = P(X_i| X_1, ..., X_{i-1})$
+ \item \texttt{for i = 1 to n do}\dots
+ \item aggiungi $X_i$ alla rete e\dots
+ \item scegli i suoi genitori in modo tale che
+ $P(X_i | Parents(X_i)) = P(X_i| X_1, ..., X_{i-1})$
 \end{itemize}
+
+\subsection{Inferenza}
+
+L'inferenza probabilistica permette di conoscere la distribuzione di
+probabilità di un certo insieme di eventi di output, dato un insieme di
+eventi in input.\\
+
+Gli eventi di input vengono chiamati \textit{evidence variables}, mentre
+gli eventi di output vengono chiamati \textit{query variables}. Tutti gli
+eventi che non sono né input né output sono \textit{hidden variables}.
+
+L'output dell'inferenza probabilistica è una full-joint distribution
+sulle query variables:
+
+$P(Q_1,..., Q_n| E_1 = e_1,..., E_n = e_n)$\\
+
+Esistono 2 modi per fare inferenza probabilistica in una rete bayesiana:
+attraverso un'enumerazione o eliminazione di variabili.\\
+
+\textbf{Esempio di enumerazione}: si vuole trovare la probabilità che ci
+sia stata un'intrusione, sapendo che sia John che Mary hanno chiamato.
+
+In questo esempio, b è la query variables mentre j e m sono le evidence
+variables.
+
+Dalla definizione di probabilità condizionata segue che:
+
+\begin{equation}
+\label{eq:pc}
+P(E_2|E_1) = \frac{P(E_1, E_2)}{P(E_1)}
+\end{equation}
+
+$P(b|j,m)$ (applicando l'equazione \ref{eq:pc}) $= \frac{P(b,j,m)}{P(j,m)} =
+\alpha P(b,j,m)$, dove $\alpha = \frac{1}{P(j,m)}$
+
+La probabilità $P(b,j,m)$ può essere determinata enumerando tutti possibili
+valori delle hidden variables a,e:
+
+$P(b,j,m) = \sum_e \sum_a P(b,j,m)$ (riscrivendo l'espressione considerando
+la rete bayesiana e i genitori delle variabili) $= \sum_e \sum_a P(b)P(e)
+P(a|b,e)P(j|a)P(m|a) = \alpha P(b) \sum_e P(e) \sum_a P(a|b,e)P(j|a)P(m|a)$
+
+Quest'espressione va calcolata considerando tutte le possibilità delle
+hidden variables che si stanno sommando (cioè $e, \neg e, a, \neg a$).
+
+L'albero di valutazione completo dell'espressione è rappresentato in figura
+\ref{fig:evalIS}. La complessità dell'inferenza per enumerazione è di
+$\mathcal{O}(n2^n)$. Questo metodo NON è efficiente in quanto si ripetono i
+rami per j e m
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{evalIS}
+\caption{La valutazione dell'espressione che calcola P(b,j,m). Si procede
+top-down, moltiplicando i valori lungo un cammino e sommando ai nodi +.
+Questo metodo NON è efficiente in quanto si ripetono i rami per j e m.}
+\label{fig:evalIS}
+\end{figure}
+
