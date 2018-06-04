@@ -118,6 +118,8 @@ $P(Q_1,..., Q_n| E_1 = e_1,..., E_n = e_n)$\\
 Esistono 2 modi per fare inferenza probabilistica in una rete bayesiana:
 attraverso un'enumerazione o eliminazione di variabili.\\
 
+\subsubsection{Inferenza per enumerazione}
+
 \textbf{Esempio di enumerazione}: si vuole trovare la probabilità che ci
 sia stata un'intrusione, sapendo che sia John che Mary hanno chiamato.
 
@@ -157,4 +159,21 @@ top-down, moltiplicando i valori lungo un cammino e sommando ai nodi +.
 Questo metodo NON è efficiente in quanto si ripetono i rami per j e m.}
 \label{fig:evalIS}
 \end{figure}
+
+\subsubsection{Inferenza per eliminazione di variabili}
+
+Come si può notare dalla figura \ref{fig:evalIS} l'inferenza per
+enumerazione può essere migliorata evitando di ripetere calcoli.
+
+L'algoritmo di eliminazione di variabili valuta espressioni come:
+
+$P(b,j,m) = \alpha P(b) \sum_e P(e) \sum_a P(a|b,e)P(j|a)P(m|a)$
+\textbf{da destra a sinistra}.
+
+L'espressione può essere vista come un prodotto dei seguenti fattori:
+
+$P(b|j,m) = \alpha f_1(B) \sum_e f_2(E) \sum_a f_3(A,B,E)f_4(A)f_5(A)$
+
+Ogni fattore è una matrice indicizzata dalla/e variabile/i condizionate a
+cui si riferisce e che possono essere reperite dalla rete bayesiana.
 

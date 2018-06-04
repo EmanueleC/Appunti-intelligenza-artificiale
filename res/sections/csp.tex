@@ -205,17 +205,90 @@ restituirne una - quando tutti i domini delle variabili sono ristretti a un unic
 valore) o se non ne esiste nessuna (quando rimangono domini vuoti per una o più variabili).
  \item \textbf{Cammino-consistenza}: si tratta di imporre la consistenza su più di un
 vincolo. Due variabili legate da un vincolo ${X_i, X_j}$ sono cammino-consistenti rispetto
-a una terza variabile $X_m$ se per ogni assegnamento consistente di ${X_i, X_j}$ esiste un
-assegnamento di $X_m$ che soddisfa i vincoli di ${X_i, X_m}$ e ${X_i, X_j}$.
+a una terza variabile $X_m$ se per ogni assegnamento consistente di
+${X_i, X_j}$ esiste un assegnamento di $X_m$ che soddisfa i vincoli di ${X_i, X_m}$
+e ${X_i, X_j}$.
 \end{itemize}
 
 Un concetto più generale di consistenza è la k-Consistenza\dots un problema
-CSP è k-consistente se per ogni insieme di k-1 variabili e per ogni assegnamento consistente
-di queste k-1 variabili, può sempre essere scelto un valore consistente per una qualsiasi
-variabile k-esima.
+CSP è k-consistente se per ogni insieme di k-1 variabili e per ogni assegnamento
+consistente di queste k-1 variabili, può sempre essere scelto un valore consistente
+per una qualsiasi variabile k-esima.
 
 \begin{itemize}
  \item Nodo consistenza $\rightarrow$ 1-consistenza
  \item Arco consistenza $\rightarrow$ 2-consistenza
  \item Cammino consistenza $\rightarrow$ 3-consistenza
 \end{itemize}
+
+\subsection{Local search}
+
+Nell'ambito dei problemi con vincoli è possibile applicare la ricerca
+locale come segue:
+
+Lo scopo è quello di ``migliorare'' un assegnamento di variabili, cercando di
+diminuire man mano il numero di vincoli violati.
+
+Lo spazio di ricerca in questo problema sono tutti gli assegnamenti completi.
+
+Il vicinato di un assegnamento sono tutti gli assegnamenti che possono essere
+raggiunti tramite un passo della ricerca locale, cioè tutti gli assegnamenti
+che differiscono per il valore di una variabile.
+
+Lo spazio delle soluzioni invece consiste di tutti gli assegnamenti che
+soddisfano i vincoli.
+
+La funzione di valutazione mappa gli assegnamenti a un numero reale che indica
+quanto sono lontani dall'essere una soluzione, cioè il numero di vincoli
+violati.
+
+La ricerca comincia da un assegnamento casuale e si muove verso i suoi vicini
+in base alla funzione di valutazione. Termina quando trova una soluzione o
+ha effettuato un certo limite di passi.
+
+Una possibile euristica che utilizza la funzione di valutazione e guida la
+ricerca locale è la \textbf{Min-Conflicts}. Questa euristica scegli il vicino
+di un assegnamento che minimizza il numero di conflitti violati.
+
+\begin{algorithm}
+    \caption{Euristica Min-Conflicts}
+    \label{alg:minconflicts}
+    \begin{algorithmic}[1]
+        \Procedure{MIN-CONFLICTS}{csp, max\_steps}
+            \State{current $\leftarrow$ un assegnamento completo per csp}
+            \For{i = 1 to max\_steps}
+            \If{current è una soluzione per csp} \Return{current} \EndIf
+            \State{var $\leftarrow$ una qualsiasi variabile coinvolta in un
+conflitto}
+            \State{value $\leftarrow$ un valore per var che minimizzi i
+conflitti dell'assegnamento current}
+            \State{var = value in current}
+            \EndFor
+            \State{\Return{Fallimento}}
+        \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
+
+Anche se nell'ambito dei problemi con vincoli, il principio della ricerca
+locale è sempre lo stesso e anche i problemi rimangono gli stessi:
+è possibile bloccarsi in un minimo locale (largo o stretto) o in un plateau.
+
+Tecniche per evitare di bloccarsi:
+
+\begin{itemize}
+ \item Ricominciare da stati iniziali casuali
+ \item Permettere passi non miglioranti $\rightarrow$ random-walk
+ \item Cambiare il vicinato $\rightarrow$ taboo search
+ \item Cambiare la funzione di valutazione $\rightarrow$ strategie penalty-
+based
+\end{itemize}
+
+Rimanere intrappolati in un minimo locale può essere visto come bloccarsi
+in un loop. Per sbloccarsi da un loop si possono ricordare gli stati
+già visti e non visitarli più: questo potrebbe consumare molta memoria,
+perciò è utile memorizzare solo gli ultimi stati per prevenire ``piccoli''
+loops.
+
+La lista tabù contiene gli stati vietati <variabile, valore> e ha una lunghezza
+fissata k.
+
