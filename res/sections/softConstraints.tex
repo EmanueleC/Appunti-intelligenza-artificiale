@@ -200,3 +200,22 @@ E ora si ripetono tutte le combinazioni con X = b\dots\\
 <X = a, Z = b, Y = b, P = a> $\rightarrow$ min(0.2, 0, 0.3) = 0
 
 <X = a, Z = b, Y = b, P = b> $\rightarrow$ min(0.2, 0, 0) = 0
+
+\subsection{Ricerca di una soluzione con i vincoli soft}
+
+Si visita ogni assegnamento che potrebbe essere una soluzione e si saltano
+quelli che sono ``dominati'' da altri.
+
+Ricerca branch and bound: si tiene traccia di un lower bound (preferenza
+della migliore soluzione trovata) e di un upper bound (preferenza data dalle
+variabili assegnate fino al nodo in cui ci si trova).
+
+Il lower bound si inizializza con \textbf{l'elemento bottom del c-semianello}
+utilizzato e viene aggiornato ogni volta che si incontra una soluzione
+ammissibile migliorante a seconda del tipo di problema.
+
+Se il problema è di minimizzazione e upper bound > lower bound si taglia il
+sottoalbero, viceversa se il problema è di massimizzazione.
+
+Se la soluzione non è feasible (non ci sono preferenze) allora
+\textbf{non va considerata} nel branch and bound.

@@ -165,12 +165,12 @@ Questo metodo NON è efficiente in quanto si ripetono i rami per j e m.}
 Come si può notare dalla figura \ref{fig:evalIS} l'inferenza per
 enumerazione può essere migliorata evitando di ripetere calcoli.
 
-L'algoritmo di eliminazione di variabili valuta espressioni come:
+L'algoritmo di eliminazione di variabili valuta espressioni come:\\
 
 $P(b,j,m) = \alpha P(b) \sum_e P(e) \sum_a P(a|b,e)P(j|a)P(m|a)$
-\textbf{da destra a sinistra}.
+\textbf{da destra a sinistra}.\\
 
-L'espressione può essere vista come un prodotto dei seguenti fattori:
+L'espressione può essere vista come un prodotto dei seguenti fattori:\\
 
 $P(b|j,m) = \alpha f_1(B)$ x $\sum_e f_2(E)$ x $\sum_a f_3(A,B,E)$ x $f_4(A)
 x f_5(A)$\\
@@ -182,16 +182,19 @@ definito in Y, cioè: $. : Y$ x $Y \rightarrow Y$ che rispetta la
 definizione di funzione.
 
 Siano f e g due funzioni f,g: $X \rightarrow Y$. Allora il prodotto
-pointwise $(f.g): X \rightarrow Y$ è così definito:
+pointwise $(f\cdot g): X \rightarrow Y$ è così definito:
 
-$(f.g)(x) = f(x).g(x)$ per ogni x in X.\\
+$(f\cdot g)(x) = f(x)\cdot g(x)$ per ogni x in X.\\
  
 Ogni fattore è una matrice indicizzata dalla/e variabile/i condizionate a
 cui si riferisce e che possono essere reperite dalla rete bayesiana.\\
 
 La valutazione dell'espressione avviene da destra a sinistra: dapprima 
 si calcola $f_6(B,E) = \sum_a f_3(a,b,e)$ x $f_4(a)$ x $f_5(a) = (f_3(a,b,e)$ x
-$f_4(a) x f_5(a))$ + $(f_3(\neg a,b,e)$ x $f_4(\neg a)$ x $f_5(\neg a))$, poi
+$f_4(a) x f_5(a))$ + $(f_3(\neg a,b,e)$ x $f_4(\neg a)$ x $f_5(\neg a))$\\
+
+poi si calcola\dots\\
+
 $f_7(B) = \sum_e f_2(E)$ x $f_6(B,E) = (f_2(e)$ x $f_6(b,e)) + (f_2(\neg e)$ x
 $f_6(b, \neg e))$.\\
 
@@ -200,3 +203,26 @@ L'espressione risultante è la seguente: $P(B|j,m) = \alpha f_1(B)$ x $f_7(B)$.
 La somma delle matrici è quella usuale, un piccolo accorgimento è quello di
 ricordarsi di portare fuori dalla somma i fattori che non dipendono dalle
 variabili sommate.
+
+\subsection{Esercizio}
+
+Notazione: $P(E = true) = P(+e)$
+
+Data la rete bayesiana in figura \ref{fig:bayesEx}, si calcoli $P(D|+b)$
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{bayesEx}
+\caption{Rete bayesiana dell'esercizio}
+\label{fig:bayesEx}
+\end{figure}
+
+$P(D|+b)$ è una distribuzione di probabilità e si ottiene calcolando $P(+d|+b)$ e
+$P(\neg d|+b)$.\\
+
+Calcolo di $P(+d|+b)$:\\
+
+$P(+d|+b) \propto P(+d, +b) = \sum_a P(a) P(+b|a) \sum_c P(c|+b) P(+d|c) =
+[P(+a)P(+b|+a) + P(\neg a) P(+b|\neg a)][P(+c|+b) P(+d|+c) + P(\neg c|+b)
+P(+d|\neg c)] = (0.9\cdot 0.7 + 0.1\cdot 0.2)\cdot (0.2\cdot 0.6 + 0.8\cdot 0.9) =
+0.546$
