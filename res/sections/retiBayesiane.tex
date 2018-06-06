@@ -172,8 +172,31 @@ $P(b,j,m) = \alpha P(b) \sum_e P(e) \sum_a P(a|b,e)P(j|a)P(m|a)$
 
 L'espressione può essere vista come un prodotto dei seguenti fattori:
 
-$P(b|j,m) = \alpha f_1(B) \sum_e f_2(E) \sum_a f_3(A,B,E)f_4(A)f_5(A)$
+$P(b|j,m) = \alpha f_1(B)$ x $\sum_e f_2(E)$ x $\sum_a f_3(A,B,E)$ x $f_4(A)
+x f_5(A)$\\
 
+L'operatore x utilizzato è il \textbf{pointwise product}.
+
+Siano X e Y due insiemi e sia la moltiplicazione un operatore ben
+definito in Y, cioè: $. : Y$ x $Y \rightarrow Y$ che rispetta la
+definizione di funzione.
+
+Siano f e g due funzioni f,g: $X \rightarrow Y$. Allora il prodotto
+pointwise $(f.g): X \rightarrow Y$ è così definito:
+
+$(f.g)(x) = f(x).g(x)$ per ogni x in X.\\
+ 
 Ogni fattore è una matrice indicizzata dalla/e variabile/i condizionate a
-cui si riferisce e che possono essere reperite dalla rete bayesiana.
+cui si riferisce e che possono essere reperite dalla rete bayesiana.\\
 
+La valutazione dell'espressione avviene da destra a sinistra: dapprima 
+si calcola $f_6(B,E) = \sum_a f_3(a,b,e)$ x $f_4(a)$ x $f_5(a) = (f_3(a,b,e)$ x
+$f_4(a) x f_5(a))$ + $(f_3(\neg a,b,e)$ x $f_4(\neg a)$ x $f_5(\neg a))$, poi
+$f_7(B) = \sum_e f_2(E)$ x $f_6(B,E) = (f_2(e)$ x $f_6(b,e)) + (f_2(\neg e)$ x
+$f_6(b, \neg e))$.\\
+
+L'espressione risultante è la seguente: $P(B|j,m) = \alpha f_1(B)$ x $f_7(B)$.
+
+La somma delle matrici è quella usuale, un piccolo accorgimento è quello di
+ricordarsi di portare fuori dalla somma i fattori che non dipendono dalle
+variabili sommate.

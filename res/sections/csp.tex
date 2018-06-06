@@ -34,7 +34,7 @@ Concetti utili:
 
 \textbf{Stato}: un assegnamento di valori a qualcuna o a tutte le variabili.
 
-Un \textbf{Assegnamento} può essere:
+Un \textbf{assegnamento} può essere:
 
 \begin{itemize}
  \item \textbf{consistente} se non viola nessun vincolo
@@ -151,12 +151,11 @@ altre variabili.\\
 
 \subsection{Difetti del backtracking}
 
-
 \begin{itemize}
  \item Non ricorda le ragioni di eventuali conflitti; la soluzione è il
 \textbf{backjumping}.
-Il \textbf{backjumping} consiste nel ritornare all'assegnamento completo causa del
-conflitto e identificare la più recente assegnazione precedente.
+Il \textbf{backjumping} consiste nel ritornare all'assegnamento causa del
+conflitto e modificare la più recente assegnazione precedente.
 
  \item Effettua più volte controlli inutili; la soluzione è \textbf{ricordarsi gli
 assegnamenti non legali} e aggiungere dei vincoli al problema o tenere in cache
@@ -292,3 +291,67 @@ loops.
 La lista tabù contiene gli stati vietati <variabile, valore> e ha una lunghezza
 fissata k.
 
+\subsection{Struttura di un problema}
+
+La struttura di un problema - il grafo dei vincoli - può offrire indicazioni su
+come trovare soluzioni più velocemente.
+
+Ad esempio, nel problema di colorazione dell'Australia la Tasmania è sconnessa
+dalle altre regioni e può essere vista come un sottoproblema indipendente dal
+sottoproblema rimanente.
+
+Per scoprire quali parti sono indipendenti fra di loro in un problema con
+vincoli occorre individuare le componenti connesse del grafo dei vincoli.
+
+Ogni componente è un sottoproblema indipendente e la soluzione del problema
+totale è l'unione di queste soluzioni.
+
+Quanto tempo potrebbe essere risparmiato?
+
+Si assuma che ci siano n variabili con dominio d e che ciascun sottoproblema
+abbia c delle n variabili.
+
+In totale ci sono n/d sottoproblemi. Ogni sottoproblema richiede tempo $d^c$,
+quindi il problema iniziale ha complessità $\mathcal{O}(\frac{n}{c} d^c)$
+(assumendo una risoluzione con forza bruta).
+
+Se non si decompone, il problema ha complessità $\mathcal{O}(d^n)$.
+
+Si passa da una complessità esponenziale in n a una lineare in n.
+
+Un altro esempio di struttura che aiuta la risoluzione di un problema con
+vincoli è la struttura ad albero: la complessità di risoluzione del problema
+in questo caso è lineare.
+
+Se un grafo CSP è un albero, può essere risolto in $\mathcal{O}(nd^2)$.
+
+Per risolvere un albero CSP:
+
+\begin{itemize}
+ \item Scegli una radice
+ \item Ordina i nodi: scegli un ordinamento delle variabili in modo che
+ciascuna compaia dopo il genitore (ordinamento topologico)
+ \item Applica l'arco consistenza \textbf{dalle foglie alla radice}
+così da rendere l'albero DAC (directed arc-consistent)
+ \item Assegna dei valori a cominciare dalla radice
+\end{itemize}
+
+Il passaggio più importante di questa procedura è rendere l'albero
+DAC: un CSP è DAC se, definito un ordinamento delle variabili
+$X_1, X_2, ..., X_n$ se e solo se ogni $X_i$ è arco consistente
+con ciascuna $X_j$ per j>i (ciascuno dei suoi discendenti).
+
+Un albero con n nodi ha n-1 archi, si può rendere DAC in
+$\mathcal{O}(n)$ passi. Ogni passo deve comparare fino a
+d valori possibili per 2 variabili. Il tempo totale è
+$\mathcal{O}(nd^2)$.
+
+Come rendere un grafo un albero? Occorre rimuovere un nodo per
+rompere un ciclo e istanziare la variabile.
+
+Una volta istanziata, rispettando eventuali vincoli unari,
+occorre forzare i domini delle variabili collegate ad assumere
+valori consistenti con la variabile già istanziata.
+
+Trovare il più piccolo insiemi di nodi cycle-cutset è NP-hard
+ma esistono algoritmi di aprossimazione efficienti.
