@@ -114,12 +114,12 @@ variabili non assegnate che non sia in conflitto con l'attuale assegnamento
  \item \textbf{Goal test: l'assegnamento è completo}
 \end{itemize}
 
-Con questa formulazione sarebbe possibile usare una ricerca in profondità, tuttavia
-la complessità è elevata.
-
-Se si considera un CSP con n variabili e un dominio discreto e finito di
-dimensione d, viene generato un albero con $n!*d^n$ foglie anche se gli
-assegnamenti completi possibili sono $d^n$.\\
+Con questa formulazione, se si considera un CSP con n variabili e un dominio
+discreto e finito di dimensione d allora verrebbe generato un albero di ricerca
+partendo da $nd$ nodi, poi $nd^2(n-1)$ e così via\dots... le foglie in totale
+sarebbero $n!*d^n$ anche se gli assegnamenti completi possibili sono solamente
+$d^n$ (cioè il numero di foglie dell'albero di backtracking esposto di seguito
+).\\
 
 In CSP, gli assegnamenti di variabili sono commutativi, perciò occorre
 considerare una sola variabile a ogni nodo nell'albero di ricerca.
@@ -175,7 +175,7 @@ assumere lo stesso unico valore).
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.5\textwidth]{fc}
+\includegraphics[width=0.55\textwidth]{fc}
 \caption{Esempio di forward checking nel problema di colorazione di una mappa}
 \label{fig:fc}
 \end{figure}
@@ -222,7 +222,7 @@ per una qualsiasi variabile k-esima.
  \item Cammino consistenza $\rightarrow$ 3-consistenza
 \end{itemize}
 
-\subsection{Esercizio}
+\subsection{Esercizio - Consistenza}
 
 Provide an example of a constraint satisfaction problem which is arc
 consistent but not consistent.
@@ -231,7 +231,7 @@ Un esempio di un problema csp arco consistente ma non nodo consistente:
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.5\textwidth]{exConst}
+\includegraphics[width=0.45\textwidth]{exConst}
 \caption{Problema csp arco-consistente ma non nodo consistente}
 \label{fig:fc}
 \end{figure}
@@ -240,10 +240,84 @@ Un esempio di un problema csp arco consistente ma non cammino consistente:
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.5\textwidth]{notPC}
+\includegraphics[width=0.45\textwidth]{notPC}
 \caption{Problema csp arco-consistente ma non cammino consistente}
 \label{fig:fc}
 \end{figure}
+
+\subsection{Esercizio - Backtracking}
+
+Define a map coloring problem with 5 variables where each variable can have
+values in D = \{red, blu, green\}.
+
+Apply backtracking with forward checking on this problem.
+
+Apply arc consistency.
+
+Esempio inventato (in modo che non sia un problema impossibile):
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{cspEx}
+\caption{grafo csp}
+\end{figure}
+
+\textbf{Forward-checking}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+A & B & C & D & E \\ \hline
+\{r,g,b\} & \{r,g,b\} & \{r,g,b\} & \{r,g,b\} & \{r,g,b\} \\
+\{r\} & \{g,b\} & \{r,g,b\} & \{g,b\} & \{r,g,b\} \\
+\{r\} & \{g\} & \{r,b\} & \{b\} & \{r,g,b\} \\
+\{r\} & \{g\} & \{b\} & \{b\} & \{r,g\} \\
+\{r\} & \{g\} & \{b\} & \{b\} & \{r,g\} \\
+\{r\} & \{g\} & \{b\} & \{b\} & \{g\} \\ \hline
+\end{tabular}
+\caption{Forward checking}
+\end{table}
+
+\textbf{Backtracking}:
+
+\{ A = red \}
+
+\{ A = red, B = green \}
+
+\{ A = red, B = green, C = blue \}
+
+\{ A = red, B = green, C = blue, D = blue \}
+
+\{ A = red, B = green, C = blue, D = blue, E = green \}\\
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{cspSol}
+\caption{soluzione csp}
+\end{figure}
+
+\textbf{Arc-consistency}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+A & B & C & D & E \\ \hline
+\{r,g,b\} & \{r,g,b\} & \{r,g,b\} & \{r,g,b\} & \{r,g,b\} \\
+\{r\} & \{g,b\} & \{r,g,b\} & \{g,b\} & \{r,g,b\} \\
+\{r\} & \{g\} & \{r,b\} & \{b\} & \{r,g\} \\
+\{r\} & \{g\} & \{b\} & \{b\} & \{r,g\} \\
+\{r\} & \{g\} & \{b\} & \{b\} & \{r,g\} \\
+\{r\} & \{g\} & \{b\} & \{b\} & \{g\} \\ \hline
+\end{tabular}
+\caption{Arc-consistency}
+\end{table}
+
+\textbf{Nota}: anche se di poco, la tabella che mostra l'algoritmo del forward
+checking e la tabella che riporta l'algoritmo dell'arc consistency sono
+diversi\dots infatti il primo metodo non è in grado di rilevare i conflitti
+in anticipo mentre il secondo sì.
 
 \subsection{Local search}
 
