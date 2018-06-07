@@ -119,7 +119,7 @@ la complessità è elevata.
 
 Se si considera un CSP con n variabili e un dominio discreto e finito di
 dimensione d, viene generato un albero con $n!*d^n$ foglie anche se gli
-assegnamenti completi possibili sono $d^n$\\.
+assegnamenti completi possibili sono $d^n$.\\
 
 In CSP, gli assegnamenti di variabili sono commutativi, perciò occorre
 considerare una sola variabile a ogni nodo nell'albero di ricerca.
@@ -157,9 +157,11 @@ altre variabili.\\
 Il \textbf{backjumping} consiste nel ritornare all'assegnamento causa del
 conflitto e modificare la più recente assegnazione precedente.
 
- \item Effettua più volte controlli inutili; la soluzione è \textbf{ricordarsi gli
-assegnamenti non legali} e aggiungere dei vincoli al problema o tenere in cache
-tali assegnamenti e controllare che non vengano ripetuti.
+ \item Effettua più volte controlli inutili; quando viene scoperto un
+conflitto la soluzione è \textbf{ricordarsi gli assegnamenti non legali}, in
+particolare il sottoinsieme del conflict set che causa il problema e
+aggiungere dei vincoli al problema o tenere in cache tali assegnamenti e
+controllare che non vengano ripetuti (no-good assignments).
 
  \item Un conflitto viene scoperto solo quando tutte le variabili sono state assegnate a
 dei valori; la soluzione è fare \textbf{forward checking} dei vincoli (si controlla
