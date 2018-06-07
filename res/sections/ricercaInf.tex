@@ -55,6 +55,8 @@ da n allo stato obiettivo.\\
 All'inizio g(n) è una distanza infinita da S a tutti i nodi diversi da se
 stesso.
 
+% source: http://db.cs.duke.edu/courses/fall11/cps149s/notes/a_star.pdf
+% author - Siyang Chen
 \begin{algorithm}[H]
     \caption{Ricerca A*}
     \label{alg:algA}
@@ -81,7 +83,7 @@ Completo? Sì.
 
 Complessità? Esponenziale.
 
-Ottimo? Sì, (a certe condizioni) vedi il teorema\dots
+Ottimo? Sì, (a certe condizioni di h) vedi il teorema\dots
 
 \subsection{Euristica ammissibile}
 
@@ -90,7 +92,9 @@ Un'euristica è ammissibile se vale: $h(n) <= h^*(n)$
 
 \textbf{Teorema su A*}
 Se h(n) è un'euristica ammissibile,  A* usando la ricerca su albero è ottimale.
-Dimostrazione - Si basa sul confronto di f e g tra un ottimo G e un sub-ottimo G2
+
+\textbf{Nota bene:} l'algoritmo di Dijkstra è un caso speciale di A*, quando
+l'euristica h(v) = 0 per tutti i nodi.
 
 \subsection{Euristica consistente}
 
