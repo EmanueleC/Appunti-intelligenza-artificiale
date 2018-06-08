@@ -11,10 +11,24 @@
 - Ricerca non informata e informata
 - Stable matching: algoritmo di Gale-Shapley
 - Problemi con vincoli (in progress)
-  - Vincoli soft (in progress)
+  - Tipi di consistenza locale (node, arc, path consistency)
+  - Vincoli soft (esempi di proiezione e combinazione)
 - Sistemi di voto
+  - k-approval (plurality, majority, 3-approval...)
+  - Borda
+  - Copeland
+  - i formalismi dei vincoli soft e delle reti CSP
 - Reti bayesiane (in progress)
+  - Inferenza probabilistica in una rete bayesiana (enumerazione ed eliminazione)
 - Introduzione e cenni di reinforcement learning (in progress)
+
+### Esercizi
+
+- Stable matching problem
+- Dare esempi di problemi csp arco consistenti ma non consistenti
+- Problema csp con backtracking, forward checking e arc consistency
+- Esercizio di combinazione per i vincoli soft
+- Esercizio di inferenza probabilistica data una rete bayesiana (sia per eliminazione che per enumerazione)
 
 ### Laboratori
 
