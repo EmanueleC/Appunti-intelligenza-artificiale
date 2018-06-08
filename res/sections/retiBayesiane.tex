@@ -214,7 +214,7 @@ Notazione: $P(E = true) = P(+e)$
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\textwidth]{bayesEx}
+\includegraphics[width=0.65\textwidth]{bayesEx}
 \caption{Rete bayesiana dell'esercizio}
 \label{fig:bayesEx}
 \end{figure}
@@ -222,9 +222,72 @@ Notazione: $P(E = true) = P(+e)$
 $P(D|+b)$ è una distribuzione di probabilità e si ottiene calcolando $P(+d|+b)$ e
 $P(\neg d|+b)$.\\
 
-Calcolo di $P(+d|+b)$:\\
+Calcolo di $P(+d|+b)$ tramite enumerazione:\\
 
 $P(+d|+b) \propto P(+d, +b) = \sum_a P(a) P(+b|a) \sum_c P(c|+b) P(+d|c) =
 [P(+a)P(+b|+a) + P(\neg a) P(+b|\neg a)][P(+c|+b) P(+d|+c) + P(\neg c|+b)
 P(+d|\neg c)] = (0.9\cdot 0.7 + 0.1\cdot 0.2)\cdot (0.2\cdot 0.6 + 0.8\cdot 0.9) =
 0.546$
+
+Calcolo di $P(D|+b)$ tramite eliminazione:\\
+
+$P(D|+b) \propto P(D, +b) = \sum_a P(a) P(+b|a) \sum_c P(c|+b) P(D|c) =
+\sum_a f_1 (a)$ x $f_2 (a)$ x $\sum_c f_3 (c)$ x $f_4 (D, c)$\\
+
+Calcolo $f_5 (D) = \sum_c f_3 (c)$ x $f_4 (D, c) = f_3 (+c)$ x $f_4 (D, +c)$ +
+$f_3 (\neg c)$ x $f_4 (D, \neg c)$\\
+
+$f_3 (+c) = 0.2$
+
+$f_4 (D, +c) =
+\begin{bmatrix}
+0.6 \\
+0.4
+\end{bmatrix}$
+
+$f_3 (\neg c) = 0.8$
+
+$f_4 (D, \neg c) =
+\begin{bmatrix}
+0.9 \\
+0.1
+\end{bmatrix}$\\
+
+$f_5 (D) =
+\begin{bmatrix}
+0.12 \\
+0.08
+\end{bmatrix} + 
+\begin{bmatrix}
+0.72 \\
+0.08
+\end{bmatrix} =
+\begin{bmatrix}
+0.84 \\
+0.16
+\end{bmatrix}$
+\\
+
+Calcolo $f_6 = \sum_a f_1 (a)$ x $f_2 (a) = f_1 (+a)$ x $f_2 (+a)$ +
+$f_1 (\neg a)$ x $f_2 (\neg a)$\\
+
+$f_1 (+a) = 0.9$
+
+$f_2 (+a) = 0.7$
+
+$f_1 (\neg a) = 0.1$
+
+$f_2 (\neg a) = 0.2$
+
+$f_6 = 0.9\cdot 0.7 + 0.1\cdot 0.2 = 0.63 + 0.02 = 0.65$\\
+
+Quindi $P(D, +b) = 
+\begin{bmatrix}
+0.84 \\
+0.16
+\end{bmatrix}
+\cdot 0.65 =
+\begin{bmatrix}
+0.546 = P(+d, +b) \propto P(+d|+b) \\
+0.104 = P(\neg d, +b) \propto P(\neg d|+b)
+\end{bmatrix}$

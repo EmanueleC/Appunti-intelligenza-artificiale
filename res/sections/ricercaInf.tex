@@ -34,7 +34,7 @@ rispetto a quella su albero.
 Espande il nodo che è più vicino all'obiettivo tra i nodi collegati al corrente.
 Ogni nodo deve sapere quanto è distante dal nodo obiettivo.
 
-Completo? No, può ciclare o arrivare in un punto morto oppure c'è un infinito.
+Completo? No, può ciclare o arrivare in un punto morto oppure c'è un infinito
 numero di stati.
 
 Ottimo? No, dà una soluzione greedy
@@ -194,3 +194,23 @@ raggiunto.
 
 La hill-climbing search è incompleta, ma se combinata alla random walk
 (ricerca puramente casuale nello spazio degli stati) può diventare completa.
+
+La \textbf{Simulated annealing search}, una versione modificata
+della hill-climbing dove le mosse peggioranti sono accettate con probabilità
+$\epsilon < 1$ e si riesce a sfuggire dai massimi locali.
+
+La \textbf{Beam search} (rappresentata in figura \ref{fig:beamSearch}), genera
+k stati diversi casualmente e a ogni iterazione:
+
+\begin{itemize}
+ \item Se uno degli stati raggiunti è uno stato obiettivo, l'algoritmo si ferma.
+ \item Altrimenti si selezionano i k migliori successori e si prosegue.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{beamSearch}
+\caption{Beam search con k = 2 - a ogni iterazione o si trova lo stato obiettivo
+o si mantengono sempre 2 nodi}
+\label{fig:beamSearch}
+\end{figure}
