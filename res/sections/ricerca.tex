@@ -78,7 +78,8 @@ Esistono diverse politiche di ordinamento di una coda \dots
 
 \begin{itemize}
 \item FIFO: l'operazione pop ritorna l'elemento più vecchio inserito.
-\item LIFO: l'operazione pop ritorna l'elemento più recente inserito.
+\item LIFO: l'operazione pop ritorna l'elemento più recente inserito (in questo
+caso si chiama ``stack'')
 \item Coda di priorità: l'operazione pop ritorna l'elemento con priorità più alta.
 \end{itemize}
 
@@ -121,7 +122,7 @@ $\mathcal{O}(b^{floor(C^*/\epsilon)+1})$ dove $C^*$ è il costo della soluzione
 ottimale e ciascuna azione costa almeno $\epsilon$. È ottimale.\\
 
 \textbf{Depth-first search}: espande il nodo non ancora esplorato più profondo
-(più lontano dalla radice) dell'albero. La frontiera è una coda LIFO.
+(più lontano dalla radice) dell'albero. La frontiera è uno stack (politica LIFO).
 \textbf{Non} è completo in generale dato che uno stato già incontrato non può
 essere ripetuto in un cammino. In spazi finiti è completo. Non è ottimale.
 Complessità di spazio pari a: $\mathcal{O}(bm)$: lineare.

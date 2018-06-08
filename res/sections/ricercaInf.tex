@@ -7,9 +7,11 @@ Che differenza c'è tra ricerca non informata e informata?
 Nella ricerca informata si ha più conoscenza del problema e si
 velocizza il processo di ricerca.
 
-Sia f la funzione di valutazione di costo.
+Sia f la funzione di valutazione di costo del cammino totale.
 
-La funzione h(n) è una euristica ed è un componente di f.
+La funzione h(n) è una euristica componente di f ed è la
+conoscenza in più che si ha a disposizione del problema. La
+velocità delle seguenti euristiche dipende da h.
 
 h(n): costo stimato del percorso più economico dal nodo n allo stato
 obiettivo (goal)
@@ -93,8 +95,8 @@ Un'euristica è ammissibile se vale: $h(n) <= h^*(n)$
 \textbf{Teorema su A*}
 Se h(n) è un'euristica ammissibile,  A* usando la ricerca su albero è ottimale.
 
-\textbf{Nota bene:} l'algoritmo di Dijkstra è un caso speciale di A*, quando
-l'euristica h(v) = 0 per tutti i nodi.
+\textbf{Nota bene:} l'algoritmo di Dijkstra è un caso speciale di A* (quando
+l'euristica h(n) è pari a 0 per tutti i nodi).
 
 \subsection{Euristica consistente}
 
