@@ -80,17 +80,17 @@ esprimere le loro preferenze, non devono essere manipolabili.
 \end{itemize}
 
 Il \textbf{teorema di Arrow} afferma che non è possibile trovare un sistema di 
-voto che garantisca contemporaneamente l'unanimità e che non sia dittatoriale.
+voto che garantisca contemporaneamente l'unanimità e che non sia dittatoriale.\\
 
 Il \textbf{teorema di Gibbard-Sattherwaite} afferma che non è possibile trovare
-un sistema di voto che non sia dittatoriale e anche non manipolabile.
+un sistema di voto che non sia dittatoriale e anche non manipolabile.\\
 
 Questi teoremi valgono sia nel caso in cui l'insieme delle preferenze sia
 totalmente ordinabile sia nel caso in cui sia parzialmente ordinabile.
 
 In molti scenari dell'AI \textbf{multiagente} si hanno situazioni in cui
 può succedere che due o più oggetti non siano comparabili (in questo caso
-l'insieme delle preferenze è \textbf{parzialmente ordinabile}), ci sia
+l'insieme delle preferenze è \textbf{parzialmente ordinabile}), che ci sia
 incertezza, complessità computazionale e un insieme di oggetti/scelte molto
 grande rispetto al numero di agenti.
 
@@ -100,11 +100,35 @@ tipo quantitativo (numeri) e incondizionate (senza condizioni aggiuntive... ad
 esempio, voto X se Y), il secondo è il formalismo delle \textit{CP-net}, che
 modella preferenze di tipo qualitativo (preferisco A a B) e condizionate.
 
+In figura \ref{fig:cpnet} è rappresentata una CP-net che modella le preferenze
+di una persona per un pasto.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{cpnet}
+\caption{Un esempio di CP-net per modellare le preferenze di un
+pasto}
+\label{fig:cpnet}
+\end{figure}
+
+Trovare una soluzione ottima in una CP-net è semplice\dots
+
+\begin{itemize}
+ \item Prima si considerano le variabili indipendenti e si assegna
+a loro il valore di preferenza massima.
+ \item Poi si considerano le variabili dipendenti e si assegna loro
+i valori preferiti in modo consistente ai loro genitori.
+\end{itemize}
+
+Nell'esempio si comincia dal pasto e dalla frutta, per finire con
+il vino. La soluzione ottima è: \{pasto = Pesce, vino = Bianco,
+frutta= Pesche\}\\
+
 Questi 2 formalismi hanno un diverso potere espressivo e richiedono
 diverse capacità computazionali.
 
 \begin{table}[H]
-\begin{tabular}{|p{4cm}|c|c|c|}
+\begin{tabular}{|p{3.5cm}|c|c|c|}
 \hline
 \textbf{Caratteristiche} & \textbf{Soft constraints} & \textbf{CP-Nets} &
 \textbf{Acyclic CP-nets} \\ \hline

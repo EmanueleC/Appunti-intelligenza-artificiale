@@ -89,8 +89,8 @@ Ottimo? Sì, (a certe condizioni di h) vedi il teorema\dots
 
 \subsection{Euristica ammissibile}
 
-Un'euristica è ammissibile se vale: $h(n) <= h^*(n)$
-(cioè non deve sovrastimare il costo per raggiungere un obiettivo)
+Un'euristica è ammissibile se vale: $h(n) <= h^*(n)$ per ogni n
+(cioè non deve sovrastimare il costo per raggiungere un obiettivo).
 
 \textbf{Teorema su A*}
 Se h(n) è un'euristica ammissibile,  A* usando la ricerca su albero è ottimale.
@@ -101,9 +101,9 @@ l'euristica h(n) è pari a 0 per tutti i nodi).
 \subsection{Euristica consistente}
 
 Un'euristica è consistente se:
-$\forall n \land \forall succ(n) = n'$ generato da un'azione act vale:
-$h(n) <= c(n,act,n') + h(n')$
-dove c(n,act,n') è il costo per andare da n a n' con l'azione act.
+$\forall n \land \forall succ(n) = n'$ generato da un'azione 
+\textit{act} vale: $h(n) <= c(n,act,n') + h(n')$
+dove $c(n,act,n')$ è il costo per andare da n a n' con l'azione act.
 
 Se un'euristica è consistente allora è anche ammissibile.
 Questa implicazione (Consistenza $\rightarrow$ Ammissibilità) si dimostra per
@@ -118,7 +118,7 @@ h(n) = c(n,a,g) + h(g) = c(n,a,g) = h*(n) quindi h(n) <= h*(n) ammissibile.
 
 \subsection{Euristiche e dominanza}
 
-Un'euristica h2 domina un'euristica h1 se $h2(n) >= h1(n) \forall n$ .
+Un'euristica $h_2$ domina un'euristica $h_1$ se $h_2(n) >= h_1(n) \forall n$.\\
 
 Un problema rilassato ha meno vincoli rispetto all'originale.
 Grafo del problema rilassato = Supergrafo problema originale.
@@ -148,7 +148,7 @@ trovare un massimo e un minimo globale).
 
 \subsubsection{Hill-climbing search}
 
-Si assume che l'elevazione corrisponde alla funzione obiettivo; lo scopo
+Si assume che l'elevazione corrisponda alla funzione obiettivo; lo scopo
 sarebbe quello di trovare un massimo globale\dots tuttavia la hill-climbing
 è search un'euristica che può bloccarsi a un massimo locale.
 
