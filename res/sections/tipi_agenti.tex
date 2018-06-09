@@ -24,10 +24,10 @@ condizione/azione)} $\rightarrow$ Attuatori $\rightarrow$ Ambiente
 
 \subsection{Model-based reflex agents}
 
-Ambiente $\rightarrow$ Sensori $\rightarrow$ \textbf{Capisco com'è il mondo in
-questo istante (come evolve e come influiscono su di esso le mie azioni)}
-$\rightarrow$ Che azione dovrei fare? (dipende dalle regole condizione/azione)
-$\rightarrow$ Attuatori $\rightarrow$ Ambiente
+Ambiente $\rightarrow$ Sensori $\rightarrow$ Capisco com'è il mondo in
+questo istante \textbf{(come evolve e come influiscono su di esso le mie
+azioni)} $\rightarrow$ Che azione dovrei fare? (dipende dalle regole
+condizione/azione) $\rightarrow$ Attuatori $\rightarrow$ Ambiente
 
 \subsection{Goal-based agents}
 
@@ -41,7 +41,7 @@ $\rightarrow$ Attuatori $\rightarrow$ Ambiente
 
 Ambiente $\rightarrow$ Sensori $\rightarrow$ Capisco com'è il mondo in questo
 istante (come evolve e come influiscono su di esso le mie azioni)
-$\rightarrow$ Come apparirebbe il mondo se eseguissi l'azione A? (ipotesi)
+$\rightarrow$ Come apparirebbe il mondo se eseguissi l'azione A? (ipotesi/test)
 $\rightarrow$ \textbf{Quanto soddisfatto sarei in questo stato?
 (dipende dall'utilità)} $\rightarrow$ Che azione dovrei fare?
 (dipende dalle regole condizione/azione) $\rightarrow$ Attuatori
@@ -74,6 +74,9 @@ desiderabili in cui l'obiettivo è stato raggiunto) e un insieme di
 \textbf{azioni}.
 Infine specifica i \textbf{costi} di ricerca e di esecuzione. \\
 
+\{Problema, insieme degli stati, goal, insieme delle azioni, costi
+di ricerca ed esecuzione\}\\
+
 Questo agente funziona in un ambiente \textit{statico, noto, osservabile e
 deterministico}.
 
@@ -88,8 +91,8 @@ La soluzione è data da un'appropriata \textbf{sequenza di azioni}.
 
 Il processo di scoperta di una soluzione viene chiamato \textbf{ricerca}.
 
-Lo spazio degli stati rappresenta un'\textbf{astrazione} di un problema reale,
-che solitamente è molto complesso.
+Lo spazio degli stati (diverso dall'insieme degli stati!) rappresenta
+un'\textbf{astrazione} di un problema reale, che solitamente è molto complesso.
 
 Un'astrazione è utile/valida se è possibile ``trasformare'' ogni soluzione
 astratta in una soluzione nel mondo reale.
@@ -102,8 +105,8 @@ Si consideri il problema dell'aspirapolvere. \\
 
 \textbf{Insieme di stati}: 8 (sporco o pulito (4))*(destra o sinistra (2)).
 
-\textbf{Azioni}: muoviti a destra, muoviti a sinistra, aspira.
+\textbf{Insieme di azioni}: muoviti a destra, muoviti a sinistra, aspira.
 
-\textbf{Obiettivo}: arrivare agli stati (2) in cui non c'è sporco.
+\textbf{Goal}: arrivare agli stati (2) in cui non c'è sporco.
 
 \textbf{Costo}: 1 unità per azione (è arbitrario in questo esempio).

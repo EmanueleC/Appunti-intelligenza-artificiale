@@ -436,21 +436,21 @@ così da rendere l'albero DAC (directed arc-consistent)
 \end{itemize}
 
 Il passaggio più importante di questa procedura è rendere l'albero
-DAC: un CSP è DAC se, definito un ordinamento delle variabili
-$X_1, X_2, ..., X_n$ se e solo se ogni $X_i$ è arco consistente
+DAC: dato un ordinamento delle variabili $X_1, X_2, ..., X_n$,
+un CSP è DAC se e solo se ogni $X_i$ è arco consistente
 con ciascuna $X_j$ per j>i (ciascuno dei suoi discendenti).
 
 Un albero con n nodi ha n-1 archi, si può rendere DAC in
 $\mathcal{O}(n)$ passi. Ogni passo deve comparare fino a
 d valori possibili per 2 variabili. Il tempo totale è
-$\mathcal{O}(nd^2)$.
+$\mathcal{O}(nd^2)$.\\
 
-Come rendere un grafo un albero? Occorre rimuovere un nodo per
-rompere un ciclo e istanziare la variabile.
+Come rendere un grafo un albero? Occorre \textbf{rimuovere un nodo
+per rompere un ciclo e istanziare la variabile rimossa}.
 
-Una volta istanziata, rispettando eventuali vincoli unari,
-occorre forzare i domini delle variabili collegate ad assumere
-valori consistenti con la variabile già istanziata.
+Una volta istanziata, rispettando eventuali vincoli unari (nodo-
+consistenza), occorre forzare i domini delle variabili collegate
+ad assumere valori consistenti con la variabile già istanziata.
 
 Trovare il più piccolo insiemi di nodi cycle-cutset è NP-hard
 ma esistono algoritmi di aprossimazione efficienti.

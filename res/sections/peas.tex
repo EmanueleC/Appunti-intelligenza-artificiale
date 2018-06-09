@@ -2,8 +2,8 @@
 
 \section{Task environment}
 
-Il task environment (T.E.) è la specifica del problema: deve essere il più precisa
-possibile.
+Il task environment (T.E.) è la specifica del problema e deve essere il
+più precisa possibile. Comprende:
 
 \begin{itemize}
  \item \textbf{P}erformance measure
@@ -12,31 +12,41 @@ possibile.
  \item \textbf{S}ensors
 \end{itemize}
 
-Una lunga e noiosa lista di tipi di T.E.:
+Una lista di tipi di T.E.:
 
 \begin{itemize}
- \item \textbf{Totalmente/parzialmente osservabile}.
+ \item \textbf{Totalmente/parzialmente osservabile}: i sensori dell'agente
+gli consentono di avere una visione totale/parziale dello stato dell'ambiente
+in ogni momento.
  \item \textbf{Deterministico}: lo stato corrente determina completamente
 quello successivo (vs non deterministico).
  \item \textbf{Strategico}: come deterministico, ma ci sono più agenti (che
 possono competere o collaborare).
- \item \textbf{Stocastico}: incertezza (+ probabilità) per scegliere il
-prossimo stato.
+ \item \textbf{Stocastico}: incertezza (espressa come probabilità) per
+scegliere il prossimo stato.
  \item \textbf{Incerto}: parzialmente osservabile e non deterministico.
  \item \textbf{Episodico}: l'azione di un agente dipende solo da un singolo
 episodio (vs sequenziale).
  \item \textbf{Discreto}: ha un numero finito di distinti stati, percezioni,
-azioni. (vs continuo).
+azioni (vs continuo).
  \item \textbf{Single/multi-agent} uno o più agenti operano nell'ambiente. Se
 ci sono più agenti un T.E. può essere competitivo (es.: scacchi) o cooperativo.
  \item \textbf{Noto/Non noto}: dipende dalla conoscenza che ha un agente delle
 regole che governano un ambiente.
  \item \textbf{Dinamico}: l'ambiente cambia/viene cambiato dall'agente (vs
-statico).
+statico o semi-dinamico se l'ambiente non cambia ma lo score dell'agente sì).
+\end{itemize}
+
+Qualche esempio di T.E. :
+
+\begin{itemize}
+ \item Aspirapolvere: deterministico
+ \item Scacchi: sequenziale, discreto
+ \item Scacchi a tempo: semidinamico
+ \item Taxi: stocastico, dinamico, continuo
+ \item Parole crociate: statico
 \end{itemize}
 
 Il tipo di T.E. determina la progettazione dell'agente.
 Il mondo reale è parzialmente osservabile, stocastico, continuo, non noto,
 dinamico e multi-agent.
-
-
