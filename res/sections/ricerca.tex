@@ -113,6 +113,13 @@ La frontiera è una coda FIFO.
 è ottimale (se ha un costo di un'unità per passo).
 Lo spazio è il problema maggiore.\\
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.35\textwidth]{breadth.jpg}
+\caption{A ogni livello i, la complessità è $b(d^i)$}
+\label{fig:breadth}
+\end{figure}
+
 \textbf{Uniform-cost search}: espande il nodo non ancora esplorato con minor costo.
 La frontiera è una coda di priorità in base al costo di cammino.
 È equivalente al breadth-first se i costi sono tutti uguali.
