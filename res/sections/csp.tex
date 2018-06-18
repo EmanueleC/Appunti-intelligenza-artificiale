@@ -90,7 +90,7 @@ All'inizio si posiziona una regina su ciascuna colonna, in una riga a caso e
 così facendo abbiamo escluso la possibilità di un attacco su colonna.
 
 Occorre imporre anche altri vincoli: nessun attacco su riga e nessun attacco su
-diagonale. Questi vincoli si traducono in matematichese così:
+diagonale. Questi vincoli si traducono in linguaggio matematico così:
 
 Siano $x_1,...,x_n$ le n regine posizionate su n colonne.
 
@@ -116,7 +116,7 @@ variabili non assegnate che non sia in conflitto con l'attuale assegnamento
 
 Con questa formulazione, se si considera un CSP con n variabili e un dominio
 discreto e finito di dimensione d allora verrebbe generato un albero di ricerca
-partendo da $nd$ nodi, poi $nd^2(n-1)$ e così via\dots... le foglie in totale
+partendo da $nd$ nodi, poi $nd^2(n-1)$ e così via\dots le foglie in totale
 sarebbero $n!*d^n$ anche se gli assegnamenti completi possibili sono solamente
 $d^n$ (cioè il numero di foglie dell'albero di backtracking esposto di
 seguito).\\
@@ -316,16 +316,14 @@ A & B & C & D & E \\ \hline
 
 \textbf{Nota}: anche se di poco, la tabella che mostra l'algoritmo del forward
 checking e la tabella che riporta l'algoritmo dell'arc consistency sono
-diversi\dots infatti il primo metodo non è in grado di rilevare i conflitti
+diverse\dots infatti il primo metodo non è in grado di rilevare i conflitti
 in anticipo mentre il secondo sì.
 
 \subsection{Local search}
 
 Nell'ambito dei problemi con vincoli è possibile applicare la ricerca
-locale come segue:
-
-Lo scopo è quello di ``migliorare'' un assegnamento di variabili, cercando di
-diminuire man mano il numero di vincoli violati.
+locale come segue: lo scopo è quello di ``migliorare'' un assegnamento
+di variabili, cercando di diminuire man mano il numero di vincoli violati.
 
 Lo spazio di ricerca in questo problema sono tutti gli assegnamenti completi.
 
@@ -400,10 +398,11 @@ dalle altre regioni e può essere vista come un sottoproblema indipendente dal
 sottoproblema rimanente.
 
 Per scoprire quali parti sono indipendenti fra di loro in un problema con
-vincoli occorre individuare le componenti connesse del grafo dei vincoli.
+vincoli occorre individuare le \textbf{componenti connesse} del grafo dei
+vincoli.
 
 Ogni componente è un sottoproblema indipendente e la soluzione del problema
-totale è l'unione di queste soluzioni.
+totale è l'unione delle soluzioni delle componenti.
 
 Quanto tempo potrebbe essere risparmiato?
 
@@ -416,8 +415,8 @@ quindi il problema iniziale ha complessità $\mathcal{O}(\frac{n}{c} d^c)$
 
 Se non si decompone, il problema ha complessità $\mathcal{O}(d^n)$.
 
-Si passa da una complessità esponenziale in n a una lineare in n.
-
+Si passa da una complessità esponenziale in n a una lineare in n ($\sim$
+però c potrebbe essere una funzione di n\dots)
 Un altro esempio di struttura che aiuta la risoluzione di un problema con
 vincoli è la struttura ad albero: la complessità di risoluzione del problema
 in questo caso è lineare.
@@ -448,8 +447,8 @@ $\mathcal{O}(nd^2)$.\\
 Come rendere un grafo un albero? Occorre \textbf{rimuovere un nodo
 per rompere un ciclo e istanziare la variabile rimossa}.
 
-Una volta istanziata, rispettando eventuali vincoli unari (nodo-
-consistenza), occorre forzare i domini delle variabili collegate
+Una volta istanziata, rispettando eventuali vincoli unari
+(nodo-consistenza), occorre forzare i domini delle variabili collegate
 ad assumere valori consistenti con la variabile già istanziata.
 
 Trovare il più piccolo insiemi di nodi cycle-cutset è NP-hard
