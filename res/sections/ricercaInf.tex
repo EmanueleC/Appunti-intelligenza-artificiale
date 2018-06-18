@@ -17,18 +17,8 @@ h(n): costo stimato del percorso più economico dal nodo n allo stato
 obiettivo (goal)
 
 h(n) dipende solo dallo stato associato a n.
-Assunzioni: $h(n) >= 0 \land h(n) = 0$ per ogni stato obiettivo n.
-
-\subsection{Uniform Cost Search - richiami}
-Espande il nodo con il minore costo di cammino g(n), ma in questo caso \dots
-
-g(n) nella uniform cost search fornisce il costo per andare dallo stato
-iniziale (root) fino ad n g(n) non è una stima, ma un costo certo.
-
-f(n) = h(n)
-
-La versione della ricerca su grafo è più furba (non rivisita stati già esplorati)
-rispetto a quella su albero. 
+Assunzioni: $(h(n) >= 0$ $\forall n) \land (h(n) = 0$ per ogni stato
+obiettivo n).
 
 \subsection{Best first seach}
 Espande il nodo che è più vicino all'obiettivo tra i nodi collegati al corrente.
@@ -90,7 +80,8 @@ Ottimo? Sì, (a certe condizioni di h) vedi il teorema\dots
 \subsection{Euristica ammissibile}
 
 Un'euristica è ammissibile se vale: $h(n) <= h^*(n)$ per ogni n
-(cioè non deve sovrastimare il costo per raggiungere un obiettivo).
+(cioè non deve sovrastimare il costo esatto $h^*(n)$ per
+raggiungere un obiettivo).
 
 \textbf{Teorema su A*}
 Se h(n) è un'euristica ammissibile,  A* usando la ricerca su albero è ottimale.
@@ -106,8 +97,9 @@ $\forall n \land \forall succ(n) = n'$ generato da un'azione
 dove $c(n,act,n')$ è il costo per andare da n a n' con l'azione act.
 
 Se un'euristica è consistente allora è anche ammissibile.
-Questa implicazione (Consistenza $\rightarrow$ Ammissibilità) si dimostra per
-induzione su uno stato n
+
+Questa implicazione \textbf{(Consistenza $\rightarrow$ Ammissibilità)}
+si dimostra per induzione su uno stato n
 
 Caso base:
 h(g) = 0.
@@ -150,7 +142,7 @@ trovare un massimo e un minimo globale).
 
 Si assume che l'elevazione corrisponda alla funzione obiettivo; lo scopo
 sarebbe quello di trovare un massimo globale\dots tuttavia la hill-climbing
-è search un'euristica che può bloccarsi a un massimo locale.
+search un'euristica che può bloccarsi a un massimo locale.
 
 La Hill-climbing search modifica lo stato corrente cercando di migliorarlo e
 l'algoritmo \ref{alg:climb} che segue mostra come funziona: si sceglie un nodo
@@ -195,7 +187,7 @@ raggiunto.
 La hill-climbing search è incompleta, ma se combinata alla random walk
 (ricerca puramente casuale nello spazio degli stati) può diventare completa.
 
-La \textbf{Simulated annealing search}, una versione modificata
+La \textbf{Simulated annealing search} è una versione modificata
 della hill-climbing dove le mosse peggioranti sono accettate con probabilità
 $\epsilon < 1$ e si riesce a sfuggire dai massimi locali.
 
