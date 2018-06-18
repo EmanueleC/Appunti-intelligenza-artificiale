@@ -58,8 +58,8 @@ alla propagazione dei vincoli.\\
 Le variabili in un CSP possono essere:
 
 \begin{itemize}
- \item \textbf{discrete}: in domini finiti di dimensione n le possibili
-assegnazioni sono $\mathcal{O}(d^n)$.
+ \item \textbf{discrete}: in domini finiti di dimensione d le possibili
+assegnazioni sono (date n variabili) $\mathcal{O}(d^n)$.
  \item \textbf{continue}: coinvolgono vincoli lineari risolvibili in tempo
 polinomiale (rispetto al numero di variabili) - aka programmazione lineare.
 \end{itemize}
@@ -118,8 +118,8 @@ Con questa formulazione, se si considera un CSP con n variabili e un dominio
 discreto e finito di dimensione d allora verrebbe generato un albero di ricerca
 partendo da $nd$ nodi, poi $nd^2(n-1)$ e così via\dots... le foglie in totale
 sarebbero $n!*d^n$ anche se gli assegnamenti completi possibili sono solamente
-$d^n$ (cioè il numero di foglie dell'albero di backtracking esposto di seguito
-).\\
+$d^n$ (cioè il numero di foglie dell'albero di backtracking esposto di
+seguito).\\
 
 In CSP, gli assegnamenti di variabili sono commutativi, perciò occorre
 considerare una sola variabile a ogni nodo nell'albero di ricerca.
@@ -193,8 +193,8 @@ Assumiamo che ci sia un vincolo binario tra X e Y: X è arco consistente
 rispetto a Y se e solo se per ogni valore di X, esiste un valore \textbf{legale}
 di Y:\\
 
-X arco consistente con Y $\iff (\forall$ valore di X $\implies \exists$ valore
-legale di Y)\\
+X arco consistente con Y $\iff (\forall$ valore di X $\exists$ valore legale
+di Y)\\
 
 Ne segue che ogni volta che il dominio di X viene ristretto di un valore,
 occorre ricontrollare tutti i suoi vicini per assicurare ancora l'arco consistenza.
