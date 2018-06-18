@@ -54,7 +54,8 @@ preferenze dei singoli valori.
 
 Un \textbf{c-semianello fuzzy} ha valori di A in un insieme continuo [0,1]:
 $<A = [0,1], + = max, * = min, 0 = 0, 1 = 1>$. La combinazione fra due o
-più valori in questo c-semianello avviene prendendo il valore minimo.
+più valori in questo c-semianello avviene prendendo il valore minimo,
+la proiezione avviene prendendo il valore massimo.
 
 \begin{figure}[H]
 \centering
@@ -63,7 +64,7 @@ più valori in questo c-semianello avviene prendendo il valore minimo.
 \label{fig:esempioFuzzy}
 \end{figure}
 
-In figura \ref{fig:esempioFuzzy} si può notare l'esempio di un problema
+In figura \ref{fig:esempioFuzzy} è riportato l'esempio di un problema
 csp fuzzy (FCSP). Ci sono i vincoli soft con le preferenze associate a
 ciascun assegnamento sulla sinistra e due soluzioni possibili a destra.
 
@@ -222,7 +223,8 @@ Il lower bound si inizializza con \textbf{l'elemento bottom del c-semianello}
 utilizzato e viene aggiornato ogni volta che si incontra una soluzione
 ammissibile migliorante a seconda del tipo di problema.
 
-Se il problema è di minimizzazione e upper bound > lower bound si taglia il
+Se il problema è di minimizzazione e upper bound > lower bound (ho già una
+soluzione migliore di quella che sto costruendo) si taglia il
 sottoalbero, viceversa se il problema è di massimizzazione.
 
 Se la soluzione non è feasible (non ci sono preferenze) allora
