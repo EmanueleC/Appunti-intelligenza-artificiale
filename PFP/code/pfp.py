@@ -6,7 +6,7 @@ S1 = "PPHPHPPPPHPHHPHP"
 S3 = "HPHPPHHPHPPHPHHPPHPH"
 S4 = "PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP"
 
-""" calculate an upper bound for H-contacts, counts odd and even contacts and consectutive H pairs in primary structure """
+""" calculates an upper bound for H-contacts, counts odd and even contacts and consectutive H pairs in primary structure """
 def countH(primary):
     countEven = 0
     countOdd = 0
@@ -110,17 +110,19 @@ def move(solution):
         sequence = compose(solution[:cut], n, True)
     return sequence
 
-def main(primary):
+""" Local Search """
+def LS(primary):
     n = len(primary)
     best = 0
     currBest = 0
+    currBestStructure = []
     bestStructure = []
     maxContacts = (min (countH(primary)[1], countH(primary)[2])*2) + 2
 
-    print("UB per il massimo numero di contatti: ", maxContacts)
+    #print("UB per il massimo numero di contatti: ", maxContacts)
 
     """ combination of random walk and local search """
-    for i in range(200000):
+    for i in range(1000):
         sequence = compose([], n, False)
         # print('initial sequence:', sequence)
         if(sequence != -1):
@@ -135,13 +137,16 @@ def main(primary):
                 currValue = score(neighbor, countH(primary)[3])
                 if(oldValue >= currValue):
                     currBest = currValue
-                    bestStructure = neighbor
+                    currBestStructure = neighbor
                     break
                 #else:
                     #print('Score', currValue)
                     #printTertiary(neighbor)
         if(currBest>best):
-            printTertiary(bestStructure)
+            #printTertiary(bestStructure)
             best = currBest
-            print("Best:", best, "\nDifference with UB max:", maxContacts - best)
+            bestStructure = currBestStructure
+            #print("Best:", best, "Difference with UB max:", maxContacts - best)
+    #printTertiary(bestStructure)
+    print("=== Energia della configurazione ===", best)
 

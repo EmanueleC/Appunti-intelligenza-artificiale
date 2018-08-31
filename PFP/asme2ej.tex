@@ -99,12 +99,12 @@ Uno dei modelli più usati è il modello HP: il lattice usato semplifica la stru
 Questo modello riduce una proteina a una stringa composta dai caratteri ``H'' e ``P''. In questo modello le proteine tendono a raggruppare i nodi H attorno a un punto (cioè gli amminoacidi idrofobici formano un ``nucleo'') mentre i nodi P rimangono esterni.
 
 Nella seguente notazione per semplicità si denota H con 1 e P con 0. Una proteina è dunque una sequenza binaria. L'energia usata in questo modello è data dal numero di ``contatti'' tra H (1). Se due amminoacidi H si trovano su punti adiacenti del lattice, allora contribuiscono di un'unità (negativa) all'energia.
-Formalmente, sia $\mathcal{E}_c$ la matrice quadrata associata all'energia di una configurazione c di una sequenza binaria s di dimensioni ($|s|\cdot|s|$)
+Formalmente, sia $\mathcal{E}_c$ la matrice quadrata associata all'energia di una configurazione c di una sequenza binaria s di dimensioni ($|s|\cdot|s|$): l'energia è definita dalla seguente equazione:
 
 \begin{equation}
     \mathcal{E}_c = (e(a,b))_{a,b \in s} =
     \begin{cases*}
-      -1 & if a = b = 1 \\
+      -1 & se a = b = 1 \\
       0  & altrimenti
     \end{cases*}
 \end{equation}
@@ -155,7 +155,7 @@ La hill climbing search necessita di:
  \item un modo per rappresentare una soluzione (in questo caso una soluzione è una sequenza di H,P);
  \item una definizione di vicinato (come ci si sposta da una soluzione a una sua ``vicina''?)
  \item una funzione che valuti le soluzioni (viene usata l'\textbf{energia di una configurazione});
- \item una strategia di esplorazione (viene usata la \textbf{best-first}).
+ \item una strategia di esplorazione (viene usata la \textbf{best-first strategy}).
 \end{enumerate}
 
 La definizione di vicinato in questo caso ha una forte componente randomica: data una soluzione, la struttura viene ``rotta'' in un punto casuale tra l'inizio e la fine della configurazione e da quel punto si scelgono mosse diverse (randomiche), determinando così il vicino. In questo modo, se il punto di taglio viene scelto all'inizio, gran parte della configurazione viene persa (al contrario, la maggior parte viene mantenuta).
@@ -170,6 +170,38 @@ Un task di reinforcement learning è composto da:
  \item la funzione di transizione $\sigma$ che mappa una coppia (stato, azione) a uno dei probabili stati successori
  \item la funzione di ricompensa
 \end{enumerate}
+
+Lo spazio degli stati consiste di $\frac{4^n - 1}{3}$ ed è rappresentato in figura \ref{fig:stateSpace}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{figure/stateSpace.png}
+\caption{Spazio degli stati per il task di reinforcement learning}
+\label{fig:stateSpace}
+\end{figure}
+
+Ciascuno stato è collegato a 4 vicini tramite 4 possibili azioni: L (left) $a_1$, R (right) $a_2$, U (up) $a_3$, D (Down) $a_4$.
+
+La funzione di transizione, dato uno stato $s_j$ e un'azione $a_k$ è definita dalla formula:
+
+\begin{equation}
+\delta(s_j, a_k) = s_{4*j - 3 + k} \forall k \in [1,4], \forall j, 1 \leq j \leq \frac{4^n - 1}{3}
+\end{equation}
+
+La funzione di ricompensa è definita dagli autori A nel paper P nel modo seguente:
+
+\begin{equation}
+    \mathcal{R}(\pi_k| s_1, \pi_1, \pi_2, \dots \pi_{k-1}) =
+    \begin{cases*}
+      0.01 & se $a_{\pi}$ non è valida \\
+      - E_{\pi} & se k = n - 1 \\
+      0.1 & altrimenti
+    \end{cases*}
+\end{equation}
+
+dove $\pi_k$ è lo stato finale dato dal percorso $\pi = (s_1, \pi_1, \pi_2, \dots \pi_{k-1})$ e $a_{\pi}$ denota la sequenza di azioni che hanno portato allo stato $\pi_k$ a partire da $s_1$. Una sequenza di azioni si dice valida se produce una configurazione senza cicli. $E_{\pi}$ è l'energia data dalla configurazione ottenuta in $\pi_k$ tramite la sequenza $a_{\pi}$.
+
+Il problema di predizione della struttura di una proteina in un lattice 2D consisterà nell'allenare un agente nel trovare un percorso $\pi$ che porti a uno stato finale in cui l'energia associata sia minima.
 
 %Gabriela Czibula, Maria-Iuliana Bocicor and Istvan-Gergely Czibula
 
