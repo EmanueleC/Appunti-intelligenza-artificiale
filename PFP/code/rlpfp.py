@@ -2,6 +2,11 @@ from pfp import *
 import random
 import math
 
+actionSpace = ['L', 'U', 'R', 'D']
+actionDict = {'L' : 1, 'U' : 2, 'R' : 3, 'D' : 4}
+discountFactor = 0.9
+episodes = 5000
+
 """ checks if all element of a list are unique """
 def allUnique(x):
     seen = set()
@@ -96,58 +101,56 @@ def Qf(state, action, n, discountFactor, Q, primary):
             if(rew > futureRew): futureRew = rew
     return currRew + (discountFactor * futureRew)
 
-primary = "HPHHPHHPH"
-n = len(primary)
-#print(n)
-startState = 1
-actionSpace = ['L', 'U', 'R', 'D']
-actionDict = {'L' : 1, 'U' : 2, 'R' : 3, 'D' : 4}
-discountFactor = 0.9
-episodes = 200
+def QL(primary):
+    n = len(primary)
+    #print(n)
+    startState = 1
 
-Q = {}
+    Q = {}
 
-print("TRAINING...")
+    print("TRAINING...")
 
-for i in range(episodes):
+    for i in range(episodes):
+        state = startState
+        while(not isFinal(state, n)):
+            maxRew = 0
+            maxAct = random.choice(actionSpace)
+            for i in actionSpace:
+                rew = Qf(state, i, n, discountFactor, Q, primary)
+                if(rew > maxRew):
+                    maxRew = rew
+                    maxAct = i
+            explorer = random.choice([x for x in actionSpace if x != maxAct])
+            act = random.choice([maxAct, explorer])
+            Q[(state, act)] = Qf(state, act, n, discountFactor, Q, primary)
+            state = transition(state, act)
+
+    #for key in sorted(Q):
+        #print "%s: %s" % (key, Q[key])
+
+    print("TEST...")
+
     state = startState
     while(not isFinal(state, n)):
-        maxRew = 0
+        #print(state)
         maxAct = random.choice(actionSpace)
+        if (state, maxAct) in Q:
+            maxRew = Q[(state, maxAct)]
+        else:
+            maxRew = 0
         for i in actionSpace:
-            rew = Qf(state, i, n, discountFactor, Q, primary)
+            if(state, i) in Q:
+                rew = Q[(state, i)]
             if(rew > maxRew):
                 maxRew = rew
                 maxAct = i
-        explorer = random.choice([x for x in actionSpace if x != maxAct])
-        act = random.choice([maxAct, explorer])
-        Q[(state, act)] = Qf(state, act, n, discountFactor, Q, primary)
-        state = transition(state, act)
+        #print("AZIONE", maxAct)
+        #print("RICOMPENSA", maxRew)
+        state = transition(state, maxAct)
 
-#for key in sorted(Q):
-    #print "%s: %s" % (key, Q[key])
-
-tate = startState
-while(not isFinal(state, n)):
-    #print(state)
-    maxAct = random.choice(actionSpace)
-    if (state, maxAct) in Q:
-        maxRew = Q[(state, maxAct)]
-    else:
-        maxRew = 0
-    for i in actionSpace:
-        if(state, i) in Q:
-            rew = Q[(state, i)]
-        if(rew > maxRew):
-            maxRew = rew
-            maxAct = i
-    #print("AZIONE", maxAct)
-    #print("RICOMPENSA", maxRew)
-    state = transition(state, maxAct)
-
-seq = unfoldState(state, n)
-if(isValid(seq)):
-    #print(seq)
-    #print("=== Configurazione trovata ===")
-    printTertiary(fillMatrix(seq, primary))
-    print("=== Energia della configurazione ===", score(fillMatrix(seq, primary), countH(primary)[3]))
+    seq = unfoldState(state, n)
+    if(isValid(seq)):
+        #print(seq)
+        #print("=== Configurazione trovata ===")
+        printTertiary(fillMatrix(seq, primary))
+        print("=== Energia della configurazione ===", score(fillMatrix(seq, primary), countH(primary)[3]))

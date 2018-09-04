@@ -34,7 +34,7 @@ def printTertiary(tertiary):
     print("--- tertiary structure ---")
     for i in range(len(tertiary)):
         for j in range(len(tertiary[i])):
-            print tertiary[i][j],
+            print(tertiary[i][j],end="")
         print 
     print("---")
 
