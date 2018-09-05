@@ -235,17 +235,43 @@ Esistono 2 modi che l'agente ha per imparare una propria strategia:
  \item l'agente impara una funzione Q di utilità per ogni coppia (stato, azione) così da selezionare in ogni stato l'azione appropriata
 \end{enumerate}
 
-La seconda modalità viene chiamata Q-learning.
+La seconda modalità viene chiamata Q-learning ed è quella che ho scelto di implementare secondo la definizione descritta da [Czibula et al.] nel paper ``A Reinforcement Learning Model for Solving the Folding Problem''
 
 \subsection{Q-Learning}
+
+Il Q-learning considera coppie (stato s, azione a) per ciascuna delle quali è associato un valore (Q-value).
+
+Il Q-value è la somma delle ricompense (possibilmente ridimensionate rispetto a un fattore di sconto $\gamma$) ottenute dall'eseguire l'azione a sullo stato s e proseguendo con una politica data (ad esempio greedy o $\epsilon$-greedy).
+
+Un valore ottimale $Q^*$ è la somma delle ricompense ottenute applicando a su s e proseguendo con la politica ottimale.
+
+L'equazione seguente mostra quanto detto: $r(s,a)$ è la ricompensa ottenuta applicando a su s mentre $\gamma * max_{a'} Q(s', a')$ rappresenta le ricompense future moltplicate per un fattore di sconto $\gamma$.
 
 \begin{equation}
 Q(s,a) = r(s,a) + \gamma * max_{a'} Q(s', a')
 \end{equation}
 
-
+\section{Analisi e critiche}
 
 \section{Test e risultati}
+
+settare 5 seed differenti\\
+
+4 sequenze di test (strutture primarie):\\
+
+test\_paper = "HHPH"
+
+facile = "HPHHPHHPH"
+
+intermedio = "PPHPHPPPPHPHHPHP"
+
+difficile = "HPHPPHHPHPPHPHHPPHPH"
+
+molto difficile = "PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP"\\
+
+PV $\rightarrow$ prendo solo il tempo e la soluzione ottima (quando possibile)\\
+
+LS QL confronto con tabella, dati vari seed 1 x ogni seed 5x5 = 25 test
 
 %\begin{thebibliography}
 

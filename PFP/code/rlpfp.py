@@ -1,11 +1,12 @@
 from pfp import *
+from numpy.random import choice
 import random
 import math
 
 actionSpace = ['L', 'U', 'R', 'D']
 actionDict = {'L' : 1, 'U' : 2, 'R' : 3, 'D' : 4}
 discountFactor = 0.9
-episodes = 5000
+episodes = 36
 
 """ checks if all element of a list are unique """
 def allUnique(x):
@@ -79,31 +80,33 @@ def transition(state, action):
     return (state * 4) - 3 + actionDict[action]
 
 """ returns the reward for the pair (state, action) """
-def reward(state, action, n, primary):
-    result = transition(state, action)
-    if(not isValid(unfoldState(result, n))):
+def reward(state, n, primary):
+    if(not isValid(unfoldState(state, n))):
         #print("Stato non valido")
         return -0.01
-    elif(isFinal(result, n)):
-        #print("Stato finale valido con energia: ", energy(unfoldState(result, n), primary))
-        return energy(unfoldState(result, n), primary)
+    elif(isFinal(state, n)):
+        #print("Stato finale valido con energia: ", energy(unfoldState(state, n), primary))
+        return energy(unfoldState(state, n), primary)
     else:
+        #print("Avanti")
         return 0.1
 
 """ Qf function - returns the current reward and future reward of a given state """
 def Qf(state, action, n, discountFactor, Q, primary):
-    currRew = reward(state, action, n, primary)
     nextSpace = transition(state, action)
+    currRew = reward(nextSpace, n, primary)
     futureRew = 0
     for i in actionSpace:
         if (nextSpace, i) in Q:
             rew = Q[(nextSpace, i)]
             if(rew > futureRew): futureRew = rew
-    return currRew + (discountFactor * futureRew)
+    #print("futureRew", futureRew)
+    total = currRew + (discountFactor * futureRew)
+    #print(total)
+    return total
 
 def QL(primary):
     n = len(primary)
-    #print(n)
     startState = 1
 
     Q = {}
@@ -114,14 +117,13 @@ def QL(primary):
         state = startState
         while(not isFinal(state, n)):
             maxRew = 0
-            maxAct = random.choice(actionSpace)
             for i in actionSpace:
                 rew = Qf(state, i, n, discountFactor, Q, primary)
                 if(rew > maxRew):
                     maxRew = rew
                     maxAct = i
             explorer = random.choice([x for x in actionSpace if x != maxAct])
-            act = random.choice([maxAct, explorer])
+            act = choice([maxAct, explorer], 1, p=[0.7,0.3])[0]
             Q[(state, act)] = Qf(state, act, n, discountFactor, Q, primary)
             state = transition(state, act)
 
@@ -133,19 +135,14 @@ def QL(primary):
     state = startState
     while(not isFinal(state, n)):
         #print(state)
-        maxAct = random.choice(actionSpace)
-        if (state, maxAct) in Q:
-            maxRew = Q[(state, maxAct)]
-        else:
-            maxRew = 0
+        maxRew = 0
         for i in actionSpace:
             if(state, i) in Q:
                 rew = Q[(state, i)]
             if(rew > maxRew):
                 maxRew = rew
                 maxAct = i
-        #print("AZIONE", maxAct)
-        #print("RICOMPENSA", maxRew)
+        #print("AZIONE", maxAct, "RICOMPENSA", maxRew)
         state = transition(state, maxAct)
 
     seq = unfoldState(state, n)

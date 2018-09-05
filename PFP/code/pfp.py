@@ -1,11 +1,5 @@
 import random
 
-# sample proteins
-#primary = "HPHHPHHPH"
-S1 = "PPHPHPPPPHPHHPHP"
-S3 = "HPHPPHHPHPPHPHHPPHPH"
-S4 = "PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP"
-
 """ calculates an upper bound for H-contacts, counts odd and even contacts and consectutive H pairs in primary structure """
 def countH(primary):
     countEven = 0
@@ -34,7 +28,7 @@ def printTertiary(tertiary):
     print("--- tertiary structure ---")
     for i in range(len(tertiary)):
         for j in range(len(tertiary[i])):
-            print(tertiary[i][j],end="")
+            print tertiary[i][j],
         print 
     print("---")
 
@@ -147,6 +141,6 @@ def LS(primary):
             best = currBest
             bestStructure = currBestStructure
             #print("Best:", best, "Difference with UB max:", maxContacts - best)
-    #printTertiary(bestStructure)
+    printTertiary(bestStructure)
     print("=== Energia della configurazione ===", best)
 
