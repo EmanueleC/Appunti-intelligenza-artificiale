@@ -54,7 +54,7 @@ def adjustSol(sol, n):
     return sequence
 
 def generateSeq(primary):
-    solutions = constraint(primary, True)
+    solutions = constraint(primary, False)
     sequences = []
     for sol in solutions:
         sequence = adjustSol(sol, len(primary))

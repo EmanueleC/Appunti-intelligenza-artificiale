@@ -105,7 +105,7 @@ def move(solution):
     return sequence
 
 """ Local Search """
-def LS(primary):
+def LS(primary, r):
     n = len(primary)
     best = 0
     currBest = 0
@@ -113,10 +113,12 @@ def LS(primary):
     bestStructure = []
     maxContacts = (min (countH(primary)[1], countH(primary)[2])*2) + 2
 
+    random.seed(42)
+
     #print("UB per il massimo numero di contatti: ", maxContacts)
 
     """ combination of random walk and local search """
-    for i in range(1000):
+    for i in range(r):
         sequence = compose([], n, False)
         # print('initial sequence:', sequence)
         if(sequence != -1):

@@ -6,7 +6,6 @@ import math
 actionSpace = ['L', 'U', 'R', 'D']
 actionDict = {'L' : 1, 'U' : 2, 'R' : 3, 'D' : 4}
 discountFactor = 0.9
-episodes = 36
 
 """ checks if all element of a list are unique """
 def allUnique(x):
@@ -76,7 +75,7 @@ def energy(seq, primary):
 
 """ applies a transition to a state """
 def transition(state, action):
-    #print("da stato", state, "a succ: ", (state * 4) - 3 + actionDict[action], "con l'azione", action, " - ", actionDict[action])
+    #print("da: ", state, "a: ", (state * 4) - 3 + actionDict[action], "con l'azione", action)
     return (state * 4) - 3 + actionDict[action]
 
 """ returns the reward for the pair (state, action) """
@@ -105,38 +104,37 @@ def Qf(state, action, n, discountFactor, Q, primary):
     #print(total)
     return total
 
-def QL(primary):
+def QL(primary, episodes):
+    random.seed(42)
+    #print(episodes)
     n = len(primary)
     startState = 1
 
     Q = {}
 
-    print("TRAINING...")
+    #print("TRAINING...")
 
     for i in range(episodes):
         state = startState
         while(not isFinal(state, n)):
-            maxRew = 0
-            for i in actionSpace:
-                rew = Qf(state, i, n, discountFactor, Q, primary)
-                if(rew > maxRew):
-                    maxRew = rew
-                    maxAct = i
-            explorer = random.choice([x for x in actionSpace if x != maxAct])
-            act = choice([maxAct, explorer], 1, p=[0.7,0.3])[0]
+            act = random.choice(actionSpace)
             Q[(state, act)] = Qf(state, act, n, discountFactor, Q, primary)
             state = transition(state, act)
 
     #for key in sorted(Q):
         #print "%s: %s" % (key, Q[key])
 
-    print("TEST...")
+    #print("TEST...")
 
     state = startState
     while(not isFinal(state, n)):
         #print(state)
-        maxRew = 0
+        maxAct = random.choice(actionSpace)
+        if(state, maxAct) in Q:
+                        maxRew = Q[(state, maxAct)]
+        else: maxRew = 0
         for i in actionSpace:
+            rew = 0
             if(state, i) in Q:
                 rew = Q[(state, i)]
             if(rew > maxRew):
@@ -145,9 +143,12 @@ def QL(primary):
         #print("AZIONE", maxAct, "RICOMPENSA", maxRew)
         state = transition(state, maxAct)
 
+    s = -1
     seq = unfoldState(state, n)
     if(isValid(seq)):
         #print(seq)
         #print("=== Configurazione trovata ===")
-        printTertiary(fillMatrix(seq, primary))
-        print("=== Energia della configurazione ===", score(fillMatrix(seq, primary), countH(primary)[3]))
+        #printTertiary(fillMatrix(seq, primary))
+        s = score(fillMatrix(seq, primary), countH(primary)[3])
+        #print("=== Energia della configurazione ===", score(fillMatrix(seq, primary), countH(primary)[3]))
+    return s
