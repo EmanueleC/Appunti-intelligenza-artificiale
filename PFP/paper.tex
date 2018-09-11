@@ -241,11 +241,21 @@ Una possibile modifica potrebbe essere abbassare $\epsilon$ da 1 a (ad esempio) 
 
 Inoltre il numero di episodi è molto piccolo: 36 può essere sufficiente per l'esempio riportato dagli autori (HHPH), ma per proteine più lunghe serve un maggior numero di episodi.
 
-I risultati riportati nel paper sono discutibili in quanto non specificano nessun seed e non riportano quante volte hanno eseguito l'algoritmo.
+I risultati riportati nel paper sono discutibili in quanto non viene specificato nessun seed e nemmeno quante volte è stato eseguito l'algoritmo. In particolare, riportare la tabella dei valori Q non è molto utile, dato che vengono trovati in fase di training che è prettamente esplorativa: senza un feed i valori sono impossibili da riprodurre.
 
 \section{Test e risultati}
 
-\textbf{Nota} per la hill climbing search viene riportato il numero minimo di iterazioni con le quali sono stati raggiunti i risultati riportati
+\textbf{Nota} per la hill climbing search  e il q learning vengono riportati il numero minimo di iterazioni ed episodi (rispettivamente) con cui sono stati raggiunti i risultati riportati.
+
+I test vengono eseguiti su 4 proteine:
+
+\begin{itemize}
+ \item proteina di lunghezza 4: HHPH
+ \item proteina di lunghezza 9: HPHHPHHPH
+ \item proteina di lunghezza 16: PPHPHPPPPHPHHPHP
+ \item proteina di lunghezza 20: HPHPPHHPHPPHPHHPPHPH
+ \item proteina di lunghezza 36: PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP
+\end{itemize}
 
 \begin{table}[h]
 \begin{center}
@@ -255,8 +265,8 @@ I risultati riportati nel paper sono discutibili in quanto non specificano nessu
 HHPH & 0.0346564320007019 & -1 \\ \hline
 HPHHPHHPH & 8.78769836499987 & -3 \\ \hline
 \end{tabular}
-\caption{Risultati tramite problema con vincoli}
 \end{center}
+\caption{Risultati tramite problema con vincoli}
 \end{table}
 
 \begin{table}[h]
@@ -267,10 +277,10 @@ HPHHPHHPH & 8.78769836499987 & -3 \\ \hline
 HHPH & 42 & 100 & 1e-3 & -1 \\ \hline
 HPHHPHHPH & 42 & 100 & 0.007 & -3 \\ \hline
 PPHPHPPPPHPHHPHP & 42 & 356 & 0.039 & -3 \\ \hline
--6 difficult
+HPHPPHHPHPPHPHHPPHPH & 42 & 75375 & 10.723209142684937 & -6 \\ \hline
 \end{tabular}
-\caption{Risultati tramite hill climbing search}
 \end{center}
+\caption{Risultati tramite hill climbing search}
 \end{table}
 
 \begin{table}[h]
@@ -283,8 +293,8 @@ HPHHPHHPH & 42 & 8 & 0.00089 & - 3 \\ \hline
 PPHPHPPPPHPHHPHP & 42 & 464 & 0.0499 & -2 \\ \hline
 HPHPPHHPHPPHPHHPPHPH & 42 & 402 & 0.061 & -3 \\ \hline
 \end{tabular}
-\caption{Risultati tramite Q-learning}
 \end{center}
+\caption{Risultati tramite Q-learning}
 \end{table}
 
 \end{document}

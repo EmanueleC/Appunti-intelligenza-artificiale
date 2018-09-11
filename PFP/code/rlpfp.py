@@ -84,7 +84,7 @@ def reward(state, n, primary):
         #print("Stato non valido")
         return -0.01
     elif(isFinal(state, n)):
-        #print("Stato finale valido con energia: ", energy(unfoldState(state, n), primary))
+        #print("Stato finale valido con energia: ", state, energy(unfoldState(state, n), primary))
         return energy(unfoldState(state, n), primary)
     else:
         #print("Avanti")
@@ -92,19 +92,19 @@ def reward(state, n, primary):
 
 """ Qf function - returns the current reward and future reward of a given state """
 def Qf(state, action, n, discountFactor, Q, primary):
-    nextSpace = transition(state, action)
-    currRew = reward(nextSpace, n, primary)
+    nextState = transition(state, action)
+    currRew = reward(nextState, n, primary)
     futureRew = 0
     for i in actionSpace:
-        if (nextSpace, i) in Q:
-            rew = Q[(nextSpace, i)]
+        if (nextState, i) in Q:
+            rew = Q[(nextState, i)]
             if(rew > futureRew): futureRew = rew
     #print("futureRew", futureRew)
     total = currRew + (discountFactor * futureRew)
     #print(total)
     return total
 
-def QL(primary, episodes):
+def QL(primary, episodes, opt):
     random.seed(42)
     #print(episodes)
     n = len(primary)
@@ -125,30 +125,70 @@ def QL(primary, episodes):
         #print "%s: %s" % (key, Q[key])
 
     #print("TEST...")
+    found = False
+    if(opt):
+        m = 0
+        st = 0
+        for key in sorted(Q):
+            if(key[0] > st and Q[key] >= m):
+                m = Q[key]
+                st = key[0]
 
-    state = startState
-    while(not isFinal(state, n)):
-        #print(state)
-        maxAct = random.choice(actionSpace)
-        if(state, maxAct) in Q:
-                        maxRew = Q[(state, maxAct)]
-        else: maxRew = 0
-        for i in actionSpace:
-            rew = 0
-            if(state, i) in Q:
-                rew = Q[(state, i)]
-            if(rew > maxRew):
-                maxRew = rew
-                maxAct = i
-        #print("AZIONE", maxAct, "RICOMPENSA", maxRew)
-        state = transition(state, maxAct)
+        print(st, m)
+        for act in actionSpace:
+            fs = transition(st, act)
+            seq = unfoldState(fs, n)
+            if(isFinal(fs, n) and isValid(seq)):
+                #print("transition with", act)
+                st = transition(st, act)
+                found = True
+                break
+    
+        if(not found):
+            print("not found")
+
+            st = startState
+            while(not isFinal(st, n)):
+                #print(state)
+                maxAct = random.choice(actionSpace)
+                if(st, maxAct) in Q: maxRew = Q[(st, maxAct)]
+                else: maxRew = 0
+                for i in actionSpace:
+                    rew = 0
+                    if(st, i) in Q:
+                        rew = Q[(st, i)]
+                    if(rew > maxRew):
+                        maxRew = rew
+                        maxAct = i
+                #print("AZIONE", maxAct, "RICOMPENSA", maxRew)
+                st = transition(st, maxAct)
+
+    if(not opt):
+        st = startState
+        while(not isFinal(st, n)):
+            #print(state)
+            maxAct = random.choice(actionSpace)
+            if(st, maxAct) in Q: maxRew = Q[(st, maxAct)]
+            else: maxRew = 0
+            for i in actionSpace:
+                rew = 0
+                if(st, i) in Q:
+                    rew = Q[(st, i)]
+                if(rew > maxRew):
+                    maxRew = rew
+                    maxAct = i
+            #print("AZIONE", maxAct, "RICOMPENSA", maxRew)
+            st = transition(st, maxAct)
+
 
     s = -1
-    seq = unfoldState(state, n)
-    if(isValid(seq)):
+    seq = unfoldState(st, n)
+    if(found or (not found and isValid(seq))):
+        print(n)
+        print(seq)
         #print(seq)
         #print("=== Configurazione trovata ===")
-        #printTertiary(fillMatrix(seq, primary))
+        printTertiary(fillMatrix(seq, primary))
         s = score(fillMatrix(seq, primary), countH(primary)[3])
         #print("=== Energia della configurazione ===", score(fillMatrix(seq, primary), countH(primary)[3]))
-    return s
+        return s

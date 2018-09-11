@@ -143,6 +143,6 @@ def LS(primary, r):
             best = currBest
             bestStructure = currBestStructure
             #print("Best:", best, "Difference with UB max:", maxContacts - best)
-    printTertiary(bestStructure)
-    print("=== Energia della configurazione ===", best)
+    #printTertiary(bestStructure)
+    return best
 
