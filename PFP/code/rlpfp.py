@@ -104,8 +104,9 @@ def Qf(state, action, n, discountFactor, Q, primary):
     #print(total)
     return total
 
-def QL(primary, episodes, opt):
-    random.seed(42)
+def QL(primary, episodes, seed):
+    if(seed != -1): random.seed(seed)
+    opt = False
     #print(episodes)
     n = len(primary)
     startState = 1
@@ -134,7 +135,7 @@ def QL(primary, episodes, opt):
                 m = Q[key]
                 st = key[0]
 
-        print(st, m)
+        #print(st, m)
         for act in actionSpace:
             fs = transition(st, act)
             seq = unfoldState(fs, n)
@@ -145,7 +146,7 @@ def QL(primary, episodes, opt):
                 break
     
         if(not found):
-            print("not found")
+            #print("not found")
 
             st = startState
             while(not isFinal(st, n)):
@@ -184,11 +185,11 @@ def QL(primary, episodes, opt):
     s = -1
     seq = unfoldState(st, n)
     if(found or (not found and isValid(seq))):
-        print(n)
-        print(seq)
+        #print(n)
+        #print(seq)
         #print(seq)
         #print("=== Configurazione trovata ===")
-        printTertiary(fillMatrix(seq, primary))
+        #printTertiary(fillMatrix(seq, primary))
         s = score(fillMatrix(seq, primary), countH(primary)[3])
         #print("=== Energia della configurazione ===", score(fillMatrix(seq, primary), countH(primary)[3]))
         return s

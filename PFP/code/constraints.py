@@ -88,4 +88,23 @@ def generateSol(primary):
         if(points > best):
             #print("score:", points)
             best = points
-    print(best)
+    return best
+
+def test(seq, function):
+    start = timeit.default_timer()
+    r = function(seq, i)
+    stop = timeit.default_timer()
+    time = stop - start
+    return r, time
+
+test_seq = "HHPH"
+easy = "HPHHPHHPH"
+medium = "PPHPHPPPPHPHHPHP"
+difficult = "HPHPPHHPHPPHPHHPPHPH"
+hard = "PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP"
+
+test(test_seq, generateSol)
+test(easy, generateSol)
+test(medium, generateSol)
+test(difficult, generateSol)
+test(hard, generateSol)

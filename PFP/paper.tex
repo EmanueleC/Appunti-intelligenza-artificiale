@@ -3,6 +3,7 @@
 \usepackage{mathtools}
 \usepackage{amsmath}
 \usepackage{graphicx}
+\usepackage{float}
 \usepackage[italian]{babel}
 
 \setlength{\columnsep}{14mm}
@@ -163,10 +164,35 @@ Lo spazio degli stati consiste di $\frac{4^n - 1}{3}$ ed è rappresentato in fig
 
 Ciascuno stato è collegato a 4 vicini tramite 4 possibili azioni: L (left) $a_1$, R (right) $a_2$, U (up) $a_3$, D (Down) $a_4$.
 
-La funzione di transizione, dato uno stato $s_j$ e un'azione $a_k$ è definita dalla formula:
+\subsection{Funzione di transizione}
+
+La funzione di transizione è un caso particolare applicato a un albero con fattore di ramificazione 4.
+
+In generale, dato un albero T con fattore di ramificazione b, un nodo/stato i e un'azione (ramo) a, il nodo/stato di arrivo j è dato dalla formula:
 
 \begin{equation}
-\delta(s_j, a_k) = s_{4*j - 3 + k} \forall k \in [1,4] \qquad \forall j 1 \leq j \leq \frac{4^n - 1}{3}
+j = i + b*pn + sn + a
+\end{equation}
+
+dove pn sono i nodi precedenti a i e sn sono i nodi successivi. Ricordando che pn è pari al numero di nodi totali del livello (nt) meno quelli successivi e i (pn = nt - sn - 1), l'indice dello stato di arrivo è dato dalla seguente formula:
+
+\begin{equation}
+j = bi + a - b + 1
+\end{equation}
+
+I calcoli sono stati sviluppato in appendice (\ref{appendix:sviluppo}).
+
+Dunque per b = 4, la formula diventa:
+
+\begin{equation}
+\tag{Funzione di transizione}
+4i + a - 3
+\end{equation}
+
+La funzione di transizione, dato uno stato $s_i$ e un'azione $a_k$ è definita dalla formula:
+
+\begin{equation}
+\delta(s_i, a_k) = s_{4*i - 3 + k} \forall k \in [1,4] \qquad \forall i 1 \leq i \leq \frac{4^n - 1}{3}
 \end{equation}
 
 La funzione di ricompensa è definita da [Czibula et al.] nel paper ``A Reinforcement Learning Model for Solving the Folding Problem'' nel modo seguente:
@@ -245,56 +271,175 @@ I risultati riportati nel paper sono discutibili in quanto non viene specificato
 
 \section{Test e risultati}
 
-\textbf{Nota} per la hill climbing search  e il q learning vengono riportati il numero minimo di iterazioni ed episodi (rispettivamente) con cui sono stati raggiunti i risultati riportati.
+\textbf{Nota}: per la hill climbing search  e il q learning vengono riportati il numero minimo di iterazioni ed episodi (rispettivamente) con cui sono stati raggiunti i risultati riportati.
 
-I test vengono eseguiti su 4 proteine:
+I test vengono eseguiti su 4 proteine diverse:
 
 \begin{itemize}
- \item proteina di lunghezza 4: HHPH
- \item proteina di lunghezza 9: HPHHPHHPH
- \item proteina di lunghezza 16: PPHPHPPPPHPHHPHP
- \item proteina di lunghezza 20: HPHPPHHPHPPHPHHPPHPH
- \item proteina di lunghezza 36: PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP
+ \item p4 - proteina di lunghezza 4: HHPH
+ \item p9 - proteina di lunghezza 9: HPHHPHHPH
+ \item p16 - proteina di lunghezza 16: PPHPHPPPPHPHHPHP
+ \item p20 - proteina di lunghezza 20: HPHPPHHPHPPHPHHPPHPH
+ \item p36 - proteina di lunghezza 36: PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP
 \end{itemize}
 
-\begin{table}[h]
+Vengono variati 3 seed e infine viene eseguito un test in modo totalmente random. Durante i test il limite massimo di iterazioni è fissato per tutti i seed.
+
+\subsection{Test per problema con vincoli}
+
+\begin{table}[H]
 \begin{center}
 \begin{tabular}{|c|c|c|}
 \hline
 \textbf{Proteina} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
-HHPH & 0.0346564320007019 & -1 \\ \hline
-HPHHPHHPH & 8.78769836499987 & -3 \\ \hline
+p4 & 0.0346564320007019 & -1 \\ \hline
+p9 & 8.78769836499987 & -3 \\ \hline
 \end{tabular}
 \end{center}
 \caption{Risultati tramite problema con vincoli}
 \end{table}
 
-\begin{table}[h]
+\subsection{Test per hill climbing search}
+
+\begin{table}[H]
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
-\textbf{Proteina} & \textbf{Seed} & \textbf{\# interazioni} & \textbf{Tempo} & \textbf{Energia} \\ \hline
-HHPH & 42 & 100 & 1e-3 & -1 \\ \hline
-HPHHPHHPH & 42 & 100 & 0.007 & -3 \\ \hline
-PPHPHPPPPHPHHPHP & 42 & 356 & 0.039 & -3 \\ \hline
-HPHPPHHPHPPHPHHPPHPH & 42 & 75375 & 10.723209142684937 & -6 \\ \hline
+\textbf{Proteina} & \textbf{Seed} & \textbf{\# interazioni} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
+p4 & 3 & 4 & 1e-3 & -1 \\ \hline
+p9 & 3 & 225 & 0.001128 & -3 \\ \hline
+p16 & 3 & 518 & 0.05107 & -4 \\ \hline
+p20 & 3 & 157 & 0.02231 & -7 \\ \hline
+p36 & 3 & 587 & 0.15838 & -8 \\ \hline
 \end{tabular}
 \end{center}
-\caption{Risultati tramite hill climbing search}
+\caption{Risultati tramite hill climbing search con seed 3}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[H]
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
-\textbf{Proteina} & \textbf{Seed} & \textbf{\# episodi} & \textbf{Tempo} & \textbf{Energia} \\ \hline
-HHPH & 42 & 8 & 1e-4 & - 1 \\ \hline
-HPHHPHHPH & 42 & 8 & 0.00089 & - 3 \\ \hline
-PPHPHPPPPHPHHPHP & 42 & 464 & 0.0499 & -2 \\ \hline
-HPHPPHHPHPPHPHHPPHPH & 42 & 402 & 0.061 & -3 \\ \hline
+\textbf{Proteina} & \textbf{Seed} & \textbf{\# interazioni} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
+p4 & 1234 & 10 & 3.8e-3 & -1 \\ \hline
+p9 & 1234 & 188 & 0.00969 & -3 \\ \hline
+p16 & 1234 & 136 & 0.013 & -3 \\ \hline
+p20 & 1234 & 175 & 0.02346 & -6 \\ \hline
+p36 & 1234 & 92 & 0.02368 & -6 \\ \hline
 \end{tabular}
 \end{center}
-\caption{Risultati tramite Q-learning}
+\caption{Risultati tramite hill climbing search con seed 1234}
 \end{table}
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Proteina} & \textbf{Seed} & \textbf{\# interazioni} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
+p4 & 42 & 6 & 1.8e-3 & -1 \\ \hline
+p9 & 42 & 117 & 0.00614 & -3 \\ \hline
+p16 & 42 & 356 & 0.0335 & -3 \\ \hline
+p20 & 42 & 27 & 0.00332 & -4 \\ \hline
+p36 & 42 & 1808 & 0.4511 & -8 \\ \hline
+\end{tabular}
+\end{center}
+\caption{Risultati tramite hill climbing search con seed 42}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Proteina} & \textbf{Seed} & \textbf{\# interazioni} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
+p4 & - & 6 & 1.43e-4 & -1 \\ \hline
+p9 & - & 14 & 9.16e-4 & -3 \\ \hline
+p16 & - & 164 & 0.0162 & -4 \\ \hline
+p20 & - & 119 & 0.016 & -7 \\ \hline
+p36 & - & 751 & 0.1939 & -10 \\ \hline
+\end{tabular}
+\end{center}
+\caption{Risultati tramite hill climbing search random}
+\end{table}
+
+\subsection{Test per Q-learning}
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Proteina} & \textbf{Seed} & \textbf{\# episodi} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
+p4 & 3 & 4 & 7.7e-4 & -1 \\ \hline
+p9 & 3 & 25 & 0.00112 & -2 \\ \hline
+p16 & 3 & 464 & 0.00599 & -2 \\ \hline
+p20 & 3 & 402 & 0.002453 & -1 \\ \hline
+\end{tabular}
+\end{center}
+\caption{Risultati tramite Q-learning v1 con seed 3}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Proteina} & \textbf{Seed} & \textbf{\# episodi} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
+p4 & 1234 & 11 & 2.1e-4 & -1 \\ \hline
+p9 & 1234 & 53 & 0.00241 & -2 \\ \hline
+p16 & 1234 & 260 & 0.02871 & -2 \\ \hline
+p20 & 1234 & 695 & 0.1137 & -4 \\ \hline
+\end{tabular}
+\end{center}
+\caption{Risultati tramite Q-learning v1 con seed 1234}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Proteina} & \textbf{Seed} & \textbf{\# episodi} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
+p4 & 42 & 51 & 8.3e-4 & -1 \\ \hline
+p9 & 42 & 8 & 0.3.9e-4 & -3 \\ \hline
+p16 & 42 & 464 & 0.04977 & -2 \\ \hline
+p20 & 42 & 402 & 0.06103 & -3 \\ \hline
+\end{tabular}
+\end{center}
+\caption{Risultati tramite Q-learning v1 con seed 42}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Proteina} & \textbf{Seed} & \textbf{\# episodi} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
+p4 & - & 4 & 9.79900360107e-05 & -1 \\ \hline
+p9 & - & 22 & 0.0011 & -3 \\ \hline
+p16 & - & 517 & 0.0571 & -3 \\ \hline
+p20 & - & 696 & 0.1181 & -5 \\ \hline
+p36 & - & 1678 & 0.93 & -3 \\ \hline
+\end{tabular}
+\end{center}
+\caption{Risultati tramite Q-learning v1 random}
+\end{table}
+
+\appendix
+\label{appendix:sviluppo}
+
+\begin{equation}
+\begin{split}
+j   & = i + b(nt - sn - 1) + \bigg(\frac{b^{l + 1} - 1}{b - 1} - i\bigg) + a\\
+    & = i + b(nt - sn - 1) + \bigg(\frac{b^{l + 1} - 1}{b - 1} - i\bigg) + a\\
+    & = i + b\bigg(b^{l} - \frac{b^{l + 1} - 1}{b - 1} + i - 1\bigg) + \frac{b^{l + 1} - 1}{b - 1} - i + a\\
+    & = b\bigg(b^{l} - \frac{b^{l + 1} - 1}{b - 1} + i - 1\bigg) + \frac{b^{l + 1} - 1}{b - 1} + a\\
+    & = b^{l + 1} - b\bigg(\frac{b^{l + 1} - 1}{b - 1}\bigg) + bi -b + \frac{b^{l + 1} - 1}{b - 1} + a\\
+    & = b^{l + 1} - \frac{b^{l + 2} - b}{b - 1} + bi -b + \frac{b^{l + 1} - 1}{b - 1} + a\\
+    & = b^{l + 1} + \frac{b - b^{l + 2}}{b - 1} + bi -b + \frac{b^{l + 1} - 1}{b - 1} + a\\
+    & = \frac{b^{l + 1}(b - 1) + b - b^{l + 2} + bi(b - 1) -b^2 + b + b^{l + 1} - 1}{b - 1} + a\\
+    & = \frac{b^{l + 2} - b^{l + 1} + b - b^{l + 2} + b^2i - bi -b^2 + b + b^{l + 1} - 1}{b - 1} + a\\
+    & = \frac{b^2i - bi - b^2 + 2b - 1}{b - 1} + a\\
+    & = \frac{bi(b - 1) - (b^2 - 2b + 1)}{b - 1} + a\\
+    & = \frac{bi(b - 1) - (b - 1)^2}{b - 1} + a\\
+    & = \frac{(b -1)(bi - b + 1)}{b-1} + a\\
+    & = bi + a - b + 1
+\end{split}
+\end{equation}
 
 \end{document}

@@ -105,7 +105,7 @@ def move(solution):
     return sequence
 
 """ Local Search """
-def LS(primary, r):
+def LS(primary, r, seed):
     n = len(primary)
     best = 0
     currBest = 0
@@ -113,7 +113,7 @@ def LS(primary, r):
     bestStructure = []
     maxContacts = (min (countH(primary)[1], countH(primary)[2])*2) + 2
 
-    random.seed(42)
+    if(seed != -1): random.seed(seed)
 
     #print("UB per il massimo numero di contatti: ", maxContacts)
 
@@ -125,16 +125,15 @@ def LS(primary, r):
             solution = fillMatrix(sequence, primary)
             currValue = score(solution, countH(primary)[3])
             oldValue = 0
-            while(True):
+            for i in range(10):
                 newSequence = move(sequence)
-                sequence = newSequence
                 neighbor = fillMatrix(newSequence, primary)
                 oldValue = currValue
                 currValue = score(neighbor, countH(primary)[3])
-                if(oldValue >= currValue):
+                if(oldValue < currValue):
+                    sequence = newSequence
                     currBest = currValue
                     currBestStructure = neighbor
-                    break
                 #else:
                     #print('Score', currValue)
                     #printTertiary(neighbor)
