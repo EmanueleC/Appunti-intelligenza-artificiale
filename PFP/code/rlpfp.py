@@ -122,74 +122,54 @@ def QL(primary, episodes, seed):
             Q[(state, act)] = Qf(state, act, n, discountFactor, Q, primary)
             state = transition(state, act)
 
-    #for key in sorted(Q):
-        #print "%s: %s" % (key, Q[key])
+    for key in sorted(Q):
+        print "%s: %s" % (key, Q[key])
 
-    #print("TEST...")
-    found = False
-    if(opt):
-        m = 0
-        st = 0
-        for key in sorted(Q):
-            if(key[0] > st and Q[key] >= m):
-                m = Q[key]
-                st = key[0]
+        #print("TEST...")
+        '''found = False
+        if(opt):
+            m = 0
+            st = 0
+            for key in sorted(Q):
+                if(key[0] > st and Q[key] >= m):
+                    m = Q[key]
+                    st = key[0]
 
-        #print(st, m)
-        for act in actionSpace:
-            fs = transition(st, act)
-            seq = unfoldState(fs, n)
-            if(isFinal(fs, n) and isValid(seq)):
-                #print("transition with", act)
-                st = transition(st, act)
-                found = True
-                break
-    
-        if(not found):
-            #print("not found")
+            #print(st, m)
+            for act in actionSpace:
+                fs = transition(st, act)
+                seq = unfoldState(fs, n)
+                if(isFinal(fs, n) and isValid(seq)):
+                    #print("transition with", act)
+                    st = transition(st, act)
+                    found = True
+                    break
 
-            st = startState
-            while(not isFinal(st, n)):
-                #print(state)
-                maxAct = random.choice(actionSpace)
-                if(st, maxAct) in Q: maxRew = Q[(st, maxAct)]
-                else: maxRew = 0
-                for i in actionSpace:
-                    rew = 0
-                    if(st, i) in Q:
-                        rew = Q[(st, i)]
-                    if(rew > maxRew):
-                        maxRew = rew
-                        maxAct = i
-                #print("AZIONE", maxAct, "RICOMPENSA", maxRew)
-                st = transition(st, maxAct)
-
-    if(not opt):
-        st = startState
-        while(not isFinal(st, n)):
-            #print(state)
-            maxAct = random.choice(actionSpace)
-            if(st, maxAct) in Q: maxRew = Q[(st, maxAct)]
-            else: maxRew = 0
-            for i in actionSpace:
-                rew = 0
-                if(st, i) in Q:
-                    rew = Q[(st, i)]
-                if(rew > maxRew):
-                    maxRew = rew
-                    maxAct = i
-            #print("AZIONE", maxAct, "RICOMPENSA", maxRew)
-            st = transition(st, maxAct)
+        if(not found and not opt):'''
+    st = startState
+    while(not isFinal(st, n)):
+        #print(state)
+        maxAct = random.choice(actionSpace)
+        if(st, maxAct) in Q: maxRew = Q[(st, maxAct)]
+        else: maxRew = 0
+        for i in actionSpace:
+            rew = 0
+            if(st, i) in Q:
+                rew = Q[(st, i)]
+            if(rew > maxRew):
+                maxRew = rew
+                maxAct = i
+        #print("AZIONE", maxAct, "RICOMPENSA", maxRew)
+        st = transition(st, maxAct)
 
 
     s = -1
     seq = unfoldState(st, n)
-    if(found or (not found and isValid(seq))):
-        #print(n)
-        #print(seq)
-        #print(seq)
-        #print("=== Configurazione trovata ===")
-        #printTertiary(fillMatrix(seq, primary))
-        s = score(fillMatrix(seq, primary), countH(primary)[3])
-        #print("=== Energia della configurazione ===", score(fillMatrix(seq, primary), countH(primary)[3]))
-        return s
+    #print(n)
+    #print(seq)
+    #print(seq)
+    #print("=== Configurazione trovata ===")
+    #printTertiary(fillMatrix(seq, primary))
+    s = score(fillMatrix(seq, primary), countH(primary)[3])
+    #print("=== Energia della configurazione ===", score(fillMatrix(seq, primary), countH(primary)[3]))
+    return s

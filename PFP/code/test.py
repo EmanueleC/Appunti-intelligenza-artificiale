@@ -3,6 +3,9 @@ from rlpfp import *
 import random
 import math
 import timeit
+import sys
+
+sys.stdout=open("test.txt","w")
 
 # sample proteins
 test_seq = "HHPH"
@@ -30,30 +33,28 @@ def findBest(seq, function, maxIt, seed):
             it = i
     print(str(function) + " " + str(seq), "energy: " + str(m), "time: " + str(t), "iterations: " + str(it), "seed: " + str(seed))
 
-
 seeds = {3, 1234, 42, -1}
 
 for seed in seeds:
 
-#primo terminale opt false
-#secondo terminale true
-
-    exLS = True
+    exLS = False
 
     print("==============================")
 
     if(exLS):
 
-        #findBest(test_seq, LS, 250, seed)
-        findBest(easy, LS, 500, seed)
-        #findBest(medium, LS, 1000, seed)
-        #findBest(difficult, LS, 3000, seed)
-        #findBest(hard, LS, 5000, seed)
+        findBest(test_seq, LS, 20, seed)
+        findBest(easy, LS, 30, seed)
+        findBest(medium, LS, 50, seed)
+        findBest(difficult, LS, 70, seed)
+        findBest(hard, LS, 150, seed)
 
-    print("==============================")
+        print("==============================")
+    
+    findBest(test_seq, QL, 50, seed)
+    #findBest(easy, QL, 150, seed)
+    #findBest(medium, QL, 250, seed)
+    #findBest(difficult, QL, 500, seed)
+    #findBest(hard, QL, 1000, seed)
 
-    #findBest(test_seq, QL, 250, seed)
-    #findBest(easy, QL, 500, seed)
-    #findBest(medium, QL, 1000, seed)
-    #findBest(difficult, QL, 3000, seed)
-    #findBest(hard, QL, 5000, seed)
+sys.stdout.close()
