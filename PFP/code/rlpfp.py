@@ -122,11 +122,12 @@ def QL(primary, episodes, seed):
             Q[(state, act)] = Qf(state, act, n, discountFactor, Q, primary)
             state = transition(state, act)
 
-    for key in sorted(Q):
-        print "%s: %s" % (key, Q[key])
+    #for key in sorted(Q):
+        #print "%s: %s" % (key, Q[key])
 
-        #print("TEST...")
-        '''found = False
+    #print("TEST...")
+        ''' Variante - parte da una foglia e risale l'albero
+        found = False
         if(opt):
             m = 0
             st = 0
@@ -146,6 +147,7 @@ def QL(primary, episodes, seed):
                     break
 
         if(not found and not opt):'''
+    
     st = startState
     while(not isFinal(st, n)):
         #print(state)

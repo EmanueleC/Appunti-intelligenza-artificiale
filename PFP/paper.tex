@@ -177,7 +177,7 @@ j = i + b*pn + sn + a
 dove pn sono i nodi precedenti a i e sn sono i nodi successivi. Ricordando che pn è pari al numero di nodi totali del livello (nt) meno quelli successivi e i (pn = nt - sn - 1), l'indice dello stato di arrivo è dato dalla seguente formula:
 
 \begin{equation}
-j = bi + a - b + 1
+j = b*i + a - b + 1
 \end{equation}
 
 I calcoli sono stati sviluppato in appendice (\ref{appendix:sviluppo}).
@@ -198,6 +198,7 @@ La funzione di transizione, dato uno stato $s_i$ e un'azione $a_k$ è definita d
 La funzione di ricompensa è definita da [Czibula et al.] nel paper ``A Reinforcement Learning Model for Solving the Folding Problem'' nel modo seguente:
 
 \begin{equation}
+    \label{eq:rew}
     \mathcal{R}(\pi_k| s_1, \pi_1, \pi_2, \dots \pi_{k-1}) =
     \begin{cases*}
       0.01 & se $a_{\pi}$ non è valida \\
@@ -248,7 +249,7 @@ L'equazione \ref{eq:q} è stata proposta da [Czibula et al.] e mostra quanto det
 Q(s,a) = r(s,a) + \gamma * max_{a'} Q(s', a')
 \end{equation}
 
-Gli autori del paper ``A Reinforcement Learning Model for Solving the Folding Problem'' usano l'equazione \ref{eq:q} nella fase di training per aggiornare i valori di Q. Inoltre assumono che:
+Gli autori del paper ``A Reinforcement Learning Model for Solving the Folding Problem'' usano l'equazione \ref{eq:q} e la funzione di ricompensa \ref{eq:rew} nella fase di training per aggiornare i valori di Q. Inoltre assumono che:
 
 \begin{itemize}
  \item per ogni coppia (stato s, azione a), Q(s,a) sia pari a 0.
@@ -257,7 +258,9 @@ Gli autori del paper ``A Reinforcement Learning Model for Solving the Folding Pr
  \item la politica utilizzata sia greedy ($\epsilon-greedy, \epsilon = 1$)
 \end{itemize}
 
-Inoltre assumono che le coppie (stato, azione) siano visitate uniformemente.
+Assumono anche che le coppie (stato, azione) siano visitate uniformemente.
+
+Con questa procedura hanno dimostrato matematicamente che i valori di Q convergerebero ai loro valori ottimali (cioè valori che conduconol'agente alla politica ottimale, corrispondente alla struttura bidimensionale della proteina con minor energia) se si visitassero infinitamente tutte le coppie (stato, azione).
 
 \section{Analisi}
 
