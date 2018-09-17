@@ -6,6 +6,7 @@ import math
 actionSpace = ['L', 'U', 'R', 'D']
 actionDict = {'L' : 1, 'U' : 2, 'R' : 3, 'D' : 4}
 discountFactor = 0.9
+saved = []
 
 """ checks if all element of a list are unique """
 def allUnique(x):
@@ -85,7 +86,10 @@ def reward(state, n, primary):
         return -0.01
     elif(isFinal(state, n)):
         #print("Stato finale valido con energia: ", state, energy(unfoldState(state, n), primary))
-        return energy(unfoldState(state, n), primary)
+        en = energy(unfoldState(state, n), primary)
+        global saved
+        saved = saved + [(state, en)]
+        return en
     else:
         #print("Avanti")
         return 0.1
@@ -110,7 +114,6 @@ def QL(primary, episodes, seed):
     #print(episodes)
     n = len(primary)
     startState = 1
-
     Q = {}
 
     #print("TRAINING...")
@@ -118,35 +121,30 @@ def QL(primary, episodes, seed):
     for i in range(episodes):
         state = startState
         while(not isFinal(state, n)):
-            act = random.choice(actionSpace)
-            Q[(state, act)] = Qf(state, act, n, discountFactor, Q, primary)
+            maxRew = 0
+            maxAct = 'L'
+            if((state, 'L') in Q): maxRew = Q[(state, 'L')]
+            for a in actionSpace:
+                rew = -1
+                if((state, a) in Q): rew = Q[(state, a)]
+                if(rew > maxRew):
+                    maxRew = rew
+                    maxAct = a
+            nonGreedy = [x for x in actionSpace if x != maxAct]
+            randomAct = random.choice(nonGreedy)
+            act = choice([maxAct, randomAct], p = [0.1, 0.9])
+            rew = Qf(state, act, n, discountFactor, Q, primary)
+            if(rew != 0): Q[(state, act)] = rew
             state = transition(state, act)
+    
+    global saved
 
     #for key in sorted(Q):
         #print "%s: %s" % (key, Q[key])
 
+    #print(saved)
+
     #print("TEST...")
-        ''' Variante - parte da una foglia e risale l'albero
-        found = False
-        if(opt):
-            m = 0
-            st = 0
-            for key in sorted(Q):
-                if(key[0] > st and Q[key] >= m):
-                    m = Q[key]
-                    st = key[0]
-
-            #print(st, m)
-            for act in actionSpace:
-                fs = transition(st, act)
-                seq = unfoldState(fs, n)
-                if(isFinal(fs, n) and isValid(seq)):
-                    #print("transition with", act)
-                    st = transition(st, act)
-                    found = True
-                    break
-
-        if(not found and not opt):'''
     
     st = startState
     while(not isFinal(st, n)):
@@ -164,14 +162,14 @@ def QL(primary, episodes, seed):
         #print("AZIONE", maxAct, "RICOMPENSA", maxRew)
         st = transition(st, maxAct)
 
-
-    s = -1
-    seq = unfoldState(st, n)
-    #print(n)
-    #print(seq)
-    #print(seq)
-    #print("=== Configurazione trovata ===")
-    #printTertiary(fillMatrix(seq, primary))
-    s = score(fillMatrix(seq, primary), countH(primary)[3])
-    #print("=== Energia della configurazione ===", score(fillMatrix(seq, primary), countH(primary)[3]))
-    return s
+    energy = -1
+    tertiary = {}
+    seq = {}
+    if(isValid(unfoldState(st, n))):    
+        seq = unfoldState(st, n)
+        tertiary = fillMatrix(seq, primary)
+        energy = score(fillMatrix(seq, primary), countH(primary)[3])
+        #print(n)
+        #print(seq)
+        #print("=== Energia della configurazione ===", score(fillMatrix(seq, primary), countH(primary)[3]))
+    return energy, tertiary, seq

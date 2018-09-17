@@ -117,6 +117,7 @@ def LS(primary, r, seed):
 
     #print("UB per il massimo numero di contatti: ", maxContacts)
 
+    bestSequence = {}
     """ combination of random walk and local search """
     for i in range(r):
         sequence = compose([], n, False)
@@ -141,7 +142,8 @@ def LS(primary, r, seed):
             #printTertiary(bestStructure)
             best = currBest
             bestStructure = currBestStructure
+            bestSequence = sequence
             #print("Best:", best, "Difference with UB max:", maxContacts - best)
     #printTertiary(bestStructure)
-    return best
+    return best, bestStructure, bestSequence
 
