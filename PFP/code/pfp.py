@@ -126,7 +126,7 @@ def LS(primary, r, seed):
             solution = fillMatrix(sequence, primary)
             currValue = score(solution, countH(primary)[3])
             oldValue = 0
-            for i in range(10):
+            for i in range(50):
                 newSequence = move(sequence)
                 neighbor = fillMatrix(newSequence, primary)
                 oldValue = currValue

@@ -87,8 +87,8 @@ def reward(state, n, primary):
     elif(isFinal(state, n)):
         #print("Stato finale valido con energia: ", state, energy(unfoldState(state, n), primary))
         en = energy(unfoldState(state, n), primary)
-        global saved
-        saved = saved + [(state, en)]
+        #global saved
+        #saved = saved + [(state, en)]
         return en
     else:
         #print("Avanti")
@@ -130,14 +130,13 @@ def QL(primary, episodes, seed):
                 if(rew > maxRew):
                     maxRew = rew
                     maxAct = a
-            nonGreedy = [x for x in actionSpace if x != maxAct]
-            randomAct = random.choice(nonGreedy)
-            act = choice([maxAct, randomAct], p = [0.1, 0.9])
+            randomAct = random.choice(actionSpace)
+            act = choice([maxAct, randomAct], p = [0.6, 0.4])
             rew = Qf(state, act, n, discountFactor, Q, primary)
             if(rew != 0): Q[(state, act)] = rew
             state = transition(state, act)
     
-    global saved
+    #global saved
 
     #for key in sorted(Q):
         #print "%s: %s" % (key, Q[key])
