@@ -5,7 +5,7 @@ import math
 import timeit
 import sys
 
-sys.stdout = open("QLNegRew5001000S3.txt","w")
+sys.stdout = open("LSHardVariousIt.txt","w")
 
 # sample proteins
 test_seq = "HHPH"
@@ -40,11 +40,16 @@ def findBest(seq, function, startIt, maxIt, seed):
             printTertiary(bSt)
             print(str(function) + " " + str(seq), "energy: " + str(m), "time: " + str(t), "iterations: " + str(it), "seed: " + str(seed))
 
-seeds = {3}
-# 42, 1234, -1
+seeds = {3, 42, 1234, -1}
+its = {500, 1000, 1200, 1500, 1600, 1700, 1800, 2000, 2500, 2700, 3000, 3200, 3500, 4000, 4500, 5000, 5500, 6000}
 for seed in seeds:
+    for it in its:
+        r, st, act, time = test(hard, LS, it, seed)
+        print(str(LS) + " " + str(hard), act)
+        printTertiary(st)
+        print(str(LS) + " " + str(hard), "energy: " + str(r), "time: " + str(time), "seed: " + str(seed), "it: " + str(it))
 
-    exLS = False
+    '''exLS = False
     print("==============================")
 
     if(exLS):
@@ -52,14 +57,14 @@ for seed in seeds:
         #findBest(easy, LS, 200, seed)
         #findBest(medium, LS, 500, seed)
         #findBest(difficult, LS, 1000, seed)
-        #findBest(hard, LS, 0, 200, seed)
+        #findBest(hard, LS, 0, 500, seed)
         print("==============================")
 
     #findBest(test_seq, QL, 0, 200, seed)
     #findBest(easy, QL, 0, 200, seed)
     #findBest(medium, QL, 100, 500, seed)
     #findBest(difficult, QL, 1000, seed)
-    findBest(hard, QL, 500, 1000, seed)
+    findBest(hard, QL, 1500, 2000, seed)'''
 
 # 50, 200, 500, 1000, 2000
 

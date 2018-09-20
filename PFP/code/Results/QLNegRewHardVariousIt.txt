@@ -1,0 +1,288 @@
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 23.9049649239', 'seed: 1234', 'it: 4000')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 15.8073270321', 'seed: 1234', 'it: 3200')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 7.47918319702', 'seed: 1234', 'it: 2500')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 28.7516438961', 'seed: 1234', 'it: 5000')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 14.5214290619', 'seed: 1234', 'it: 2700')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 3.74657392502', 'seed: 1234', 'it: 1200')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 17.0009419918', 'seed: 1234', 'it: 3500')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 6.71506094933', 'seed: 1234', 'it: 500')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 5.39729619026', 'seed: 1234', 'it: 1500')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 31.1146850586', 'seed: 1234', 'it: 6000')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 10.4158060551', 'seed: 1234', 'it: 1800')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 22.34308815', 'seed: 1234', 'it: 4500')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 3.4695379734', 'seed: 1234', 'it: 1000')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 11.8315289021', 'seed: 1234', 'it: 2000')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 14.7162029743', 'seed: 1234', 'it: 3000')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 5.36686420441', 'seed: 1234', 'it: 1700')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 10.6193599701', 'seed: 1234', 'it: 1600')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 30.0066578388', 'seed: 1234', 'it: 5500')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 18.6542789936', 'seed: 3', 'it: 4000')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 16.6019771099', 'seed: 3', 'it: 3200')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 13.9345400333', 'seed: 3', 'it: 2500')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 24.2043898106', 'seed: 3', 'it: 5000')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 12.9202771187', 'seed: 3', 'it: 2700')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 9.95595312119', 'seed: 3', 'it: 1200')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 17.1800088882', 'seed: 3', 'it: 3500')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 1.46704411507', 'seed: 3', 'it: 500')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 5.48700404167', 'seed: 3', 'it: 1500')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 30.1141049862', 'seed: 3', 'it: 6000')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 11.4962759018', 'seed: 3', 'it: 1800')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 20.322259903', 'seed: 3', 'it: 4500')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 9.26484799385', 'seed: 3', 'it: 1000')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 6.99406695366', 'seed: 3', 'it: 2000')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 15.5718820095', 'seed: 3', 'it: 3000')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 11.1668050289', 'seed: 3', 'it: 1700')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 5.45328593254', 'seed: 3', 'it: 1600')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 28.2692530155', 'seed: 3', 'it: 5500')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 18.2425589561', 'seed: 42', 'it: 4000')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 16.2412438393', 'seed: 42', 'it: 3200')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 13.6749420166', 'seed: 42', 'it: 2500')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 27.7431950569', 'seed: 42', 'it: 5000')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 8.10978102684', 'seed: 42', 'it: 2700')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 9.19870400429', 'seed: 42', 'it: 1200')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 16.7164161205', 'seed: 42', 'it: 3500')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 1.60238313675', 'seed: 42', 'it: 500')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 9.78934121132', 'seed: 42', 'it: 1500')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 31.1557769775', 'seed: 42', 'it: 6000')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 7.22405910492', 'seed: 42', 'it: 1800')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 21.080147028', 'seed: 42', 'it: 4500')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 8.08029294014', 'seed: 42', 'it: 1000')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 6.18047094345', 'seed: 42', 'it: 2000')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 14.8408200741', 'seed: 42', 'it: 3000')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 11.0150589943', 'seed: 42', 'it: 1700')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 4.6903219223', 'seed: 42', 'it: 1600')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 17.431276083', 'seed: 42', 'it: 5500')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 14.7358529568', 'seed: -1', 'it: 4000')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 9.78789901733', 'seed: -1', 'it: 3200')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 11.8132469654', 'seed: -1', 'it: 2500')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 17.025842905', 'seed: -1', 'it: 5000')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 11.0818040371', 'seed: -1', 'it: 2700')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 1.95420694351', 'seed: -1', 'it: 1200')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 7.04155182838', 'seed: -1', 'it: 3500')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 4.31541991234', 'seed: -1', 'it: 500')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 4.38706016541', 'seed: -1', 'it: 1500')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 18.7242269516', 'seed: -1', 'it: 6000')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 3.65747117996', 'seed: -1', 'it: 1800')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 24.1987328529', 'seed: -1', 'it: 4500')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 2.78886604309', 'seed: -1', 'it: 1000')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 11.2943089008', 'seed: -1', 'it: 2000')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 11.512349844', 'seed: -1', 'it: 3000')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 8.98263692856', 'seed: -1', 'it: 1700')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 6.02777886391', 'seed: -1', 'it: 1600')
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function QL at 0x7fb3d7394b18> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: -1', 'time: 26.9842381477', 'seed: -1', 'it: 5500')

@@ -1,0 +1,206 @@
+==============================
+('<function LS at 0x7f4999a01140> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', {})
+--- tertiary structure ---
+---
+('<function LS at 0x7f4999a01140> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: 0', 'time: 0.000131845474243', 'iterations: 0', 'seed: 42')
+('<function LS at 0x7f4999a01140> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', [828, 792, 756, 720, 721, 685, 684, 648, 612, 576, 577, 541, 540, 504, 468, 469, 433, 434, 470, 506, 542, 578, 614, 613, 649, 650, 651, 615, 579, 543, 507, 508, 509, 545, 581, 617])
+--- tertiary structure ---
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+  H H                                                                  
+H H H                                                                  
+P   H H P P                                                            
+P P H H   H                                                            
+P P P P   P                                                            
+H H P P   P                                                            
+H H P P                                                                
+P P                                                                    
+H H                                                                    
+P                                                                      
+P                                                                      
+P                                                                      
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+---
+('<function LS at 0x7f4999a01140> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: 5', 'time: 0.0560929775238', 'iterations: 1', 'seed: 42')
+('<function LS at 0x7f4999a01140> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', [1100, 1136, 1172, 1208, 1207, 1206, 1242, 1243, 1244, 1245, 1281, 1282, 1246, 1210, 1209, 1173, 1137, 1101, 1102, 1138, 1174, 1175, 1176, 1177, 1141, 1140, 1139, 1103, 1067, 1066, 1030, 994, 958, 957, 993, 1029])
+--- tertiary structure ---
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                          H P                          
+                                          P P                          
+                                          P H                          
+                                            H P                        
+                                        P H H P                        
+                                        P H H P P H                    
+                                        P H H P P H                    
+                                    P H H H P                          
+                                    P H H P P                          
+                                          P P                          
+---
+('<function LS at 0x7f4999a01140> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: 6', 'time: 0.133128881454', 'iterations: 18', 'seed: 42')
+('<function LS at 0x7f4999a01140> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', [1030, 994, 993, 1029, 1065, 1064, 1028, 1027, 1063, 1099, 1135, 1134, 1133, 1132, 1096, 1060, 1061, 1062, 1026, 1025, 989, 953, 952, 988, 1024, 1023, 987, 951, 950, 949, 913, 877, 878, 914, 915, 916])
+--- tertiary structure ---
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                          P P                                          
+                          H H P P                                      
+                          H P P P P                                    
+                              P H H       P P                          
+                              P H H H H P H P                          
+                                H H H H P H                            
+                                H     P                                
+                                P P P P                                
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+---
+('<function LS at 0x7f4999a01140> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: 7', 'time: 0.376285076141', 'iterations: 47', 'seed: 42')
+('<function LS at 0x7f4999a01140> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', [236, 200, 164, 163, 162, 161, 197, 198, 234, 235, 271, 270, 269, 268, 267, 303, 302, 301, 265, 266, 230, 229, 228, 264, 263, 227, 226, 262, 298, 299, 300, 336, 337, 338, 374, 410])
+--- tertiary structure ---
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                  P H H P                              
+                                  P H   P                              
+                    P P P P H       H P P                              
+                    P H H H H H P P P P                                
+                    P H H H H H                                        
+                        P P H                                          
+                            P                                          
+                            P                                          
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+---
+('<function LS at 0x7f4999a01140> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: 8', 'time: 5.18634700775', 'iterations: 131', 'seed: 42')
+('<function LS at 0x7f4999a01140> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', [1133, 1097, 1061, 1060, 1024, 1023, 1022, 1058, 1059, 1095, 1096, 1132, 1131, 1130, 1094, 1093, 1057, 1056, 1092, 1091, 1055, 1054, 1090, 1126, 1127, 1163, 1199, 1200, 1164, 1128, 1129, 1165, 1201, 1202, 1203, 1239])
+--- tertiary structure ---
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                            P P H                                      
+                    P H H H H H H P                                    
+                    P H H H H P P P                                    
+                    H H H H P P P P                                    
+                      P P P                                            
+                      P P P H P                                        
+                              P                                        
+                                                                       
+---
+('<function LS at 0x7f4999a01140> PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'energy: 9', 'time: 6.31665992737', 'iterations: 225', 'seed: 42')
+==============================
