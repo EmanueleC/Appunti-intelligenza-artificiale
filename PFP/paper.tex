@@ -209,7 +209,7 @@ La funzione di ricompensa è definita da [Czibula et al.] nel paper ``A Reinforc
 
 dove $\pi_k$ è lo stato finale dato dal percorso $\pi = (s_1, \pi_1, \pi_2, \dots \pi_{k-1})$ e $a_{\pi}$ denota la sequenza di azioni che hanno portato allo stato $\pi_k$ a partire da $s_1$. Una sequenza di azioni si dice valida se produce una configurazione senza cicli. $E_{\pi}$ è l'energia data dalla configurazione ottenuta in $\pi_k$ tramite la sequenza $a_{\pi}$.
 
-Ho scelto di cambiare la funzione di ricompensa nel caso in cui l'azione $a_{\pi}$ non sia valida: a mio parere una ricompensa (per quanto piccola) può far deviare l'agente in fase di test verso cammini che conducono a una sequenza non valida. Ho quindi cambiato il segno della ricompensa per renderla negativa (-0.01) e penalizzare l'agente.
+Ho scelto di testare una versione alternativa della funzione di ricompensa nel caso in cui l'azione $a_{\pi}$ non sia valida: a mio parere una ricompensa di 0.01 (per quanto piccola) può far deviare l'agente in fase di test verso cammini che conducono a una sequenza non valida. Ho quindi cambiato il segno della ricompensa per renderla negativa (-0.01) e penalizzare l'agente.
 
 Il task di reinforcement learning deve allenare un agente nel trovare un percorso $\pi$ che porti a uno stato finale in cui l'energia associata sia minima.
 
@@ -268,7 +268,7 @@ Formalmente, gli autori hanno dimostrato che dato $Q_n(s, a)$ (la stima di $Q(s,
 
 Gli autori utilizzano una politica strettamentre esplorativa in fase di training ($\epsilon-greedy, \epsilon = 1$), quindi permettono di esplorare lo spazio degli stati uniformemente.
 
-Una possibile modifica potrebbe essere abbassare $\epsilon$ da 1 a (ad esempio) 0.7 e rendere il training un po' più greedy.
+Una possibile modifica potrebbe essere abbassare $\epsilon$ da 1 a (ad esempio) 0.6 e rendere il training epsilon-greedy.
 
 Inoltre il numero di episodi è molto piccolo: 36 può essere sufficiente per l'esempio riportato dagli autori (HHPH), ma per proteine più lunghe serve un maggior numero di episodi.
 
@@ -288,7 +288,7 @@ I test vengono eseguiti su 5 proteine di lunghezze diverse (4, 9, 16, 20, 36):
  \item p36 = PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP
 \end{itemize}
 
-Vengono variati 3 seed e infine viene eseguito un test in modo totalmente random. Durante i test il limite massimo di iterazioni è fissato per tutti i seed.
+Vengono variati 3 seed e infine viene eseguito un test in modo totalmente random. Durante i test il limite massimo di iterazioni è fissato per tutti i seed nel seguente modo: p4 - 50 it, p9 - 200 it, p16 - 500 it, p20 - 1000 it, p36 - 2000 it. Se in nessun caso si è raggiunto un risultato entro il numero massimo di iterazioni, allora la tabella dei risultati non viene riportata e ciò significa che il tempo richiesto è probabilmente maggiore (ad esempio nel test del Q-Learning v-paper per la sequenza p36).
 
 \subsection{Test per problema con vincoli}
 
@@ -306,64 +306,81 @@ p9 & 8.78769836499987 & -3 \\ \hline
 
 \subsection{Test per hill climbing search}
 
-\begin{table}[H]
+\begin{table}[h]
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
-\textbf{Proteina} & \textbf{Seed} & \textbf{\# interazioni} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
-p4 & 3 & 4 & 1e-3 & -1 \\ \hline
-p9 & 3 & 225 & 0.001128 & -3 \\ \hline
-p16 & 3 & 518 & 0.05107 & -4 \\ \hline
-p20 & 3 & 157 & 0.02231 & -7 \\ \hline
-p36 & 3 & 587 & 0.15838 & -8 \\ \hline
+\textbf{Seed} & \textbf{\# interazioni} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
+3 & 2 & 0.00049901008606 & -1 \\ \hline
+1234 & 2 & 0.000531911849976 & -1 \\ \hline
+42 & 2 & 0.00047492980957 & -1 \\ \hline
+random (figura \ref{fig:lsp4}) & 2 & 0.000494003295898 & -1 \\ \hline
 \end{tabular}
 \end{center}
-\caption{Risultati tramite hill climbing search con seed 3}
+\caption{Risultati tramite hill climbing search per p4}
 \end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.10\textwidth]{figure/p4LS.png}
+\caption{Hill climbing search - p4 (random)}
+\label{fig:lsp4}
+\end{figure}
 
 \begin{table}[H]
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
-\textbf{Proteina} & \textbf{Seed} & \textbf{\# interazioni} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
-p4 & 1234 & 10 & 3.8e-3 & -1 \\ \hline
-p9 & 1234 & 188 & 0.00969 & -3 \\ \hline
-p16 & 1234 & 136 & 0.013 & -3 \\ \hline
-p20 & 1234 & 175 & 0.02346 & -6 \\ \hline
-p36 & 1234 & 92 & 0.02368 & -6 \\ \hline
+\textbf{Seed} & \textbf{\# interazioni} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
+3 & 4 & 0.00353193283081 & -3 \\ \hline
+1234 & 3 & 0.00242280960083 & -3 \\ \hline
+42 (figura \ref{fig:lsp9}) & 2 & 0.00117897987366 & -3 \\ \hline
+random & 3 & 0.00240302085876 & -3 \\ \hline
 \end{tabular}
 \end{center}
-\caption{Risultati tramite hill climbing search con seed 1234}
+\caption{Risultati tramite hill climbing search per p9}
 \end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.25\textwidth]{figure/p9LS.png}
+\caption{Hill climbing search - p9 (seed 42)}
+\label{fig:lsp9}
+\end{figure}
 
 \begin{table}[H]
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
-\textbf{Proteina} & \textbf{Seed} & \textbf{\# interazioni} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
-p4 & 42 & 6 & 1.8e-3 & -1 \\ \hline
-p9 & 42 & 117 & 0.00614 & -3 \\ \hline
-p16 & 42 & 356 & 0.0335 & -3 \\ \hline
-p20 & 42 & 27 & 0.00332 & -4 \\ \hline
-p36 & 42 & 1808 & 0.4511 & -8 \\ \hline
+\textbf{Seed} & \textbf{\# interazioni} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
+3 & 47 & 0.150655031204 & -4 \\ \hline
+1234 & 33 & 0.0698339939117 & -4 \\ \hline
+42 & 228 & 1.0661611557 & -4 \\ \hline
+random (figura \ref{fig:lsp16}) & 12 & 0.0363581180573 & -4 \\ \hline
 \end{tabular}
 \end{center}
-\caption{Risultati tramite hill climbing search con seed 42}
+\caption{Risultati tramite hill climbing search per p16}
 \end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.25\textwidth]{figure/LSP16.png}
+\caption{Hill climbing search - p16 (random)}
+\label{fig:lsp16}
+\end{figure}
 
 \begin{table}[H]
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
-\textbf{Proteina} & \textbf{Seed} & \textbf{\# interazioni} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
-p4 & - & 6 & 1.43e-4 & -1 \\ \hline
-p9 & - & 14 & 9.16e-4 & -3 \\ \hline
-p16 & - & 164 & 0.0162 & -4 \\ \hline
-p20 & - & 119 & 0.016 & -7 \\ \hline
-p36 & - & 751 & 0.1939 & -10 \\ \hline
+\textbf{Seed} & \textbf{\# interazioni} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
+3 & 741 & 2.14663600922 & -7 \\ \hline
+1234 & 854 & 2.94443798065 & -8 \\ \hline
+42 & 250 & 0.715470075607 & -8 \\ \hline
+random & 88 & 0.25554394722 & -9 \\ \hline
 \end{tabular}
 \end{center}
-\caption{Risultati tramite hill climbing search random}
+\caption{Risultati tramite hill climbing search per p20}
 \end{table}
 
 \subsection{Test per Q-learning}
@@ -372,57 +389,56 @@ p36 & - & 751 & 0.1939 & -10 \\ \hline
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
-\textbf{Proteina} & \textbf{Seed} & \textbf{\# episodi} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
-p4 & 3 & 4 & 7.7e-4 & -1 \\ \hline
-p9 & 3 & 25 & 0.00112 & -2 \\ \hline
-p16 & 3 & 464 & 0.00599 & -2 \\ \hline
-p20 & 3 & 402 & 0.002453 & -1 \\ \hline
+\textbf{Seed} & \textbf{\# episodi} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
+3 & 9 & 0.000707149505615 & -1 \\ \hline
+1234 & 39 & 0.00345897674561 & -1 \\ \hline
+42 & 9 & 0.000800132751465 & -1 \\ \hline
+random & 1 & 2.21729278564e-05 & -1 \\ \hline
 \end{tabular}
 \end{center}
-\caption{Risultati tramite Q-learning v1 con seed 3}
+\caption{Risultati tramite Q-learning [v. paper] per p4}
 \end{table}
 
 \begin{table}[H]
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
-\textbf{Proteina} & \textbf{Seed} & \textbf{\# episodi} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
-p4 & 1234 & 11 & 2.1e-4 & -1 \\ \hline
-p9 & 1234 & 53 & 0.00241 & -2 \\ \hline
-p16 & 1234 & 260 & 0.02871 & -2 \\ \hline
-p20 & 1234 & 695 & 0.1137 & -4 \\ \hline
+\textbf{Seed} & \textbf{\# episodi} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
+3 & 26 & 0.00551986694336 & -2 \\ \hline
+1234 & 11 & 0.00375199317932 & -1 \\ \hline
+42 & 74 & 0.0227060317993 & -2 \\ \hline
+random & 26 & 0.0056300163269 & -2 \\ \hline
 \end{tabular}
 \end{center}
-\caption{Risultati tramite Q-learning v1 con seed 1234}
+\caption{Risultati tramite Q-learning [v. paper] per p9}
 \end{table}
 
 \begin{table}[H]
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
-\textbf{Proteina} & \textbf{Seed} & \textbf{\# episodi} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
-p4 & 42 & 51 & 8.3e-4 & -1 \\ \hline
-p9 & 42 & 8 & 0.3.9e-4 & -3 \\ \hline
-p16 & 42 & 464 & 0.04977 & -2 \\ \hline
-p20 & 42 & 402 & 0.06103 & -3 \\ \hline
+\textbf{Seed} & \textbf{\# episodi} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
+3 & >500 & - & - \\ \hline
+1234 & >500 & - & - \\ \hline
+42 & >500 & - & - \\ \hline
+random & 254 & 0.195900917053 & -1 \\ \hline
 \end{tabular}
 \end{center}
-\caption{Risultati tramite Q-learning v1 con seed 42}
+\caption{Risultati tramite Q-learning [v. paper] per p16}
 \end{table}
 
 \begin{table}[H]
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
-\textbf{Proteina} & \textbf{Seed} & \textbf{\# episodi} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
-p4 & - & 4 & 9.79900360107e-05 & -1 \\ \hline
-p9 & - & 22 & 0.0011 & -3 \\ \hline
-p16 & - & 517 & 0.0571 & -3 \\ \hline
-p20 & - & 696 & 0.1181 & -5 \\ \hline
-p36 & - & 1678 & 0.93 & -3 \\ \hline
+\textbf{Seed} & \textbf{\# episodi} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
+3 & 52 & 0.0305478572845 & -1 \\ \hline
+1234 & >1000 & - & - \\ \hline
+42 & >1000 & - & - \\ \hline
+random & 822 & 0.513980150223 & -2 \\ \hline
 \end{tabular}
 \end{center}
-\caption{Risultati tramite Q-learning v1 random}
+\caption{Risultati tramite Q-learning [v. paper] per p20}
 \end{table}
 
 \appendix

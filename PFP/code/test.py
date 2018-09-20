@@ -5,7 +5,7 @@ import math
 import timeit
 import sys
 
-sys.stdout = open("QLNegRew0200S3.txt","w")
+sys.stdout = open("QLNegRew5001000S3.txt","w")
 
 # sample proteins
 test_seq = "HHPH"
@@ -55,11 +55,11 @@ for seed in seeds:
         #findBest(hard, LS, 0, 200, seed)
         print("==============================")
 
-    #findBest(test_seq, QL, 50, seed)
-    #findBest(easy, QL, 200, seed)
-    #findBest(medium, QL, 500, seed)
+    #findBest(test_seq, QL, 0, 200, seed)
+    #findBest(easy, QL, 0, 200, seed)
+    #findBest(medium, QL, 100, 500, seed)
     #findBest(difficult, QL, 1000, seed)
-    findBest(hard, QL, 0, 200, seed)
+    findBest(hard, QL, 500, 1000, seed)
 
 # 50, 200, 500, 1000, 2000
 

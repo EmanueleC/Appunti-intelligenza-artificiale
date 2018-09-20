@@ -28,8 +28,8 @@ def printTertiary(tertiary):
     print("--- tertiary structure ---")
     for i in range(len(tertiary)):
         for j in range(len(tertiary[i])):
-            print tertiary[i][j],
-        print 
+            print(tertiary[i][j], end="")
+        print("")
     print("---")
 
 """ fills a 2D square lattice with primary structure (example: [h,h,p,h,p...]), given a sequence guide of numbers """

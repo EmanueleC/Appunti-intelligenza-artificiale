@@ -1,0 +1,115 @@
+==============================
+('<function LS at 0x7f9e06f0f1b8> HPHHPHHPH', {})
+--- tertiary structure ---
+---
+('<function LS at 0x7f9e06f0f1b8> HPHHPHHPH', 'energy: 0', 'time: 2.00271606445e-05', 'iterations: 0', 'seed: 1234')
+('<function LS at 0x7f9e06f0f1b8> HPHHPHHPH', [78, 69, 68, 77, 76, 67, 66, 57, 56])
+--- tertiary structure ---
+                 
+                 
+                 
+                 
+                 
+                 
+    H P          
+      H H H P    
+        P H H    
+---
+('<function LS at 0x7f9e06f0f1b8> HPHHPHHPH', 'energy: 2', 'time: 0.00121402740479', 'iterations: 1', 'seed: 1234')
+('<function LS at 0x7f9e06f0f1b8> HPHHPHHPH', [28, 37, 38, 29, 20, 19, 18, 9, 10])
+--- tertiary structure ---
+                 
+P H              
+H H P            
+  H H            
+  P H            
+                 
+                 
+                 
+                 
+---
+('<function LS at 0x7f9e06f0f1b8> HPHHPHHPH', 'energy: 3', 'time: 0.00242280960083', 'iterations: 2', 'seed: 1234')
+==============================
+==============================
+('<function LS at 0x7f9e06f0f1b8> HPHHPHHPH', {})
+--- tertiary structure ---
+---
+('<function LS at 0x7f9e06f0f1b8> HPHHPHHPH', 'energy: 0', 'time: 1.19209289551e-05', 'iterations: 0', 'seed: 3')
+('<function LS at 0x7f9e06f0f1b8> HPHHPHHPH', [19, 20, 11, 10, 9, 0, 1, 2, 3])
+--- tertiary structure ---
+H H P H          
+P H H            
+  H P            
+                 
+                 
+                 
+                 
+                 
+                 
+---
+('<function LS at 0x7f9e06f0f1b8> HPHHPHHPH', 'energy: 2', 'time: 0.00117683410645', 'iterations: 1', 'seed: 3')
+('<function LS at 0x7f9e06f0f1b8> HPHHPHHPH', [39, 30, 31, 40, 41, 32, 23, 24, 33])
+--- tertiary structure ---
+                 
+                 
+          H P    
+      P H H H    
+      H H P      
+                 
+                 
+                 
+                 
+---
+('<function LS at 0x7f9e06f0f1b8> HPHHPHHPH', 'energy: 3', 'time: 0.00353193283081', 'iterations: 3', 'seed: 3')
+==============================
+==============================
+('<function LS at 0x7f9e06f0f1b8> HPHHPHHPH', {})
+--- tertiary structure ---
+---
+('<function LS at 0x7f9e06f0f1b8> HPHHPHHPH', 'energy: 0', 'time: 1.19209289551e-05', 'iterations: 0', 'seed: 42')
+('<function LS at 0x7f9e06f0f1b8> HPHHPHHPH', [51, 42, 41, 50, 49, 40, 39, 30, 31])
+--- tertiary structure ---
+                 
+                 
+                 
+      P H        
+      H H H P    
+        P H H    
+                 
+                 
+                 
+---
+('<function LS at 0x7f9e06f0f1b8> HPHHPHHPH', 'energy: 3', 'time: 0.00117897987366', 'iterations: 1', 'seed: 42')
+==============================
+==============================
+('<function LS at 0x7f9e06f0f1b8> HPHHPHHPH', {})
+--- tertiary structure ---
+---
+('<function LS at 0x7f9e06f0f1b8> HPHHPHHPH', 'energy: 0', 'time: 5.00679016113e-06', 'iterations: 0', 'seed: -1')
+('<function LS at 0x7f9e06f0f1b8> HPHHPHHPH', [27, 36, 45, 54, 55, 64, 73, 72, 63])
+--- tertiary structure ---
+                 
+                 
+                 
+H                
+P                
+H                
+H P              
+H H              
+P H              
+---
+('<function LS at 0x7f9e06f0f1b8> HPHHPHHPH', 'energy: 2', 'time: 0.00119996070862', 'iterations: 1', 'seed: -1')
+('<function LS at 0x7f9e06f0f1b8> HPHHPHHPH', [72, 73, 64, 63, 54, 55, 46, 47, 56])
+--- tertiary structure ---
+                 
+                 
+                 
+                 
+                 
+  H P            
+P H H            
+H H              
+H P              
+---
+('<function LS at 0x7f9e06f0f1b8> HPHHPHHPH', 'energy: 3', 'time: 0.00240302085876', 'iterations: 2', 'seed: -1')
+==============================

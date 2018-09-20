@@ -1,0 +1,147 @@
+==============================
+('<function QL at 0x7f50577c7578> HPHHPHHPH', [7, 16, 15, 14, 13, 12, 11, 10, 9])
+--- tertiary structure ---
+              H  
+H P H H P H H P  
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+---
+('<function QL at 0x7f50577c7578> HPHHPHHPH', 'energy: 0', 'time: 0.000444173812866', 'iterations: 1', 'seed: 1234')
+('<function QL at 0x7f50577c7578> HPHHPHHPH', [22, 21, 20, 19, 28, 37, 36, 27, 18])
+--- tertiary structure ---
+                 
+                 
+H H H P H        
+P P              
+H H              
+                 
+                 
+                 
+                 
+---
+('<function QL at 0x7f50577c7578> HPHHPHHPH', 'energy: 1', 'time: 0.0141739845276', 'iterations: 8', 'seed: 1234')
+('<function QL at 0x7f50577c7578> HPHHPHHPH', [12, 21, 20, 29, 38, 37, 36, 27, 28])
+--- tertiary structure ---
+                 
+      H          
+    H P          
+P H H            
+H H P            
+                 
+                 
+                 
+                 
+---
+('<function QL at 0x7f50577c7578> HPHHPHHPH', 'energy: 2', 'time: 0.0477120876312', 'iterations: 88', 'seed: 1234')
+==============================
+('<function QL at 0x7f50577c7578> HPHHPHHPH', [13, 4, 3, 12, 21, 30, 29, 28, 27])
+--- tertiary structure ---
+      H P        
+      H H        
+      P          
+H P H H          
+                 
+                 
+                 
+                 
+                 
+---
+('<function QL at 0x7f50577c7578> HPHHPHHPH', 'energy: 1', 'time: 0.00105309486389', 'iterations: 4', 'seed: 3')
+('<function QL at 0x7f50577c7578> HPHHPHHPH', [29, 28, 27, 18, 9, 10, 19, 20, 11])
+--- tertiary structure ---
+                 
+P H H            
+H H P            
+H P H            
+                 
+                 
+                 
+                 
+                 
+---
+('<function QL at 0x7f50577c7578> HPHHPHHPH', 'energy: 2', 'time: 0.0039529800415', 'iterations: 15', 'seed: 3')
+('<function QL at 0x7f50577c7578> HPHHPHHPH', [21, 12, 11, 20, 29, 28, 27, 18, 19])
+--- tertiary structure ---
+                 
+    H P          
+P H H H          
+H H P            
+                 
+                 
+                 
+                 
+                 
+---
+('<function QL at 0x7f50577c7578> HPHHPHHPH', 'energy: 3', 'time: 0.0481441020966', 'iterations: 176', 'seed: 3')
+==============================
+('<function QL at 0x7f50577c7578> HPHHPHHPH', [4, 3, 2, 1, 0, 9, 10, 19, 20])
+--- tertiary structure ---
+P H H P H        
+H H              
+  P H            
+                 
+                 
+                 
+                 
+                 
+                 
+---
+('<function QL at 0x7f50577c7578> HPHHPHHPH', 'energy: 1', 'time: 0.000846147537231', 'iterations: 3', 'seed: 42')
+('<function QL at 0x7f50577c7578> HPHHPHHPH', [14, 15, 6, 5, 4, 13, 12, 11, 10])
+--- tertiary structure ---
+        P H H    
+  H P H H H P    
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+---
+('<function QL at 0x7f50577c7578> HPHHPHHPH', 'energy: 2', 'time: 0.012237071991', 'iterations: 50', 'seed: 42')
+('<function QL at 0x7f50577c7578> HPHHPHHPH', [12, 13, 4, 3, 2, 11, 10, 19, 20])
+--- tertiary structure ---
+    P H H        
+  H H H P        
+  P H            
+                 
+                 
+                 
+                 
+                 
+                 
+---
+('<function QL at 0x7f50577c7578> HPHHPHHPH', 'energy: 3', 'time: 0.0338659286499', 'iterations: 105', 'seed: 42')
+==============================
+('<function QL at 0x7f50577c7578> HPHHPHHPH', [15, 14, 13, 12, 11, 10, 9, 0, 1])
+--- tertiary structure ---
+P H              
+H H P H H P H    
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+---
+('<function QL at 0x7f50577c7578> HPHHPHHPH', 'energy: 1', 'time: 0.000343799591064', 'iterations: 1', 'seed: -1')
+('<function QL at 0x7f50577c7578> HPHHPHHPH', [31, 30, 21, 22, 13, 12, 3, 2, 1])
+--- tertiary structure ---
+  H P H          
+      H P        
+      H H        
+      P H        
+                 
+                 
+                 
+                 
+                 
+---
+('<function QL at 0x7f50577c7578> HPHHPHHPH', 'energy: 2', 'time: 0.0113568305969', 'iterations: 46', 'seed: -1')
