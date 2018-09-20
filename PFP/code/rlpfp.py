@@ -131,7 +131,7 @@ def QL(primary, episodes, seed):
                     maxRew = rew
                     maxAct = a
             randomAct = random.choice(actionSpace)
-            act = choice([maxAct, randomAct], p = [0.6, 0.4])
+            act = choice([maxAct, randomAct], p = [0, 1])
             rew = Qf(state, act, n, discountFactor, Q, primary)
             if(rew != 0): Q[(state, act)] = rew
             state = transition(state, act)
