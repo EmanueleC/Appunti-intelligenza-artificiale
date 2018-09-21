@@ -103,7 +103,7 @@ In ogni conformazione, il numero di contatti che può avere un 1 nella sequenza 
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.3\textwidth]{figure/optConfig}
+\includegraphics[width=0.25\textwidth]{figure/optConfig}
 \caption{Una configurazione ottima per la sequenza 0010100001011010. I punti neri rappresentano 1 (H) mentre i punti bianchi 0 (P). Questa configurazione ha 4 contatti (linee tratteggiate) quindi l'energia totale è -4. L'upper bound per il numero massimo di contatti in questa sequenza è 2*2 + 2 = 6 ($\mathcal{X}[s] = 2$) \dots questo rappresenta un upper bound sul numero di contatti, non l'ottimo}
 \label{fig:optConfig}
 \end{figure}
@@ -174,7 +174,7 @@ In generale, dato un albero T con fattore di ramificazione b, un nodo/stato i e 
 j = i + b*pn + sn + a
 \end{equation}
 
-dove pn sono i nodi precedenti a i e sn sono i nodi successivi. Ricordando che pn è pari al numero di nodi totali del livello (nt) meno quelli successivi e i (pn = nt - sn - 1), l'indice dello stato di arrivo è dato dalla seguente formula:
+dove pn sono i nodi precedenti a i e sn sono i nodi successivi. Ricordando che pn è pari al numero di nodi totali del livello (nt) meno quelli successivi (sn) e i (pn = nt - sn - 1), l'indice dello stato di arrivo è dato dalla seguente formula:
 
 \begin{equation}
 j = b*i + a - b + 1
@@ -377,10 +377,31 @@ random (figura \ref{fig:lsp16}) & 12 & 0.0363581180573 & -4 \\ \hline
 3 & 741 & 2.14663600922 & -7 \\ \hline
 1234 & 854 & 2.94443798065 & -8 \\ \hline
 42 & 250 & 0.715470075607 & -8 \\ \hline
-random & 88 & 0.25554394722 & -9 \\ \hline
+random (figura \ref{fig:lsp16}) & 88 & 0.25554394722 & -9 \\ \hline
 \end{tabular}
 \end{center}
 \caption{Risultati tramite hill climbing search per p20}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.25\textwidth]{figure/LSp20.png}
+\caption{Hill climbing search - p20 (random)}
+\label{fig:lsp20}
+\end{figure}
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Seed} & \textbf{\# interazioni} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
+3 & 501 & 6.86409592628 & -9 \\ \hline
+1234 & 501 & 10.0945160389 & -10 \\ \hline
+42 & 501 & 3.27979493141 & -9 \\ \hline
+random & 2000 & 12.1902740002 & -10 \\ \hline
+\end{tabular}
+\end{center}
+\caption{Risultati tramite hill climbing search per p36}
 \end{table}
 
 \subsection{Test per Q-learning}
@@ -418,9 +439,9 @@ random & 26 & 0.0056300163269 & -2 \\ \hline
 \begin{tabular}{|c|c|c|c|c|}
 \hline
 \textbf{Seed} & \textbf{\# episodi} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
-3 & >500 & - & - \\ \hline
-1234 & >500 & - & - \\ \hline
-42 & >500 & - & - \\ \hline
+3 & $>$500 & - & - \\ \hline
+1234 & $>$500 & - & - \\ \hline
+42 & $>$500 & - & - \\ \hline
 random & 254 & 0.195900917053 & -1 \\ \hline
 \end{tabular}
 \end{center}
@@ -433,16 +454,34 @@ random & 254 & 0.195900917053 & -1 \\ \hline
 \hline
 \textbf{Seed} & \textbf{\# episodi} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
 3 & 52 & 0.0305478572845 & -1 \\ \hline
-1234 & >1000 & - & - \\ \hline
-42 & >1000 & - & - \\ \hline
+1234 & $>$1000 & - & - \\ \hline
+42 & $>$1000 & - & - \\ \hline
 random & 822 & 0.513980150223 & -2 \\ \hline
 \end{tabular}
 \end{center}
 \caption{Risultati tramite Q-learning [v. paper] per p20}
 \end{table}
 
+Sono stati effettuati ulteriori test sia per QL $\epsilon$-greedy ($\epsilon$-QL) sia per QL con la funzione di ricompensa modificata (QLNeg) (viene data una ricompensa negativa alle configurazione non valide).
+
+Non si sono notati grossi cambiamenti a parte per le proteine p20 e p36: per p20 sia $\epsilon$-QL che QLNeg raggiungono energia 4.
+
 \appendix
 \label{appendix:sviluppo}
+
+b = fattore di ramificazione b
+
+i = nodo/stato di partenza
+
+a = ramo/azione
+
+j = nodo/stato di arrivo
+
+l = livello del nodo i
+
+nt = numero di nodi/stati totali del livello i
+
+sn = numero di nodi/stati successivi al nodo/stato i
 
 \begin{equation}
 \begin{split}
