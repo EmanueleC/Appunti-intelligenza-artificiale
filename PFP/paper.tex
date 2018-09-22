@@ -10,7 +10,7 @@
 
 \newcommand{\abs}[1]{\left|#1\right|}
 
-\title{Predizione della struttura di una proteina (PSP) in un lattice 2D}
+\title{Predizione della struttura di una proteina (PSP) in un reticolo 2D}
 
 \author{Emanuele Carraro}
 
@@ -19,23 +19,19 @@
 \maketitle    
 
 \begin{abstract}
-{\it Il problema di predizione della struttura terziaria di una proteina è molto rilevante nell'ambito della bioinformatica, infatti la configurazione assunta nello spazio determina le sue proprietà biologiche.
+Il problema di predizione della struttura terziaria di una proteina è molto rilevante nell'ambito della bioinformatica, della biologia molecolare e della chimica teorica in quanto la configurazione che una proteina assume nello spazio ne determina le proprietà biologiche.
 
-Di seguito vengono analizzati tre metodi di risoluzione del problema, uno tramite ricerca informata (algoritmo hill-climbing), uno tramite la definizione di un problema con vincoli e, infine, uno tramite un noto algoritmo di reinforcement learning (Q-learning).
-}
+Di seguito vengono analizzati tre metodi di risoluzione del problema, uno tramite ricerca informata (algoritmo hill-climbing search), uno tramite la definizione di un problema con vincoli e, infine, uno tramite un noto algoritmo di reinforcement learning (Q-learning).
 \end{abstract}
 
 \section{Nomenclatura}
 
 \begin{itemize}
  \item PSP Protein structure prediction
- \item $\mathcal{E}_c$ Matrice dell'energia di una proteina
  \item H Amminoacido idrofobico
  \item P Amminoacido polare
- \item $\mathcal{S}$ Spazio degli stati
- \item $\mathcal{A}$ Spazio delle azioni
- \item $\mathcal{R}$ Funzione di ricompensa
- \item $\delta$ Funzione di transizione
+ \item RL Reinforcement Learning
+ \item QL Q-Learning
 \end{itemize}
 
 \section{Background}
@@ -53,27 +49,27 @@ Gli amminoacidi vengono uniti durante la sintesi proteica grazie alla creazione 
 
 La \textbf{struttura primaria} di una proteina è data dalla pura sequenza di amminoacidi e condiziona la configurazione spaziale e la forma globale della molecola.
 
-L'avvolgimento a spirale e la disposizione regolare di tratti più o meno lunghi della catena proteica costituiscono la sua \textbf{struttura secondaria}.\\
+L'avvolgimento a spirale e la disposizione regolare di tratti più o meno lunghi della catena proteica costituiscono la sua \textbf{struttura secondaria}.
 
-Di solito, gruppi di queste strutture secondarie si combinano fra loro per formare la \textbf{struttura terziaria}, dalla quale dipendono le proprietà biologiche della molecola. La predizione della struttura di una proteina (PSP) è quindi una sfida molto importante nell'ambito della biologia molecolare.
+Di solito, gruppi di queste strutture secondarie si combinano fra loro per formare la \textbf{struttura terziaria}, dalla quale dipendono le proprietà biologiche della molecola.
 
-Le tecniche computazionali di psp assumono che la struttura primaria di una proteina determini completamente la sua struttura terziaria (anche se nella realtà ci sono alcune eccezioni).
+Le tecniche computazionali di PSP assumono che la struttura primaria di una proteina determini completamente la sua struttura terziaria (anche se nella realtà esistono alcune eccezioni).
 
-I modelli basati sulla struttura \textit{lattice} (o reticolo) si sono dimostrati utili per ragionare a proposito della complessità di questo problema. Un modello con lattice porta a ``discretizzare'' lo spazio di configurazione di una proteina e può essere classificato in base a determinate proprietà:
+I modelli basati sulla struttura \textit{lattice} (reticolo) si sono dimostrati utili per ragionare a proposito della complessità di questo problema. Un modello con reticolo porta a ``discretizzare'' lo spazio di configurazione di una proteina e può essere classificato in base alle seguenti proprietà:
 
 \begin{enumerate}
  \item Come viene rappresentata la struttura di una proteina? (ad esempio, tramite un grafo)
  \item Quale alfabeto di amminoacidi viene utilizzato? (tutti i 20 conosciuti oppure solo 2 categorie - (H) idrofobi o (P) polari)
- \item Quale formula utilizzare per descrivere l'\textbf{energia di una conformazione}? (equivalente a una funzione di costo in un problema di ottimizzazione)
- \item Che tipo di lattice scegliere) (ad esempio, un lattice quadratico - 2D - o cubico - 3D)
+ \item Quale formula utilizzare per descrivere l'\textbf{energia di una configurazione}? (equivalente a una funzione di costo in un problema di ottimizzazione)
+ \item Che tipo di reticolo scegliere? (ad esempio, un reticolo quadrato - 2D - o cubico - 3D)
 \end{enumerate}
 
 \subsection{Il modello HP}
 
-Uno dei modelli più usati è il modello HP: il lattice usato semplifica la struttura primaria di una proteina in un grafo, dove i nodi sono gli amminoacidi e gli archi sono i legami peptidici. Ogni nodo è un amminoacido che può essere di 2 tipi: H (idrofobico) o P (polare), così la proteina può essere rappresentata tramite una stringa. Si è osservato che in questo modello le proteine tendono a raggruppare i nodi H attorno a un punto (cioè gli amminoacidi idrofobici formano un ``nucleo'') mentre i nodi P rimangono esterni.
+Uno dei modelli più usati è il modello HP: il reticolo usato semplifica la struttura primaria di una proteina in un grafo, dove i nodi sono gli amminoacidi e gli archi sono i legami peptidici. Ogni nodo è un amminoacido che può essere di 2 tipi: H (idrofobico) o P (polare), così la proteina può essere rappresentata tramite una stringa. Si è osservato che in questo modello le proteine tendono a raggruppare i nodi H attorno a un punto (cioè gli amminoacidi idrofobici formano un ``nucleo'') mentre i nodi P rimangono esterni.
 
-Nella seguente notazione si denota H con 1 e P con 0. Una proteina è dunque una sequenza binaria. L'energia usata in questo modello è data dal numero di ``contatti'' tra H (1). Se due amminoacidi H si trovano su punti adiacenti del lattice, allora contribuiscono di un'unità (negativa) all'energia.
-Formalmente, sia s una sequenza binaria di dimensioni ($|s|\cdot|s|$) e $\mathcal{E}_c$ la matrice quadrata associata all'energia di una sua configurazione c. Allora, dati due punti a e b della sequenza \textbf{adiacenti nel lattice}, l'energia è definita dalla seguente equazione:
+Nella seguente notazione si denota H con 1 e P con 0. Una proteina è dunque una sequenza binaria. L'energia usata in questo modello è data dal numero di ``contatti'' tra H (1). Se due amminoacidi H si trovano su punti adiacenti del reticolo e non sono collegati da un legame peptidico nella struttura primaria, allora contribuiscono di un'unità (negativa) all'energia.
+Formalmente, sia s una sequenza binaria di dimensioni ($|s|\cdot|s|$) e $\mathcal{E}_c$ la matrice quadrata associata all'energia di una sua configurazione c. Allora, dati due punti a e b della sequenza \textbf{adiacenti nel reticolo} e non collegati da un legame peptidico nella struttura primaria, l'energia è definita dalla seguente equazione:
 
 \begin{equation}
     \mathcal{E}_c = (e(a,b))_{a,b \in s} =
@@ -87,19 +83,19 @@ Formalmente, sia s una sequenza binaria di dimensioni ($|s|\cdot|s|$) e $\mathca
 
 La ricerca esaustiva nello spazio delle possibili configurazioni di una proteina non è una soluzione algoritmica efficiente (non opera in tempo polinomiale) in quanto il numero di possibili configurazioni cresce esponenzialmente in relazione alla lunghezza della proteina.
 
-Eppure, in natura il processo di ``folding'' (ripiegamento) di una proteina accade velocemente (varia da qualche secondo a qualche minuto). L'ipotesi più accreditata è che una proteina assuma la configurazione con energia minima.
+Eppure, in natura il processo di ``folding'' (ripiegamento) di una proteina accade velocemente (varia da qualche secondo a qualche minuto). L'ipotesi più accreditata è che una proteina assuma la configurazione nello spazio con energia minima.
 
-Di conseguenza, dato un modello di lattice L e una sequenza s, l'obiettivo è trovare una configurazione c di s senza cicli in L che minimizzi l'energia.
+Di conseguenza, dato un modello di reticolo L e una sequenza s, l'obiettivo è trovare una configurazione c di s senza cicli in L che minimizzi l'energia.
 
 \subsection{Modello square lattice}
 
-Un reticolo a quadrato (square lattice) è un lattice a 2 dimensioni sugli interi ($Z^2$). Considerando un modello square lattice, l'impostazione del problema rimane la stessa, con il vincolo che gli amminoacidi/nodi del grafo debbano essere posizionati solo nei punti del reticolo.
+Un reticolo a quadrato (square lattice) è un reticolo a 2 dimensioni sugli interi ($Z^2$). Considerando un modello square lattice, l'impostazione del problema rimane la stessa, con il vincolo che gli amminoacidi/nodi del grafo debbano essere posizionati solo nei punti del reticolo.
 
 Fornire un upper bound rispetto all'energia è un passo utile nello studio di questo modello. Si cerca qual è il numero massimo di contatti per una configurazione. Sia s una sequenza binaria e siano $\mathcal{P}[s]$ il numero di 1 in posizioni pari e $\mathcal{D}[s]$ il numero di 1 in posizioni dispari.
 
-Dato che questo modello di lattice è bipartito, ogni 1 in posizione pari può avere un contatto con un 1 in posizione dispari. Sia $\mathcal{X}[s] = min\{\mathcal{P}[s], \mathcal{D}[s]\}$ (il minimo numero di 1 in posizione pari/dispari).
+Dato che questo modello di reticolo è bipartito, ogni 1 in posizione pari può avere un contatto con un 1 in posizione dispari. Sia $\mathcal{X}[s] = min\{\mathcal{P}[s], \mathcal{D}[s]\}$ (il minimo numero di 1 in posizione pari/dispari).
 
-In ogni conformazione, il numero di contatti che può avere un 1 nella sequenza che non sia nè all'inizio nè alla fine, è 2 (altrimenti sarebbero 3). Quindi, il numero massimo di contatti in una configurazione di s nel reticolo quadrato è: $2 \mathcal{X}[s] + 2$ (un esempio è riportato in figura \ref{fig:optConfig})
+In ogni configurazione, il numero di contatti che può avere un 1 nella sequenza che non sia nè all'inizio nè alla fine, è 2 (altrimenti è 3). Quindi, il numero massimo di contatti in una configurazione di s nel reticolo quadrato è: $2 \mathcal{X}[s] + 2$ (un esempio è riportato in figura \ref{fig:optConfig})
 
 \begin{figure}[h]
 \centering
@@ -108,17 +104,21 @@ In ogni conformazione, il numero di contatti che può avere un 1 nella sequenza 
 \label{fig:optConfig}
 \end{figure}
 
+Tutti e 3 i metodi seguenti si basano su una struttura a reticolo bidimensionale. Per passare allo spazio (reticolo tridimensionale) occorre cambiare la struttura usata (non più una matrice, ma un tensore), la definizione di funzione di ricompensa, la definizione di configurazione valida e non valida.
+
 \section{Problema con vincoli}
 
 Data la struttura primaria di una proteina di lunghezza n, un problema tramite vincoli si definisce nel seguente modo:
 
 \begin{enumerate}
  \item ciascun amminoacido viene assegnato a un punto sul reticolo 2D di dimensione $n \cdot n$ ($(x_i, y_i) \in Z^2$ $\forall i \in 1,..,n$, le coordinate i-esime appartengono all'amminoacido i-esimo);
- \item punti successivi nella struttura primaria non possono essere a una distanza maggiore di 1 tra loro ($\abs{x_i - x_{i+1}} + \abs{y_i - y_{i+1}} = 1 $ $\forall i \in 1,..,n-1$);
+ \item punti consecutivi nella struttura primaria devono essere consecutivi anche nel reticolo ($\abs{x_i - x_{i+1}} + \abs{y_i - y_{i+1}} = 1 $ $\forall i \in 1,..,n-1$);
  \item due amminoacidi distinti non possono essere assegnati allo stesso punto sul reticolo ($ \neg (x_i = x_j \land y_i = y_j)$ $\forall i,j \in 1,..,n$).
 \end{enumerate}
 
-L'insieme di queste condizioni fa sì che il problema con vincoli ritorni l'intero insieme di configurazioni ammissibili della proteina nel reticolo 2D. Molte di queste sono ``simmetriche'', ossia la configurazione rimane la stessa ma la catena viene ``srotolata'' al contrario. Nella valutazione delle soluzioni non si tiene conto di queste simmetrie. Il problema così definito ritorna un insieme numeroso di soluzioni, esponenziale rispetto alla dimensione dell'input.
+L'insieme di queste condizioni fa sì che il problema con vincoli ritorni l'intero insieme di configurazioni ammissibili della proteina nel reticolo 2D. Molte di queste sono ``simmetriche'', ossia la configurazione rimane la stessa ma la catena viene ``srotolata'' al contrario. Nella valutazione delle soluzioni non si tiene conto di queste simmetrie. Il problema così definito ritorna un insieme di soluzioni esponenziale rispetto alla dimensione dell'input.
+
+Metodi di risoluzione da questo punto (ad esempio, il branch and bound) non sono stati esplorati in questo paper.
 
 \section{Hill climbing search}
 
@@ -132,10 +132,10 @@ La hill climbing search necessita di:
  \item una strategia di esplorazione.
 \end{enumerate}
 
-L'implementazione della hill climbing search è avvenuta nel seguente modo:
+La hill climbing search è stata implementata come segue:
 
 \begin{enumerate}
- \item una soluzione è data da un vettore di interi, uno per ogni amminoacido. Ciascun intero rappresenta la posizione di un amminoacido nella configurazione (una matrice quadrata). Per essere ammissibile, la soluzione non deve avere cicli nè salti (parti staccate).
+ \item una soluzione è data da un vettore di interi, uno per ogni amminoacido. Ciascun intero rappresenta la posizione di un amminoacido nella configurazione (matrice). Per essere ammissibile, la soluzione non deve avere cicli nè salti (parti staccate).
  \item una soluzione iniziale è una soluzione scelta in modo random
  \item la definizione di vicinato in questo caso ha una forte componente randomica: data una soluzione, la struttura viene ``rotta'' in un punto casuale tra l'inizio e la fine della configurazione e da quel punto si scelgono mosse diverse (randomiche), determinando così il vicino. In questo modo, se il punto di taglio viene scelto all'inizio, gran parte della configurazione viene persa (al contrario, la maggior parte viene mantenuta).
  \item come funzione di valutazione delle soluzioni viene usata l'\textbf{energia di una configurazione} $\mathcal{E}_c$
@@ -149,11 +149,11 @@ Un task di reinforcement learning è composto da:
 \begin{enumerate}
  \item lo spazio degli stati $\mathcal{S}$;
  \item lo spazio delle azioni $\mathcal{A}$;
- \item la funzione di transizione $\sigma$ che mappa una coppia (stato, azione) a uno dei probabili stati successori;
+ \item la funzione di transizione $\delta$ che mappa una coppia (stato, azione) a uno dei probabili stati successori;
  \item la funzione di ricompensa;
 \end{enumerate}
 
-Lo spazio degli stati $\mathcal{S}$ consiste di $\frac{4^n - 1}{3}$ ed è rappresentato in figura \ref{fig:stateSpace}.
+Lo spazio degli stati $\mathcal{S}$ consiste di $\frac{4^n - 1}{3}$ stati ed è rappresentato in figura \ref{fig:stateSpace}.
 
 \begin{figure}[h]
 \centering
@@ -166,7 +166,7 @@ Ciascuno stato è collegato a 4 vicini tramite 4 possibili azioni: $\mathcal{A} 
 
 \subsection{Funzione di transizione}
 
-La funzione di transizione è un caso particolare applicato a un albero con fattore di ramificazione 4.
+La funzione di transizione in questione è un caso particolare di funzione successore di un nodo in un albero con fattore di ramificazione 4.
 
 In generale, dato un albero T con fattore di ramificazione b, un nodo/stato i e un'azione (ramo) a, il nodo/stato di arrivo j è dato dalla formula:
 
@@ -174,7 +174,7 @@ In generale, dato un albero T con fattore di ramificazione b, un nodo/stato i e 
 j = i + b*pn + sn + a
 \end{equation}
 
-dove pn sono i nodi precedenti a i e sn sono i nodi successivi. Ricordando che pn è pari al numero di nodi totali del livello (nt) meno quelli successivi (sn) e i (pn = nt - sn - 1), l'indice dello stato di arrivo è dato dalla seguente formula:
+dove $pn$ sono i nodi precedenti a i e $sn$ sono i nodi successivi. Ricordando che $pn$ è pari al numero di nodi totali del livello ($nt$) meno quelli successivi ($sn$) e i ($pn = nt - sn - 1$), l'indice dello stato di arrivo è dato dalla seguente formula:
 
 \begin{equation}
 j = b*i + a - b + 1
@@ -192,7 +192,7 @@ Dunque per b = 4, la formula diventa:
 La funzione di transizione, dato uno stato $s_i$ e un'azione $a_k$ è definita dalla formula:
 
 \begin{equation}
-\delta(s_i, a_k) = s_{4*i - 3 + k} \forall k \in [1,4] \qquad \forall i 1 \leq i \leq \frac{4^n - 1}{3}
+\delta(s_i, a_k) = s_{4*i - 3 + k} \forall k \in [1,4] \qquad \forall i \quad 1 \leq i \leq \frac{4^n - 1}{3}
 \end{equation}
 
 La funzione di ricompensa è definita da [Czibula et al.] nel paper ``A Reinforcement Learning Model for Solving the Folding Problem'' nel modo seguente:
@@ -209,7 +209,7 @@ La funzione di ricompensa è definita da [Czibula et al.] nel paper ``A Reinforc
 
 dove $\pi_k$ è lo stato finale dato dal percorso $\pi = (s_1, \pi_1, \pi_2, \dots \pi_{k-1})$ e $a_{\pi}$ denota la sequenza di azioni che hanno portato allo stato $\pi_k$ a partire da $s_1$. Una sequenza di azioni si dice valida se produce una configurazione senza cicli. $E_{\pi}$ è l'energia data dalla configurazione ottenuta in $\pi_k$ tramite la sequenza $a_{\pi}$.
 
-Ho scelto di testare una versione alternativa della funzione di ricompensa nel caso in cui l'azione $a_{\pi}$ non sia valida: a mio parere una ricompensa di 0.01 (per quanto piccola) può far deviare l'agente in fase di test verso cammini che conducono a una sequenza non valida. Ho quindi cambiato il segno della ricompensa per renderla negativa (-0.01) e penalizzare l'agente.
+Ho scelto di testare una versione alternativa della funzione di ricompensa nel caso in cui l'azione $a_{\pi}$ non sia valida: a mio parere una ricompensa di 0.01 (per quanto piccola) può far deviare l'agente in fase di test verso cammini che conducono a una sequenza non valida. Una soluzione potrebbe essere restituire una ricompensa negativa per penalizzare l'agente.
 
 Il task di reinforcement learning deve allenare un agente nel trovare un percorso $\pi$ che porti a uno stato finale in cui l'energia associata sia minima.
 
@@ -228,7 +228,7 @@ L'agente può esplorare o avere una strategia greedy. Nella fase di training sar
 Esistono 2 modi che l'agente ha per imparare una propria strategia:
 
 \begin{enumerate}
- \item l'agente impare una funzione di utilità per ogni stato e la usa per selezionare le azioni
+ \item l'agente impara una funzione di utilità per ogni stato e la usa per selezionare le azioni
  \item l'agente impara una funzione Q di utilità per ogni coppia (stato, azione) così da selezionare in ogni stato l'azione appropriata
 \end{enumerate}
 
