@@ -1,5 +1,7 @@
 from constraint import *
 from pfp import *
+import constraint
+import timeit
 
 #primary = "HHPH"
 
@@ -30,11 +32,11 @@ def constraint(primary, half):
         for j in range(i):
             xyPairs.append(["x" + str(i), "y" + str(i), "x" + str(j), "y" + str(j)])
 
-    #print(xyPairs)
+    print(xyPairs)
 
     # distance between amminoacids
     for i in range(len(xPairs)):
-        #print(xPairs[i][0], xPairs[i][1], yPairs[i][0], yPairs[i][1])
+        print(xPairs[i][0], xPairs[i][1], yPairs[i][0], yPairs[i][1])
         problem.addConstraint(lambda x1, x2, y1, y2: abs(y1 - y2) + abs(x1 - x2) == 1, (xPairs[i][0], xPairs[i][1], yPairs[i][0], yPairs[i][1]))
 
     for i in range(len(xyPairs)):
@@ -89,22 +91,3 @@ def generateSol(primary):
             #print("score:", points)
             best = points
     return best
-
-def test(seq, function):
-    start = timeit.default_timer()
-    r = function(seq, i)
-    stop = timeit.default_timer()
-    time = stop - start
-    return r, time
-
-test_seq = "HHPH"
-easy = "HPHHPHHPH"
-medium = "PPHPHPPPPHPHHPHP"
-difficult = "HPHPPHHPHPPHPHHPPHPH"
-hard = "PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP"
-
-test(test_seq, generateSol)
-test(easy, generateSol)
-test(medium, generateSol)
-test(difficult, generateSol)
-test(hard, generateSol)

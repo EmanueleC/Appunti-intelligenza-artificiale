@@ -4,6 +4,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{hyperref}
 \usepackage[italian]{babel}
 
 \setlength{\columnsep}{14mm}
@@ -21,7 +22,7 @@
 \begin{abstract}
 Il problema di predizione della struttura terziaria di una proteina è molto rilevante nell'ambito della bioinformatica, della biologia molecolare e della chimica teorica in quanto la configurazione che una proteina assume nello spazio ne determina le proprietà biologiche.
 
-Di seguito vengono analizzati tre metodi di risoluzione del problema, uno tramite ricerca informata (algoritmo hill-climbing search), uno tramite la definizione di un problema con vincoli e, infine, uno tramite un noto algoritmo di reinforcement learning (Q-learning).
+Di seguito vengono analizzati due metodi di risoluzione del problema, uno tramite ricerca informata (algoritmo hill-climbing search) e uno tramite un noto algoritmo di reinforcement learning (Q-learning).
 \end{abstract}
 
 \section{Nomenclatura}
@@ -118,7 +119,7 @@ Data la struttura primaria di una proteina di lunghezza n, un problema tramite v
 
 L'insieme di queste condizioni fa sì che il problema con vincoli ritorni l'intero insieme di configurazioni ammissibili della proteina nel reticolo 2D. Molte di queste sono ``simmetriche'', ossia la configurazione rimane la stessa ma la catena viene ``srotolata'' al contrario. Nella valutazione delle soluzioni non si tiene conto di queste simmetrie. Il problema così definito ritorna un insieme di soluzioni esponenziale rispetto alla dimensione dell'input.
 
-Metodi di risoluzione da questo punto (ad esempio, il branch and bound) non sono stati esplorati in questo paper.
+Metodi di risoluzione alternativi per questo punto non sono stati esplorati in questo paper, ma in \cite{BranchBound} viene fornito un metodo di risoluzione efficiente basato branch and bound.
 
 \section{Hill climbing search}
 
@@ -185,6 +186,7 @@ I calcoli sono stati sviluppato in appendice (\ref{appendix:sviluppo}).
 Dunque per b = 4, la formula diventa:
 
 \begin{equation}
+\label{eq:trans}
 \tag{Funzione di transizione}
 4i + a - 3
 \end{equation}
@@ -195,7 +197,7 @@ La funzione di transizione, dato uno stato $s_i$ e un'azione $a_k$ è definita d
 \delta(s_i, a_k) = s_{4*i - 3 + k} \forall k \in [1,4] \qquad \forall i \quad 1 \leq i \leq \frac{4^n - 1}{3}
 \end{equation}
 
-La funzione di ricompensa è definita da [Czibula et al.] nel paper ``A Reinforcement Learning Model for Solving the Folding Problem'' nel modo seguente:
+La funzione di ricompensa è definita in \cite{CzibulaPFP} nel modo seguente:
 
 \begin{equation}
     \label{eq:rew}
@@ -209,7 +211,7 @@ La funzione di ricompensa è definita da [Czibula et al.] nel paper ``A Reinforc
 
 dove $\pi_k$ è lo stato finale dato dal percorso $\pi = (s_1, \pi_1, \pi_2, \dots \pi_{k-1})$ e $a_{\pi}$ denota la sequenza di azioni che hanno portato allo stato $\pi_k$ a partire da $s_1$. Una sequenza di azioni si dice valida se produce una configurazione senza cicli. $E_{\pi}$ è l'energia data dalla configurazione ottenuta in $\pi_k$ tramite la sequenza $a_{\pi}$.
 
-Ho scelto di testare una versione alternativa della funzione di ricompensa nel caso in cui l'azione $a_{\pi}$ non sia valida: a mio parere una ricompensa di 0.01 (per quanto piccola) può far deviare l'agente in fase di test verso cammini che conducono a una sequenza non valida. Una soluzione potrebbe essere restituire una ricompensa negativa per penalizzare l'agente.
+A mio parere una ricompensa di 0.01 (per quanto piccola) nel caso in cui l'azione $a_{\pi}$ non sia valida può far deviare l'agente in fase di test verso cammini che conducono a una sequenza non valida. Una soluzione potrebbe essere restituire una ricompensa nulla (non è possibile restituire una ricompensa negativa per penalizzare l'agente in quanto si andrebbe a invalidare l'algoritmo di Q-learning).
 
 Il task di reinforcement learning deve allenare un agente nel trovare un percorso $\pi$ che porti a uno stato finale in cui l'energia associata sia minima.
 
@@ -232,27 +234,27 @@ Esistono 2 modi che l'agente ha per imparare una propria strategia:
  \item l'agente impara una funzione Q di utilità per ogni coppia (stato, azione) così da selezionare in ogni stato l'azione appropriata
 \end{enumerate}
 
-La seconda modalità viene chiamata Q-learning ed è quella che ho scelto di implementare secondo la definizione descritta da [Czibula et al.] nel paper ``A Reinforcement Learning Model for Solving the Folding Problem''
+La seconda modalità viene chiamata Q-learning ed è quella che ho scelto di implementare secondo la definizione descritta in \cite{CzibulaPFP}.
 
 \subsection{Q-Learning}
 
 Il Q-learning considera coppie (stato s, azione a) per ciascuna delle quali è associato un valore (Q-value).
 
-Il Q-value è la somma delle ricompense (possibilmente ridimensionate rispetto a un fattore di sconto $\gamma$) ottenute dall'eseguire l'azione a sullo stato s e proseguendo con una politica data (ad esempio greedy o $\epsilon$-greedy).
+Il Q-value è la somma delle ricompense (possibilmente ridimensionate rispetto a un fattore di sconto $\gamma$) ottenute dall'esecuzione di un'azione a su uno stato s e proseguendo con una politica data (ad esempio greedy o $\epsilon$-greedy).
 
 Un valore ottimale $Q^*$ è la somma delle ricompense ottenute applicando a su s e proseguendo con la politica ottimale.
 
-L'equazione \ref{eq:q} è stata proposta da [Czibula et al.] e mostra quanto detto: $r(s,a)$ è la ricompensa ottenuta applicando a su s mentre $\gamma * max_{a'} Q(s', a')$ rappresenta le ricompense future moltplicate per un fattore di sconto $\gamma$.
+L'equazione \ref{eq:q} è stata proposta in \cite{CzibulaPFP} e mostra quanto detto: $r(s,a)$ è la ricompensa ottenuta applicando a su s mentre $\gamma * max_{a'} Q(s', a')$ rappresenta le ricompense future moltiplicate per un fattore di sconto $\gamma$.
 
 \begin{equation}
 \label{eq:q}
 Q(s,a) = r(s,a) + \gamma * max_{a'} Q(s', a')
 \end{equation}
 
-Gli autori del paper ``A Reinforcement Learning Model for Solving the Folding Problem'' usano l'equazione \ref{eq:q} e la funzione di ricompensa \ref{eq:rew} nella fase di training per aggiornare i valori di Q. Inoltre assumono che:
+In \cite{CzibulaPFP} viene usata l'equazione \ref{eq:q} e la funzione di ricompensa \ref{eq:rew} nella fase di training per aggiornare i valori di Q. Inoltre gli autori assumono che:
 
 \begin{itemize}
- \item per ogni coppia (stato s, azione a), Q(s,a) sia pari a 0.
+ \item per ogni coppia (stato s, azione a), all'inizio Q(s,a) sia pari a 0.
  \item il fattore di sconto $\gamma$ sia 0.9
  \item il numero di episodi sia 36
  \item la politica utilizzata sia greedy ($\epsilon-greedy, \epsilon = 1$)
@@ -260,23 +262,23 @@ Gli autori del paper ``A Reinforcement Learning Model for Solving the Folding Pr
 
 Assumono anche che le coppie (stato, azione) siano visitate uniformemente.
 
-Con questa procedura hanno dimostrato matematicamente che i valori di Q convergerebero ai loro valori ottimali (cioè valori che conduconol'agente alla politica ottimale, corrispondente alla struttura bidimensionale della proteina con minor energia) se si visitassero infinitamente tutte le coppie (stato, azione).
+Con questa procedura hanno dimostrato matematicamente che i valori di Q convergerebbero ai loro valori ottimali (cioè valori che conducono l'agente alla politica ottimale, corrispondente alla struttura bidimensionale della proteina con minor energia) se si visitassero infinitamente tutte le coppie (stato, azione).
 
-Formalmente, gli autori hanno dimostrato che dato $Q_n(s, a)$ (la stima di $Q(s,a)$ all'n-esimo episodio di training), il limite $\lim_{n \to \infty} Q_n (s,a)$ vale $Q^*(s,a) \quad \forall s \in S, a \in A$
+Formalmente, gli autori hanno dimostrato che dato $Q_n(s, a)$ (la stima di $Q(s,a)$ all'n-esimo episodio di training), il limite $\lim_{n \to \infty} Q_n (s,a)$ vale $Q^*(s,a) \quad \forall s \in S, a \in A$ (cioè con infiniti episodi di training).
 
 \section{Analisi}
 
-Gli autori utilizzano una politica strettamentre esplorativa in fase di training ($\epsilon-greedy, \epsilon = 1$), quindi permettono di esplorare lo spazio degli stati uniformemente.
+Gli autori in \cite{CzibulaPFP} utilizzano una politica strettamente esplorativa in fase di training ($\epsilon-greedy, \epsilon = 1$), quindi permettono di esplorare lo spazio degli stati uniformemente.
 
-Una possibile modifica potrebbe essere abbassare $\epsilon$ da 1 a (ad esempio) 0.6 e rendere il training epsilon-greedy.
+Una possibile modifica potrebbe essere abbassare $\epsilon$ da 1 a (ad esempio) 0.7 e rendere il training più greedy, così da evitare di trovare troppe configurazioni non valide.
 
 Inoltre il numero di episodi è molto piccolo: 36 può essere sufficiente per l'esempio riportato dagli autori (HHPH), ma per proteine più lunghe serve un maggior numero di episodi.
 
-I risultati riportati nel paper sono discutibili in quanto non viene specificato nessun seed e nemmeno quante volte è stato eseguito l'algoritmo. In particolare, riportare la tabella dei valori Q non è molto utile, dato che vengono trovati in fase di training che è prettamente esplorativa: senza un seed i valori sono impossibili da riprodurre.
+I risultati riportati nel paper sono discutibili in quanto non viene specificato nessun seed e nemmeno quante volte è stato eseguito l'algoritmo. In particolare, riportare la tabella dei valori Q non è molto utile, dato che vengono costruiti durante la fase di training che è prettamente esplorativa: senza un seed i valori non sono ripetibili.
 
 \section{Test e risultati}
 
-\textbf{Nota}: per la hill climbing search  e il q learning vengono riportati il numero minimo di iterazioni ed episodi (rispettivamente) con cui sono stati raggiunti i risultati riportati.
+\textbf{Nota}: per la hill climbing search  e il Q-learning vengono riportati il numero minimo di iterazioni ed episodi (rispettivamente) con cui sono stati raggiunti i risultati riportati.
 
 I test vengono eseguiti su 5 proteine di lunghezze diverse (4, 9, 16, 20, 36):
 
@@ -288,7 +290,24 @@ I test vengono eseguiti su 5 proteine di lunghezze diverse (4, 9, 16, 20, 36):
  \item p36 = PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP
 \end{itemize}
 
-Vengono variati 3 seed e infine viene eseguito un test in modo totalmente random. Durante i test il limite massimo di iterazioni è fissato per tutti i seed nel seguente modo: p4 - 50 it, p9 - 200 it, p16 - 500 it, p20 - 1000 it, p36 - 2000 it. Se in nessun caso si è raggiunto un risultato entro il numero massimo di iterazioni, allora la tabella dei risultati non viene riportata e ciò significa che il tempo richiesto è probabilmente maggiore (ad esempio nel test del Q-Learning v-paper per la sequenza p36).
+Vengono variati 3 seed e infine viene eseguito un test senza fissare nessun seed. Durante i test il limite massimo di iterazioni è fissato per tutti i seed nel seguente modo: p4 - 50 it, p9 - 200 it, p16 - 500 it, p20 - 1000 it, p36 - 2000 it. Se in nessun caso si è raggiunto un risultato entro il numero massimo di iterazioni, allora la tabella dei risultati non viene riportata e ciò significa che il tempo richiesto è maggiore (ad esempio nel test del Q-Learning per la sequenza p36).
+
+\subsection{Valori ottimali}
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Proteina} & \textbf{Ottimo} \\ \hline
+p4 & -1 \\ \hline
+p9 & -3 \\ \hline
+p16 & -4 \\ \hline
+p20 & -9 \\ \hline
+p36 & -14 \\ \hline
+\end{tabular}
+\end{center}
+\caption{Valori ottimi delle proteine di test}
+\end{table}
 
 \subsection{Test per problema con vincoli}
 
@@ -299,6 +318,9 @@ Vengono variati 3 seed e infine viene eseguito un test in modo totalmente random
 \textbf{Proteina} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
 p4 & 0.0346564320007019 & -1 \\ \hline
 p9 & 8.78769836499987 & -3 \\ \hline
+p16 & - & - \\ \hline
+p20 & - & - \\ \hline
+p36 & - & - \\ \hline
 \end{tabular}
 \end{center}
 \caption{Risultati tramite problema con vincoli}
@@ -374,10 +396,10 @@ random (figura \ref{fig:lsp16}) & 12 & 0.0363581180573 & -4 \\ \hline
 \begin{tabular}{|c|c|c|c|c|}
 \hline
 \textbf{Seed} & \textbf{\# interazioni} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
-3 & 741 & 2.14663600922 & -7 \\ \hline
-1234 & 854 & 2.94443798065 & -8 \\ \hline
-42 & 250 & 0.715470075607 & -8 \\ \hline
-random (figura \ref{fig:lsp16}) & 88 & 0.25554394722 & -9 \\ \hline
+3 & 159 & 0.0278298854828 & -7 \\ \hline
+1234 & 161 & 0.0351529121399 & -7 \\ \hline
+42 & 424 & 0.0856359004974 & -6 \\ \hline
+random (figura \ref{fig:lsp16}) & 879 & 0.197659015656 & -9 \\ \hline
 \end{tabular}
 \end{center}
 \caption{Risultati tramite hill climbing search per p20}
@@ -395,14 +417,21 @@ random (figura \ref{fig:lsp16}) & 88 & 0.25554394722 & -9 \\ \hline
 \begin{tabular}{|c|c|c|c|c|}
 \hline
 \textbf{Seed} & \textbf{\# interazioni} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
-3 & 501 & 6.86409592628 & -9 \\ \hline
-1234 & 501 & 10.0945160389 & -10 \\ \hline
-42 & 501 & 3.27979493141 & -9 \\ \hline
-random & 2000 & 12.1902740002 & -10 \\ \hline
+3 & 1336 & 0.530725002289 & -9 \\ \hline
+1234 & 136 & 0.050920009613 & -8 \\ \hline
+42 & 605 & 0.2579600811 & -8 \\ \hline
+random (figura \ref{fig:lsp36}) & 1175 & 0.669224023819 & -11 \\ \hline
 \end{tabular}
 \end{center}
 \caption{Risultati tramite hill climbing search per p36}
 \end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{figure/p36LS.png}
+\caption{Hill climbing search - p36 (random)}
+\label{fig:lsp36}
+\end{figure}
 
 \subsection{Test per Q-learning}
 
@@ -462,9 +491,32 @@ random & 822 & 0.513980150223 & -2 \\ \hline
 \caption{Risultati tramite Q-learning [v. paper] per p20}
 \end{table}
 
-Sono stati effettuati ulteriori test sia per QL $\epsilon$-greedy ($\epsilon$-QL) sia per QL con la funzione di ricompensa modificata (QLNeg) (viene data una ricompensa negativa alle configurazione non valide).
+\subsection{Test per Q-learning $\epsilon$-greedy}
 
-Non si sono notati grossi cambiamenti a parte per le proteine p20 e p36: per p20 sia $\epsilon$-QL che QLNeg raggiungono energia 4.
+Sono stati effettuati ulteriori test per il Q-learning in versione $\epsilon$-greedy, con $\epsilon = 0.25$
+
+In generale, all'aumentare di $\epsilon$ aumenta la fase esplorativa e quindi è richiesto un numero di episodi elevato (infatti, come si è visto nei test precedenti, la hill-climbing search, a parità di iterazioni/episodi batte il Q-learning).
+
+Se il numero di episodi è più elevato e si opta per una variante $\epsilon$-greedy del Q-learning, si ottengono risultati migliori (anche se non soddisfacenti)
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Proteina} & \textbf{Seed} & \textbf{\# episodi} & \textbf{Tempo (s)} & \textbf{Energia} \\ \hline
+p20 & 1234 & 1193 & 8.4770450592 & -4 \\ \hline
+p36 & 1234 & 5105 & 6.02311420441 & -4 \\ \hline
+\end{tabular}
+\end{center}
+\caption{Risultati tramite $\epsilon$Q-learning per p20 e p36}
+\end{table}
+
+\section{Conclusioni}
+
+Sono stati analizzati 2 metodi di risoluzione per un problema NP-completo, rispettivamente \textit{hill-climbing search} e \textit{Q-learning}. Il problema definito tramite vincoli è stato testato solo sulle proteine con sequenze più corte poiché in mancanza di metodi di ottimizzazione risulta computazionalmente troppo oneroso. La hill climbing search ha dato luogo a risultati che in alcuni casi si avvicinano molto all'ottimo in tempi brevi.
+Il Q-learning, nella versione proposta in \cite{CzibulaPFP} si dimostra inefficiente per proteine lunghe, in quanto la scelta di avere una fase di training prettamente esplorativa richiede un numero di episodi elevato, in mancanza dei quali l'algoritmo si incastra in configurazioni non valide.
+La variante $\epsilon$ Q-learning è stata solo brevemente affrontata, ma presenta dei piccoli miglioramenti. Possibili variazioni potrebbero includere una formulazione classica del Q-learning con l'utilizzo del tasso di apprendimento.
+Ulteriori metodi per affrontare il problema vicini a quelli esplorati potrebbero essere: ottimizzare la generazione delle soluzioni del problema con vincoli e la taboo search, ma in mancanza di tempo non sono stati analizzati.
 
 \appendix
 \label{appendix:sviluppo}
@@ -482,6 +534,8 @@ l = livello del nodo i
 nt = numero di nodi/stati totali del livello i
 
 sn = numero di nodi/stati successivi al nodo/stato i
+
+Dimostrazione dell'equazione \ref{eq:trans}:
 
 \begin{equation}
 \begin{split}
@@ -501,5 +555,26 @@ j   & = i + b(nt - sn - 1) + \bigg(\frac{b^{l + 1} - 1}{b - 1} - i\bigg) + a\\
     & = bi + a - b + 1
 \end{split}
 \end{equation}
+
+\begin{thebibliography}{9}
+
+\bibitem{CzibulaPFP}
+  Gabriela Czibula, Maria-Iuliana Bocicor and Istvan-Gergely Czibula
+  \textit{A Reinforcement Learning Model for Solving the Folding Problem}
+  Babes-Bolyai University, Department of Computer Science
+
+\bibitem{PFP}
+  William E. Hart, Alantha Newman
+  \textit{Protein Structure Prediction with Lattice Models}
+  Sandia National Laboratories \& Massachusetts Institute of Technology
+
+\bibitem{BranchBound}
+  Mao Chen, Wen-Qi Huang
+  \textit{A Branch and Bound Algorithm for the Protein Folding Problem in the
+HP Lattice Model}
+  School of Computer Science and Technology, Huazhong University of Science
+and Technology, Wuhan 430074, China
+
+\end{thebibliography}
 
 \end{document}

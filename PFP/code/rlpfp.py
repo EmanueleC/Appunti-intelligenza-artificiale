@@ -82,13 +82,11 @@ def transition(state, action):
 """ returns the reward for the pair (state, action) """
 def reward(state, n, primary):
     if(not isValid(unfoldState(state, n))):
-        #print("Stato non valido")
-        return -0.01
+        #print("Stato non valido, tempo sprecato per unfoldare\dots")
+        return 0.01
     elif(isFinal(state, n)):
         #print("Stato finale valido con energia: ", state, energy(unfoldState(state, n), primary))
         en = energy(unfoldState(state, n), primary)
-        #global saved
-        #saved = saved + [(state, en)]
         return en
     else:
         #print("Avanti")
@@ -135,13 +133,11 @@ def QL(primary, episodes, seed):
             rew = Qf(state, act, n, discountFactor, Q, primary)
             if(rew != 0): Q[(state, act)] = rew
             state = transition(state, act)
-    
-    #global saved
 
-    #for key in sorted(Q):
-        #print "%s: %s" % (key, Q[key])
-
-    #print(saved)
+    '''for i in range(1, 100):
+        for a in actionSpace:
+            if((i,a) in Q):
+                print "%s: %s" % ((i,a), Q[(i,a)])'''
 
     #print("TEST...")
     
@@ -164,7 +160,7 @@ def QL(primary, episodes, seed):
     energy = -1
     tertiary = {}
     seq = {}
-    if(isValid(unfoldState(st, n))):    
+    if(isValid(unfoldState(st, n))):  
         seq = unfoldState(st, n)
         tertiary = fillMatrix(seq, primary)
         energy = score(fillMatrix(seq, primary), countH(primary)[3])

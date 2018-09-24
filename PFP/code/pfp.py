@@ -28,8 +28,8 @@ def printTertiary(tertiary):
     print("--- tertiary structure ---")
     for i in range(len(tertiary)):
         for j in range(len(tertiary[i])):
-            print(tertiary[i][j], end="")
-        print("")
+            print tertiary[i][j],
+        print
     print("---")
 
 """ fills a 2D square lattice with primary structure (example: [h,h,p,h,p...]), given a sequence guide of numbers """
@@ -126,7 +126,7 @@ def LS(primary, r, seed):
             solution = fillMatrix(sequence, primary)
             currValue = score(solution, countH(primary)[3])
             oldValue = 0
-            for i in range(50):
+            while(True):
                 newSequence = move(sequence)
                 neighbor = fillMatrix(newSequence, primary)
                 oldValue = currValue
@@ -135,6 +135,7 @@ def LS(primary, r, seed):
                     sequence = newSequence
                     currBest = currValue
                     currBestStructure = neighbor
+                    break;
                 #else:
                     #print('Score', currValue)
                     #printTertiary(neighbor)
