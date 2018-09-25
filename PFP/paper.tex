@@ -44,7 +44,7 @@ Gli amminoacidi vengono uniti durante la sintesi proteica grazie alla creazione 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.4\textwidth]{figure/peptideBond.png}
-\caption{Legame peptidico}
+\caption{Creazione del legame peptidico}
 \label{fig:pept}
 \end{figure}
 
@@ -73,6 +73,7 @@ Nella seguente notazione si denota H con 1 e P con 0. Una proteina è dunque una
 Formalmente, sia s una sequenza binaria di dimensioni ($|s|\cdot|s|$) e $\mathcal{E}_c$ la matrice quadrata associata all'energia di una sua configurazione c. Allora, dati due punti a e b della sequenza \textbf{adiacenti nel reticolo} e non collegati da un legame peptidico nella struttura primaria, l'energia è definita dalla seguente equazione:
 
 \begin{equation}
+    \label{eq:en}
     \mathcal{E}_c = (e(a,b))_{a,b \in s} =
     \begin{cases*}
       -1 & se a = b = 1 \\
@@ -119,27 +120,27 @@ Data la struttura primaria di una proteina di lunghezza n, un problema tramite v
 
 L'insieme di queste condizioni fa sì che il problema con vincoli ritorni l'intero insieme di configurazioni ammissibili della proteina nel reticolo 2D. Molte di queste sono ``simmetriche'', ossia la configurazione rimane la stessa ma la catena viene ``srotolata'' al contrario. Nella valutazione delle soluzioni non si tiene conto di queste simmetrie. Il problema così definito ritorna un insieme di soluzioni esponenziale rispetto alla dimensione dell'input.
 
-Metodi di risoluzione alternativi per questo punto non sono stati esplorati in questo paper, ma in \cite{BranchBound} viene fornito un metodo di risoluzione efficiente basato branch and bound.
+Metodi di risoluzione alternativi per questo punto non sono stati esplorati in questo paper, ma in \cite{BranchBound} viene fornito un metodo di risoluzione efficiente basato sul branch and bound.
 
 \section{Hill climbing search}
 
 La hill climbing search necessita di:
 
 \begin{enumerate}
- \item un modo per rappresentare una soluzione;
- \item una soluzione iniziale;
- \item una definizione di vicinato (come ci si sposta da una soluzione a una sua ``vicina''?);
- \item una funzione che valuti le soluzioni;
- \item una strategia di esplorazione.
+ \item un modo per rappresentare una soluzione
+ \item una soluzione iniziale
+ \item una definizione di vicinato (come ci si sposta da una soluzione a una sua ``vicina''?)
+ \item una funzione che valuti le soluzioni
+ \item una strategia di esplorazione
 \end{enumerate}
 
 La hill climbing search è stata implementata come segue:
 
 \begin{enumerate}
- \item una soluzione è data da un vettore di interi, uno per ogni amminoacido. Ciascun intero rappresenta la posizione di un amminoacido nella configurazione (matrice). Per essere ammissibile, la soluzione non deve avere cicli nè salti (parti staccate).
+ \item una soluzione è data da un vettore di interi, uno per ogni amminoacido. Ciascun intero rappresenta la posizione di un amminoacido nella configurazione (matrice). Per essere ammissibile, la soluzione non deve avere cicli nè salti (parti staccate)
  \item una soluzione iniziale è una soluzione scelta in modo random
- \item la definizione di vicinato in questo caso ha una forte componente randomica: data una soluzione, la struttura viene ``rotta'' in un punto casuale tra l'inizio e la fine della configurazione e da quel punto si scelgono mosse diverse (randomiche), determinando così il vicino. In questo modo, se il punto di taglio viene scelto all'inizio, gran parte della configurazione viene persa (al contrario, la maggior parte viene mantenuta).
- \item come funzione di valutazione delle soluzioni viene usata l'\textbf{energia di una configurazione} $\mathcal{E}_c$
+ \item la definizione di vicinato in questo caso ha una forte componente randomica: data una soluzione, la struttura viene ``rotta'' in un punto casuale tra l'inizio e la fine della configurazione e da quel punto si scelgono mosse diverse (randomiche), determinando così il vicino. In questo modo, se il punto di taglio viene scelto all'inizio, gran parte della configurazione viene persa (al contrario, la maggior parte viene mantenuta)
+ \item come funzione di valutazione delle soluzioni viene usata l'\textbf{energia di una configurazione} $\mathcal{E}_c$ (vedi equazione \ref{eq:en})
  \item come strategia di esplorazione del vicinato viene usata la \textbf{best-first strategy}
 \end{enumerate}
 
@@ -172,13 +173,13 @@ La funzione di transizione in questione è un caso particolare di funzione succe
 In generale, dato un albero T con fattore di ramificazione b, un nodo/stato i e un'azione (ramo) a, il nodo/stato di arrivo j è dato dalla formula:
 
 \begin{equation}
-j = i + b*pn + sn + a
+j = i + b \cdot pn + sn + a
 \end{equation}
 
 dove $pn$ sono i nodi precedenti a i e $sn$ sono i nodi successivi. Ricordando che $pn$ è pari al numero di nodi totali del livello ($nt$) meno quelli successivi ($sn$) e i ($pn = nt - sn - 1$), l'indice dello stato di arrivo è dato dalla seguente formula:
 
 \begin{equation}
-j = b*i + a - b + 1
+j = b \cdot i + a - b + 1
 \end{equation}
 
 I calcoli sono stati sviluppato in appendice (\ref{appendix:sviluppo}).
@@ -188,13 +189,13 @@ Dunque per b = 4, la formula diventa:
 \begin{equation}
 \label{eq:trans}
 \tag{Funzione di transizione}
-4i + a - 3
+j = 4i + a - 3
 \end{equation}
 
 La funzione di transizione, dato uno stato $s_i$ e un'azione $a_k$ è definita dalla formula:
 
 \begin{equation}
-\delta(s_i, a_k) = s_{4*i - 3 + k} \forall k \in [1,4] \qquad \forall i \quad 1 \leq i \leq \frac{4^n - 1}{3}
+\delta(s_i, a_k) = s_{4 \cdot i - 3 + k} \forall k \in [1,4] \qquad \forall i \quad 1 \leq i \leq \frac{4^n - 1}{3}
 \end{equation}
 
 La funzione di ricompensa è definita in \cite{CzibulaPFP} nel modo seguente:
@@ -211,7 +212,7 @@ La funzione di ricompensa è definita in \cite{CzibulaPFP} nel modo seguente:
 
 dove $\pi_k$ è lo stato finale dato dal percorso $\pi = (s_1, \pi_1, \pi_2, \dots \pi_{k-1})$ e $a_{\pi}$ denota la sequenza di azioni che hanno portato allo stato $\pi_k$ a partire da $s_1$. Una sequenza di azioni si dice valida se produce una configurazione senza cicli. $E_{\pi}$ è l'energia data dalla configurazione ottenuta in $\pi_k$ tramite la sequenza $a_{\pi}$.
 
-A mio parere una ricompensa di 0.01 (per quanto piccola) nel caso in cui l'azione $a_{\pi}$ non sia valida può far deviare l'agente in fase di test verso cammini che conducono a una sequenza non valida. Una soluzione potrebbe essere restituire una ricompensa nulla (non è possibile restituire una ricompensa negativa per penalizzare l'agente in quanto si andrebbe a invalidare l'algoritmo di Q-learning).
+A mio parere una ricompensa di 0.01 (per quanto piccola) nel caso in cui l'azione $a_{\pi}$ non sia valida può far deviare l'agente in fase di test verso cammini che conducono a una sequenza non valida. Una soluzione potrebbe essere restituire una ricompensa nulla (ho scelto di non restituire una ricompensa negativa per penalizzare l'agente in quanto andrei a invalidare la mia implementazione del Q-learning).
 
 Il task di reinforcement learning deve allenare un agente nel trovare un percorso $\pi$ che porti a uno stato finale in cui l'energia associata sia minima.
 
@@ -220,7 +221,7 @@ Il task di reinforcement learning deve allenare un agente nel trovare un percors
 In ogni istante t, l'agente osserva uno stato e decide un'azione da intraprendere, che lo sposta nello stato successivo ricevendo una ricompensa $r_t$. Il suo obiettivo è massimizzare la somma attesa delle ricompense che ottiene:
 
 \begin{equation}
-\mathcal{E}[\mathcal{R}] = r_0 + \gamma*r_1 + \gamma^2*r_2 + \dots.
+\mathcal{E}[\mathcal{R}] = r_0 + \gamma \cdot r_1 + \gamma^2 \cdot r_2 + \dots.
 \end{equation}
 
 In questo caso l'energia è data con segno opposto (per minimizzarla effettivamente).
@@ -248,7 +249,7 @@ L'equazione \ref{eq:q} è stata proposta in \cite{CzibulaPFP} e mostra quanto de
 
 \begin{equation}
 \label{eq:q}
-Q(s,a) = r(s,a) + \gamma * max_{a'} Q(s', a')
+Q(s,a) = r(s,a) + \gamma \cdot max_{a'} Q(s', a')
 \end{equation}
 
 In \cite{CzibulaPFP} viene usata l'equazione \ref{eq:q} e la funzione di ricompensa \ref{eq:rew} nella fase di training per aggiornare i valori di Q. Inoltre gli autori assumono che:
@@ -268,13 +269,13 @@ Formalmente, gli autori hanno dimostrato che dato $Q_n(s, a)$ (la stima di $Q(s,
 
 \section{Analisi}
 
-Gli autori in \cite{CzibulaPFP} utilizzano una politica strettamente esplorativa in fase di training ($\epsilon-greedy, \epsilon = 1$), quindi permettono di esplorare lo spazio degli stati uniformemente.
+Gli autori in \cite{CzibulaPFP} utilizzano una politica prettamente esplorativa in fase di training ($\epsilon-greedy, \epsilon = 1$), quindi permettono di esplorare lo spazio degli stati uniformemente.
 
 Una possibile modifica potrebbe essere abbassare $\epsilon$ da 1 a (ad esempio) 0.7 e rendere il training più greedy, così da evitare di trovare troppe configurazioni non valide.
 
 Inoltre il numero di episodi è molto piccolo: 36 può essere sufficiente per l'esempio riportato dagli autori (HHPH), ma per proteine più lunghe serve un maggior numero di episodi.
 
-I risultati riportati nel paper sono discutibili in quanto non viene specificato nessun seed e nemmeno quante volte è stato eseguito l'algoritmo. In particolare, riportare la tabella dei valori Q non è molto utile, dato che vengono costruiti durante la fase di training che è prettamente esplorativa: senza un seed i valori non sono ripetibili.
+I risultati riportati nel paper sono discutibili in quanto non viene specificato nessun seed e nemmeno quante volte è stato eseguito l'algoritmo. In particolare, riportare la tabella dei valori Q non è molto utile, dato che vengono costruiti durante la fase di training che è prettamente esplorativa: senza un seed (e i particolare di implementazione) i valori non sono ripetibili.
 
 \section{Test e risultati}
 
@@ -446,7 +447,7 @@ random (figura \ref{fig:lsp36}) & 1175 & 0.669224023819 & -11 \\ \hline
 random & 1 & 2.21729278564e-05 & -1 \\ \hline
 \end{tabular}
 \end{center}
-\caption{Risultati tramite Q-learning [v. paper] per p4}
+\caption{Risultati tramite Q-learning per p4}
 \end{table}
 
 \begin{table}[H]
@@ -460,7 +461,7 @@ random & 1 & 2.21729278564e-05 & -1 \\ \hline
 random & 26 & 0.0056300163269 & -2 \\ \hline
 \end{tabular}
 \end{center}
-\caption{Risultati tramite Q-learning [v. paper] per p9}
+\caption{Risultati tramite Q-learning per p9}
 \end{table}
 
 \begin{table}[H]
@@ -474,7 +475,7 @@ random & 26 & 0.0056300163269 & -2 \\ \hline
 random & 254 & 0.195900917053 & -1 \\ \hline
 \end{tabular}
 \end{center}
-\caption{Risultati tramite Q-learning [v. paper] per p16}
+\caption{Risultati tramite Q-learning per p16}
 \end{table}
 
 \begin{table}[H]
@@ -495,9 +496,9 @@ random & 822 & 0.513980150223 & -2 \\ \hline
 
 Sono stati effettuati ulteriori test per il Q-learning in versione $\epsilon$-greedy, con $\epsilon = 0.25$
 
-In generale, all'aumentare di $\epsilon$ aumenta la fase esplorativa e quindi è richiesto un numero di episodi elevato (infatti, come si è visto nei test precedenti, la hill-climbing search, a parità di iterazioni/episodi batte il Q-learning).
+In generale, all'aumentare di $\epsilon$ aumenta il tempo richiesto dalla fase esplorativa e quindi è richiesto un numero di episodi elevato; infatti, come si è visto nei test precedenti, la hill-climbing search a parità di iterazioni/episodi batte il Q-learning.
 
-Se il numero di episodi è più elevato e si opta per una variante $\epsilon$-greedy del Q-learning, si ottengono risultati migliori (anche se non soddisfacenti)
+Se il numero di episodi è più elevato e si opta per una variante $\epsilon$-greedy del Q-learning, si ottengono risultati migliori anche se non soddisfacenti.
 
 \begin{table}[H]
 \begin{center}
@@ -514,7 +515,7 @@ p36 & 1234 & 5105 & 6.02311420441 & -4 \\ \hline
 \section{Conclusioni}
 
 Sono stati analizzati 2 metodi di risoluzione per un problema NP-completo, rispettivamente \textit{hill-climbing search} e \textit{Q-learning}. Il problema definito tramite vincoli è stato testato solo sulle proteine con sequenze più corte poiché in mancanza di metodi di ottimizzazione risulta computazionalmente troppo oneroso. La hill climbing search ha dato luogo a risultati che in alcuni casi si avvicinano molto all'ottimo in tempi brevi.
-Il Q-learning, nella versione proposta in \cite{CzibulaPFP} si dimostra inefficiente per proteine lunghe, in quanto la scelta di avere una fase di training prettamente esplorativa richiede un numero di episodi elevato, in mancanza dei quali l'algoritmo si incastra in configurazioni non valide.
+Il Q-learning, nella versione proposta in \cite{CzibulaPFP} si dimostra inefficiente per proteine lunghe, in quanto la scelta di avere una fase di training prettamente esplorativa richiede un numero di episodi elevato, in mancanza dei quali l'algoritmo ritorna configurazioni non valide.
 La variante $\epsilon$ Q-learning è stata solo brevemente affrontata, ma presenta dei piccoli miglioramenti. Possibili variazioni potrebbero includere una formulazione classica del Q-learning con l'utilizzo del tasso di apprendimento.
 Ulteriori metodi per affrontare il problema vicini a quelli esplorati potrebbero essere: ottimizzare la generazione delle soluzioni del problema con vincoli e la taboo search, ma in mancanza di tempo non sono stati analizzati.
 
@@ -540,7 +541,6 @@ Dimostrazione dell'equazione \ref{eq:trans}:
 \begin{equation}
 \begin{split}
 j   & = i + b(nt - sn - 1) + \bigg(\frac{b^{l + 1} - 1}{b - 1} - i\bigg) + a\\
-    & = i + b(nt - sn - 1) + \bigg(\frac{b^{l + 1} - 1}{b - 1} - i\bigg) + a\\
     & = i + b\bigg(b^{l} - \frac{b^{l + 1} - 1}{b - 1} + i - 1\bigg) + \frac{b^{l + 1} - 1}{b - 1} - i + a\\
     & = b\bigg(b^{l} - \frac{b^{l + 1} - 1}{b - 1} + i - 1\bigg) + \frac{b^{l + 1} - 1}{b - 1} + a\\
     & = b^{l + 1} - b\bigg(\frac{b^{l + 1} - 1}{b - 1}\bigg) + bi -b + \frac{b^{l + 1} - 1}{b - 1} + a\\
