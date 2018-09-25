@@ -42,4 +42,15 @@
 - Reti neurali: classificazione di vini (Python + Keras + Theano)
 - Reti neurale da zero (niente dipendenze, derivate calcolate esplicitamente) (Python)
 
+### Approfondimento - Paper
 
+- Predizione della struttura di una proteina in nun reticolo bidimensionale
+- Definizione di problema con vincoli
+- Hill climbing search
+- Q-Learning
+
+Fonti:
+
+- Gabriela Czibula, Maria-Iuliana Bocicor and Istvan-Gergely Czibula "A Reinforcement Learning Model for Solving the Folding Problem" Babes-Bolyai University, Department of Computer Science
+- William E. Hart, Alantha Newman Protein Structure Prediction with Lattice Models Sandia National Laboratories & Massachusetts Institute of Technology
+- Mao Chen, Wen-Qi Huang A Branch and Bound Algorithm for the Protein Folding Problem in the HP Lattice Model School of Computer Science and Technology, Huazhong University of Science and Technology, Wuhan 430074, China
