@@ -10,7 +10,7 @@
 - Ricerca su alberi
 - Ricerca non informata e informata
 - Stable matching: algoritmo di Gale-Shapley
-- Problemi con vincoli (in progress)
+- Problemi con vincoli
   - Tipi di consistenza locale (node, arc, path consistency)
   - Vincoli soft (esempi di proiezione e combinazione)
 - Sistemi di voto
